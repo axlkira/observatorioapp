@@ -2,8 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\welcome;
-
-
+use App\Http\Controllers\FormController;
 
 /*ImageController
 |--------------------------------------------------------------------------
@@ -18,3 +17,6 @@ use App\Http\Controllers\welcome;
 
 
 Route::get('/', [welcome::class, 'welcome'])->name('welcome');
+
+Route::get('/form/{block}', [FormController::class, 'show'])->name('form.show');
+Route::post('/form/store', [FormController::class, 'store'])->name('form.store');

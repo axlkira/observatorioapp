@@ -37,6 +37,11 @@
                         <i class="bi bi-file-earmark-text"></i> Formularios
                     </a>
                 </li>
+                <li>
+                    <a href="{{ url('/form/1') }}" class="nav-link">
+                        <i class="bi bi-plus-circle"></i> Crear formulario nuevo
+                    </a>
+                </li>
             </ul>
         </nav>
         <div class="container-fluid p-4">
