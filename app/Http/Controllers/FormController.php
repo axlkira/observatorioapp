@@ -37,7 +37,7 @@ class FormController extends Controller
     {
         $block = $request->input('block');
         $table = "t_caracterizacion_bloque1";
-        $data = $request->except(['_token', 'block']);
+        $data = $request->except(['_token', 'block', 'es_actualizacion']);
 
         // --- Normalizar campos de selección múltiple a 1 o 0 (según checkboxes) ---
         // Orientación sexual
@@ -99,13 +99,17 @@ class FormController extends Controller
             'numero_documento' => $data['numero_documento'],
         ];
 
-        // Verificar si ya existe el registro
+        // Verificar si ya existe el registro (solo para inserción)
         $exists = DB::table($table)
             ->where($keys)
             ->exists();
+        if ($exists && !$request->has('es_actualizacion')) {
+            // Si ya existe y es un intento de inserción, mostrar error
+            return back()->withErrors(['usuario_existente' => 'Este usuario ya existe, solo puedes ingresar usuarios nuevos.'])->withInput();
+        }
+
+        $now = now();
         if ($exists) {
-            // Si ya existe, actualiza el registro
-            $now = now();
             $data['updated_at'] = $now;
             DB::table($table)
                 ->where($keys)
@@ -113,9 +117,6 @@ class FormController extends Controller
             return redirect()->route('form.show', ['block' => $block, 'tipo_documento' => $data['tipo_documento'], 'numero_documento' => $data['numero_documento']])
                 ->with('success', 'Formulario actualizado exitosamente.');
         }
-
-        // Insertar el registro si no existe
-        $now = now();
         $data['created_at'] = $now;
         $data['updated_at'] = $now;
         DB::table($table)->insert($data);

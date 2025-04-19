@@ -17,6 +17,9 @@
             <form method="POST" action="{{ route('form.store') }}" autocomplete="off" id="bloque1Form">
                 @csrf
                 <input type="hidden" name="block" value="1">
+                @if(isset($registro))
+                    <input type="hidden" name="es_actualizacion" value="1">
+                @endif
                 <!-- Identificación -->
                 <div class="card mb-4 shadow-sm">
                     <div class="card-header bg-primary text-white">Identificación</div>
@@ -324,7 +327,10 @@
                 </div>
                 <div class="mt-4 text-end">
                     <button type="submit" class="btn btn-primary btn-lg">
-                        Guardar y continuar <i class="bi bi-arrow-right-circle"></i>
+                        Guardar
+                    </button>
+                    <button type="button" class="btn btn-secondary btn-lg ms-2" id="btnSiguiente">
+                        Siguiente <i class="bi bi-arrow-right-circle"></i>
                     </button>
                 </div>
             </form>
@@ -351,9 +357,9 @@
         @if($errors->has('usuario_existente'))
             Swal.fire({
                 icon: 'error',
-                title: 'Usuario existente',
-                text: '{{ $errors->first('usuario_existente') }}',
-                confirmButtonColor: '#dc3545'
+                title: 'Usuario ya existe',
+                text: 'Este usuario ya existe, solo puedes ingresar usuarios nuevos.',
+                confirmButtonColor: '#d33'
             });
         @endif
 
