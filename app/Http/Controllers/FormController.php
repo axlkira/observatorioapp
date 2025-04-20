@@ -16,7 +16,15 @@ class FormController extends Controller
         }
         // Obtener datos previos si existen
         $registro = null;
-        $table = ($block == 1) ? 't_caracterizacion_bloque1' : 't_vida_digna_bloque2';
+        if ($block == 1) {
+            $table = 't_caracterizacion_bloque1';
+        } elseif ($block == 2) {
+            $table = 't_vida_digna_bloque2';
+        } elseif ($block == 3) {
+            $table = 't_trabajo_digno_bloque3';
+        } else {
+            abort(404, 'Bloque no soportado aún');
+        }
         $registro = DB::table($table)
             ->where('tipo_documento', $tipo_documento)
             ->where('numero_documento', $numero_documento)
@@ -51,41 +59,22 @@ class FormController extends Controller
                 // Pregunta 15
                 'violencia_sexual', 'violencia_genero', 'violencia_psicologica', 'violencia_fisica', 'violencia_economica', 'violencia_ninguna',
                 // Pregunta 17
-                'discriminacion_sexo', 'discriminacion_genero', 'discriminacion_etnia', 'discriminacion_nacionalidad',
-                'discriminacion_estrato', 'discriminacion_edad', 'discriminacion_religion', 'discriminacion_discapacidad',
-                'discriminacion_otros', 'discriminacion_no_hemos',
+                'discriminacion_sexo', 'discriminacion_genero', 'discriminacion_etnia', 'discriminacion_nacionalidad', 'discriminacion_estrato', 'discriminacion_edad', 'discriminacion_religion', 'discriminacion_discapacidad', 'discriminacion_otros', 'discriminacion_no_hemos',
                 // Pregunta 19
-                'institucion_cavif', 'institucion_ips_eps', 'institucion_fiscalia', 'institucion_linea_155',
-                'institucion_comisaria', 'institucion_inspeccion', 'institucion_icbf', 'institucion_caivas',
-                'institucion_personeria', 'institucion_centros_integrales', 'institucion_no_hemos_asistido',
+                'institucion_cavif', 'institucion_ips_eps', 'institucion_fiscalia', 'institucion_linea_155', 'institucion_comisaria', 'institucion_inspeccion', 'institucion_icbf', 'institucion_caivas', 'institucion_personeria', 'institucion_centros_integrales', 'institucion_no_hemos_asistido',
             ];
-            foreach ($multichecks as $campo) {
-                $data[$campo] = $request->has($campo) ? 1 : 2;
+            foreach ($multichecks as $field) {
+                $data[$field] = $request->has($field) ? 1 : 2;
             }
-        // --- BLOQUE 3 ---
-        } elseif ($block == 3) {
-            // Pregunta 20
-            $fuentes = [
-                'fuente_ingreso_formal', 'fuente_ingreso_informal', 'fuente_ingreso_independiente',
-                'fuente_ingreso_apoyo', 'fuente_ingreso_pension', 'fuente_ingreso_subsidio', 'fuente_ingreso_ninguna'
+        }
+        // Normalización dinámica de bloque 3 (todo select, no switches)
+        if ($block == 3) {
+            // Todos los campos ya vienen del select, solo aseguramos que existan
+            $fields = [
+                'fuente_ingreso', 'ingreso_fijo', 'equilibrio_vida_laboral', 'interfiere_cuidado', 'trabajos_domesticos_impiden', 'medio_obtencion_alimentos', 'patrimonio'
             ];
-            foreach ($fuentes as $campo) {
-                $data[$campo] = $request->has($campo) ? 1 : 2;
-            }
-            // Pregunta 21
-            $personas = [
-                'personas_ingreso_1', 'personas_ingreso_2', 'personas_ingreso_3', 'personas_ingreso_4'
-            ];
-            foreach ($personas as $campo) {
-                $data[$campo] = $request->has($campo) ? 1 : 2;
-            }
-            // Pregunta 25
-            $medios = [
-                'medio_alimentos_almacenes', 'medio_alimentos_bonos_gob', 'medio_alimentos_bonos_empresa',
-                'medio_alimentos_cultivos', 'medio_alimentos_redes'
-            ];
-            foreach ($medios as $campo) {
-                $data[$campo] = $request->has($campo) ? 1 : 2;
+            foreach ($fields as $field) {
+                $data[$field] = $request->input($field, null);
             }
         } else {
             // --- Normalizar campos de selección múltiple a 1 o 0 (según checkboxes) ---
@@ -169,6 +158,10 @@ class FormController extends Controller
                 return redirect()->route('form.show', ['block' => 2, 'tipo_documento' => $data['tipo_documento'], 'numero_documento' => $data['numero_documento']])
                     ->with('success', 'Bloque 1 guardado exitosamente. Continúa con el Bloque 2.');
             }
+            if ($block == 2 && !$request->has('es_actualizacion')) {
+                return redirect()->route('form.show', ['block' => 3, 'tipo_documento' => $data['tipo_documento'], 'numero_documento' => $data['numero_documento']])
+                    ->with('success', 'Bloque 2 guardado exitosamente. Continúa con el Bloque 3.');
+            }
             return redirect()->route('form.show', ['block' => $block, 'tipo_documento' => $data['tipo_documento'], 'numero_documento' => $data['numero_documento']])
                 ->with('success', 'Formulario actualizado exitosamente.');
         }
@@ -180,6 +173,10 @@ class FormController extends Controller
             return redirect()->route('form.show', ['block' => 2, 'tipo_documento' => $data['tipo_documento'], 'numero_documento' => $data['numero_documento']])
                 ->with('success', 'Bloque 1 guardado exitosamente. Continúa con el Bloque 2.');
         }
+        if ($block == 2 && !$request->has('es_actualizacion')) {
+            return redirect()->route('form.show', ['block' => 3, 'tipo_documento' => $data['tipo_documento'], 'numero_documento' => $data['numero_documento']])
+                ->with('success', 'Bloque 2 guardado exitosamente. Continúa con el Bloque 3.');
+        }
         // Redirigir a la URL con llaves primarias
         return redirect()->route('form.show', ['block' => $block, 'tipo_documento' => $data['tipo_documento'], 'numero_documento' => $data['numero_documento']])
             ->with('success', 'Formulario guardado exitosamente.');
@@ -188,7 +185,15 @@ class FormController extends Controller
     // Mostrar información guardada
     public function showData($block, Request $request)
     {
-        $table = ($block == 1) ? 't_caracterizacion_bloque1' : 't_vida_digna_bloque2';
+        if ($block == 1) {
+            $table = 't_caracterizacion_bloque1';
+        } elseif ($block == 2) {
+            $table = 't_vida_digna_bloque2';
+        } elseif ($block == 3) {
+            $table = 't_trabajo_digno_bloque3';
+        } else {
+            abort(404, 'Bloque no soportado aún');
+        }
         $tipo_documento = $request->input('tipo_documento');
         $numero_documento = $request->input('numero_documento');
         $registro = DB::table($table)

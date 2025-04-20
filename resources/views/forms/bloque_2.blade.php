@@ -173,10 +173,13 @@
                         </div>
                     </div>
                     <div class="mt-4 text-end">
-                        <a href="/form/1/{{ request('tipo_documento', request()->route('tipo_documento')) }}/{{ request('numero_documento', request()->route('numero_documento')) }}" class="btn btn-secondary btn-lg me-2">
+                        <a href="/form/1/{{ $registro->tipo_documento ?? request('tipo_documento', request()->route('tipo_documento')) }}/{{ $registro->numero_documento ?? request('numero_documento', request()->route('numero_documento')) }}" class="btn btn-secondary btn-lg me-2">
                             <i class="bi bi-arrow-left-circle"></i> Anterior
                         </a>
-                        <button type="submit" class="btn btn-primary btn-lg">Guardar</button>
+                        <button type="submit" class="btn btn-primary btn-lg me-2">Guardar</button>
+                        <button id="btnSiguiente" type="button" class="btn btn-success btn-lg" {{ !isset($registro) ? 'disabled' : '' }}>
+                            Siguiente <i class="bi bi-arrow-right-circle"></i>
+                        </button>
                     </div>
                 </form>
             </div>
@@ -221,6 +224,20 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         });
     }
+
+    // Lógica para el botón Siguiente
+    const btnSiguiente = document.getElementById('btnSiguiente');
+    @if(isset($registro))
+        btnSiguiente.disabled = false;
+        btnSiguiente.addEventListener('click', function() {
+            // Redirige a bloque 3 con las llaves actuales
+            const tipo_documento = '{{ $registro->tipo_documento }}';
+            const numero_documento = '{{ $registro->numero_documento }}';
+            window.location.href = "/form/3/" + tipo_documento + "/" + numero_documento;
+        });
+    @else
+        btnSiguiente.disabled = true;
+    @endif
 
     // Exclusividad para "Ninguna" y "No hemos asistido" en preguntas múltiples
     function exclusividadCheckboxes(grupo, idNinguna) {

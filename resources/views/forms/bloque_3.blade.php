@@ -1,197 +1,140 @@
 @extends('layouts.app')
+
+@section('title', 'Bloque 3: Trabajo Digno')
+
 @section('content')
 <div class="container">
-    <!-- Pestañas de navegación -->
-    <ul class="nav nav-tabs mb-4">
-        <li class="nav-item">
-            <a class="nav-link" href="{{ route('form.show', ['block' => 1, 'tipo_documento' => $tipo_documento, 'numero_documento' => $numero_documento]) }}">Bloque 1</a>
+    <h2 class="mb-4">Bloque 3: Trabajo Digno</h2>
+    <ul class="nav nav-tabs mb-4" id="bloque3TabNav" role="tablist">
+        <li class="nav-item" role="presentation">
+            <a class="nav-link" id="bloque1-tab" href="{{ route('form.show', ['block' => 1, 'tipo_documento' => $tipo_documento, 'numero_documento' => $numero_documento]) }}" role="tab">Bloque 1: Caracterización Familiar</a>
         </li>
-        <li class="nav-item">
-            <a class="nav-link" href="{{ route('form.show', ['block' => 2, 'tipo_documento' => $tipo_documento, 'numero_documento' => $numero_documento]) }}">Bloque 2</a>
+        <li class="nav-item" role="presentation">
+            <a class="nav-link" id="bloque2-tab" href="{{ route('form.show', ['block' => 2, 'tipo_documento' => $tipo_documento, 'numero_documento' => $numero_documento]) }}" role="tab">Bloque 2: Vida Digna</a>
         </li>
-        <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="#">Bloque 3</a>
+        <li class="nav-item" role="presentation">
+            <a class="nav-link active" id="bloque3-tab" data-bs-toggle="tab" href="#bloque3-tab-pane" role="tab" aria-controls="bloque3-tab-pane" aria-selected="true">Bloque 3: Trabajo Digno</a>
         </li>
     </ul>
-    <form id="bloque3Form" method="POST" action="{{ route('form.save', ['block' => 3]) }}">
-        @csrf
-        <input type="hidden" name="tipo_documento" value="{{ $tipo_documento }}">
-        <input type="hidden" name="numero_documento" value="{{ $numero_documento }}">
-        <!-- Pregunta 20 -->
-        <div class="card mb-4">
-            <div class="card-header bg-primary text-white">20. ¿Cuál es la principal fuente de ingresos de tu núcleo familiar?</div>
-            <div class="card-body">
-                <div class="form-check form-switch">
-                    <input class="form-check-input" type="checkbox" name="fuente_ingreso_formal" id="fuente_ingreso_formal" value="1" {{ old('fuente_ingreso_formal', $registro->fuente_ingreso_formal ?? 2) == 1 ? 'checked' : '' }}>
-                    <label class="form-check-label" for="fuente_ingreso_formal">Empleo formal</label>
+    <div class="tab-content" id="bloque3TabsContent">
+        <div class="tab-pane fade show active" id="bloque3-tab-pane" role="tabpanel" aria-labelledby="bloque3-tab">
+            <form method="POST" action="{{ route('form.store') }}" autocomplete="off" id="bloque3Form">
+                @csrf
+                <input type="hidden" name="block" value="3">
+                @if(isset($registro))
+                    <input type="hidden" name="es_actualizacion" value="1">
+                @endif
+                <input type="hidden" name="tipo_documento" value="{{ $tipo_documento }}">
+                <input type="hidden" name="numero_documento" value="{{ $numero_documento }}">
+                <!-- Pregunta 20 -->
+                <div class="card mb-4 shadow-sm">
+                    <div class="card-header bg-primary text-white">20. ¿Cuál es la principal fuente de ingresos de tu núcleo familiar?</div>
+                    <div class="card-body">
+                        <select class="form-select" name="fuente_ingreso" required>
+                            <option value="">Seleccione...</option>
+                            <option value="118" {{ old('fuente_ingreso', $registro->fuente_ingreso ?? '') == 118 ? 'selected' : '' }}>Empleo formal</option>
+                            <option value="119" {{ old('fuente_ingreso', $registro->fuente_ingreso ?? '') == 119 ? 'selected' : '' }}>Empleo informal</option>
+                            <option value="120" {{ old('fuente_ingreso', $registro->fuente_ingreso ?? '') == 120 ? 'selected' : '' }}>Independiente</option>
+                            <option value="121" {{ old('fuente_ingreso', $registro->fuente_ingreso ?? '') == 121 ? 'selected' : '' }}>Apoyo de familiares y amigos</option>
+                            <option value="122" {{ old('fuente_ingreso', $registro->fuente_ingreso ?? '') == 122 ? 'selected' : '' }}>Pensión</option>
+                            <option value="123" {{ old('fuente_ingreso', $registro->fuente_ingreso ?? '') == 123 ? 'selected' : '' }}>Subsidios del gobierno</option>
+                            <option value="124" {{ old('fuente_ingreso', $registro->fuente_ingreso ?? '') == 124 ? 'selected' : '' }}>Ninguna</option>
+                        </select>
+                    </div>
                 </div>
-                <div class="form-check form-switch">
-                    <input class="form-check-input" type="checkbox" name="fuente_ingreso_informal" id="fuente_ingreso_informal" value="1" {{ old('fuente_ingreso_informal', $registro->fuente_ingreso_informal ?? 2) == 1 ? 'checked' : '' }}>
-                    <label class="form-check-label" for="fuente_ingreso_informal">Empleo informal</label>
+                <!-- Pregunta 21 -->
+                <div class="card mb-4 shadow-sm">
+                    <div class="card-header bg-primary text-white">21. ¿Cuántas personas de tu núcleo familiar cuentan con un ingreso fijo?</div>
+                    <div class="card-body">
+                        <select class="form-select" name="ingreso_fijo" required>
+                            <option value="">Seleccione...</option>
+                            <option value="125" {{ old('ingreso_fijo', $registro->ingreso_fijo ?? '') == 125 ? 'selected' : '' }}>1 integrante del núcleo familiar</option>
+                            <option value="126" {{ old('ingreso_fijo', $registro->ingreso_fijo ?? '') == 126 ? 'selected' : '' }}>2 integrantes del núcleo familiar</option>
+                            <option value="127" {{ old('ingreso_fijo', $registro->ingreso_fijo ?? '') == 127 ? 'selected' : '' }}>Más de 2 integrantes del núcleo familiar</option>
+                            <option value="2" {{ old('ingreso_fijo', $registro->ingreso_fijo ?? '') == 2 ? 'selected' : '' }}>Ninguno</option>
+                        </select>
+                    </div>
                 </div>
-                <div class="form-check form-switch">
-                    <input class="form-check-input" type="checkbox" name="fuente_ingreso_independiente" id="fuente_ingreso_independiente" value="1" {{ old('fuente_ingreso_independiente', $registro->fuente_ingreso_independiente ?? 2) == 1 ? 'checked' : '' }}>
-                    <label class="form-check-label" for="fuente_ingreso_independiente">Independiente</label>
+                <!-- Pregunta 22 -->
+                <div class="card mb-4 shadow-sm">
+                    <div class="card-header bg-primary text-white">22. ¿Considera que los integrantes de tu núcleo familiar tienen un equilibrio entre la vida laboral y familiar para compartir o tener espacios de recreación?</div>
+                    <div class="card-body">
+                        <select class="form-select" name="equilibrio_vida_laboral" required>
+                            <option value="">Seleccione...</option>
+                            <option value="1" {{ old('equilibrio_vida_laboral', $registro->equilibrio_vida_laboral ?? '') == 1 ? 'selected' : '' }}>Sí</option>
+                            <option value="2" {{ old('equilibrio_vida_laboral', $registro->equilibrio_vida_laboral ?? '') == 2 ? 'selected' : '' }}>No</option>
+                            <option value="44" {{ old('equilibrio_vida_laboral', $registro->equilibrio_vida_laboral ?? '') == 44 ? 'selected' : '' }}>No sabe</option>
+                        </select>
+                    </div>
                 </div>
-                <div class="form-check form-switch">
-                    <input class="form-check-input" type="checkbox" name="fuente_ingreso_apoyo" id="fuente_ingreso_apoyo" value="1" {{ old('fuente_ingreso_apoyo', $registro->fuente_ingreso_apoyo ?? 2) == 1 ? 'checked' : '' }}>
-                    <label class="form-check-label" for="fuente_ingreso_apoyo">Apoyo de familiares y amigos</label>
+                <!-- Pregunta 23 -->
+                <div class="card mb-4 shadow-sm">
+                    <div class="card-header bg-primary text-white">23. ¿El trabajo interfiere en la capacidad de cuidar a los niños/as, adultos mayores o personas con discapacidad de tu núcleo familiar?</div>
+                    <div class="card-body">
+                        <select class="form-select" name="interfiere_cuidado" required>
+                            <option value="">Seleccione...</option>
+                            <option value="1" {{ old('interfiere_cuidado', $registro->interfiere_cuidado ?? '') == 1 ? 'selected' : '' }}>Sí</option>
+                            <option value="2" {{ old('interfiere_cuidado', $registro->interfiere_cuidado ?? '') == 2 ? 'selected' : '' }}>No</option>
+                            <option value="128" {{ old('interfiere_cuidado', $registro->interfiere_cuidado ?? '') == 128 ? 'selected' : '' }}>No tenemos personas que requieran cuidado</option>
+                        </select>
+                    </div>
                 </div>
-                <div class="form-check form-switch">
-                    <input class="form-check-input" type="checkbox" name="fuente_ingreso_pension" id="fuente_ingreso_pension" value="1" {{ old('fuente_ingreso_pension', $registro->fuente_ingreso_pension ?? 2) == 1 ? 'checked' : '' }}>
-                    <label class="form-check-label" for="fuente_ingreso_pension">Pensión</label>
+                <!-- Pregunta 24 -->
+                <div class="card mb-4 shadow-sm">
+                    <div class="card-header bg-primary text-white">24. ¿Los trabajos de cuidado y domésticos le impiden acceder a tu familia a trabajos remunerados?</div>
+                    <div class="card-body">
+                        <select class="form-select" name="trabajos_domesticos_impiden" required>
+                            <option value="">Seleccione...</option>
+                            <option value="129" {{ old('trabajos_domesticos_impiden', $registro->trabajos_domesticos_impiden ?? '') == 129 ? 'selected' : '' }}>Totalmente de acuerdo</option>
+                            <option value="130" {{ old('trabajos_domesticos_impiden', $registro->trabajos_domesticos_impiden ?? '') == 130 ? 'selected' : '' }}>De acuerdo</option>
+                            <option value="131" {{ old('trabajos_domesticos_impiden', $registro->trabajos_domesticos_impiden ?? '') == 131 ? 'selected' : '' }}>Ni de acuerdo, ni en desacuerdo</option>
+                            <option value="132" {{ old('trabajos_domesticos_impiden', $registro->trabajos_domesticos_impiden ?? '') == 132 ? 'selected' : '' }}>En desacuerdo</option>
+                            <option value="133" {{ old('trabajos_domesticos_impiden', $registro->trabajos_domesticos_impiden ?? '') == 133 ? 'selected' : '' }}>Totalmente en desacuerdo</option>
+                        </select>
+                    </div>
                 </div>
-                <div class="form-check form-switch">
-                    <input class="form-check-input" type="checkbox" name="fuente_ingreso_subsidio" id="fuente_ingreso_subsidio" value="1" {{ old('fuente_ingreso_subsidio', $registro->fuente_ingreso_subsidio ?? 2) == 1 ? 'checked' : '' }}>
-                    <label class="form-check-label" for="fuente_ingreso_subsidio">Subsidios del gobierno</label>
+                <!-- Pregunta 25 -->
+                <div class="card mb-4 shadow-sm">
+                    <div class="card-header bg-primary text-white">25. ¿Cuál es el principal medio a través del cual tu núcleo familiar obtiene los alimentos?</div>
+                    <div class="card-body">
+                        <select class="form-select" name="medio_obtencion_alimentos" required>
+                            <option value="">Seleccione...</option>
+                            <option value="134" {{ old('medio_obtencion_alimentos', $registro->medio_obtencion_alimentos ?? '') == 134 ? 'selected' : '' }}>Compras en almacenes</option>
+                            <option value="135" {{ old('medio_obtencion_alimentos', $registro->medio_obtencion_alimentos ?? '') == 135 ? 'selected' : '' }}>Bonos y paquetes alimentarios del gobierno</option>
+                            <option value="136" {{ old('medio_obtencion_alimentos', $registro->medio_obtencion_alimentos ?? '') == 136 ? 'selected' : '' }}>Bonos de la empresa</option>
+                            <option value="137" {{ old('medio_obtencion_alimentos', $registro->medio_obtencion_alimentos ?? '') == 137 ? 'selected' : '' }}>Cultivos propios</option>
+                            <option value="138" {{ old('medio_obtencion_alimentos', $registro->medio_obtencion_alimentos ?? '') == 138 ? 'selected' : '' }}>Redes comunitarias</option>
+                        </select>
+                    </div>
                 </div>
-                <div class="form-check form-switch">
-                    <input class="form-check-input" type="checkbox" name="fuente_ingreso_ninguna" id="fuente_ingreso_ninguna" value="1" {{ old('fuente_ingreso_ninguna', $registro->fuente_ingreso_ninguna ?? 2) == 1 ? 'checked' : '' }}>
-                    <label class="form-check-label" for="fuente_ingreso_ninguna">Ninguna</label>
+                <!-- Pregunta 26 -->
+                <div class="card mb-4 shadow-sm">
+                    <div class="card-header bg-primary text-white">26. ¿Tu núcleo familiar cuenta con algún patrimonio que les permita solventarse ante una eventualidad o crisis?</div>
+                    <div class="card-body">
+                        <select class="form-select" name="patrimonio" required>
+                            <option value="">Seleccione...</option>
+                            <option value="1" {{ old('patrimonio', $registro->patrimonio ?? '') == 1 ? 'selected' : '' }}>Sí</option>
+                            <option value="2" {{ old('patrimonio', $registro->patrimonio ?? '') == 2 ? 'selected' : '' }}>No</option>
+                            <option value="44" {{ old('patrimonio', $registro->patrimonio ?? '') == 44 ? 'selected' : '' }}>No sabe</option>
+                        </select>
+                    </div>
                 </div>
-            </div>
+                <div class="d-flex justify-content-between mt-4">
+                    <a href="{{ route('form.show', ['block' => 2, 'tipo_documento' => $tipo_documento, 'numero_documento' => $numero_documento]) }}" class="btn btn-secondary">Anterior</a>
+                    <button type="submit" class="btn btn-primary">Guardar</button>
+                </div>
+            </form>
         </div>
-        <!-- Pregunta 21 -->
-        <div class="card mb-4">
-            <div class="card-header bg-primary text-white">21. ¿Cuántas personas de tu núcleo familiar cuentan con un ingreso fijo?</div>
-            <div class="card-body">
-                <div class="form-check form-switch">
-                    <input class="form-check-input" type="checkbox" name="personas_ingreso_1" id="personas_ingreso_1" value="1" {{ old('personas_ingreso_1', $registro->personas_ingreso_1 ?? 2) == 1 ? 'checked' : '' }}>
-                    <label class="form-check-label" for="personas_ingreso_1">1 integrante del núcleo familiar</label>
-                </div>
-                <div class="form-check form-switch">
-                    <input class="form-check-input" type="checkbox" name="personas_ingreso_2" id="personas_ingreso_2" value="1" {{ old('personas_ingreso_2', $registro->personas_ingreso_2 ?? 2) == 1 ? 'checked' : '' }}>
-                    <label class="form-check-label" for="personas_ingreso_2">2 integrantes del núcleo familiar</label>
-                </div>
-                <div class="form-check form-switch">
-                    <input class="form-check-input" type="checkbox" name="personas_ingreso_3" id="personas_ingreso_3" value="1" {{ old('personas_ingreso_3', $registro->personas_ingreso_3 ?? 2) == 1 ? 'checked' : '' }}>
-                    <label class="form-check-label" for="personas_ingreso_3">Más de 2 integrantes del núcleo familiar</label>
-                </div>
-                <div class="form-check form-switch">
-                    <input class="form-check-input" type="checkbox" name="personas_ingreso_4" id="personas_ingreso_4" value="1" {{ old('personas_ingreso_4', $registro->personas_ingreso_4 ?? 2) == 1 ? 'checked' : '' }}>
-                    <label class="form-check-label" for="personas_ingreso_4">Ninguno</label>
-                </div>
-            </div>
-        </div>
-        <!-- Pregunta 22 -->
-        <div class="card mb-4">
-            <div class="card-header bg-primary text-white">22. ¿Considera que los integrantes de tu núcleo familiar tienen un equilibrio entre la vida laboral y familiar para compartir o tener espacios de recreación?</div>
-            <div class="card-body">
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" name="equilibrio_vida" id="equilibrio_vida_si" value="1" {{ old('equilibrio_vida', $registro->equilibrio_vida ?? '') == 1 ? 'checked' : '' }}>
-                    <label class="form-check-label" for="equilibrio_vida_si">Sí</label>
-                </div>
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" name="equilibrio_vida" id="equilibrio_vida_no" value="2" {{ old('equilibrio_vida', $registro->equilibrio_vida ?? '') == 2 ? 'checked' : '' }}>
-                    <label class="form-check-label" for="equilibrio_vida_no">No</label>
-                </div>
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" name="equilibrio_vida" id="equilibrio_vida_no_aplica" value="0" {{ old('equilibrio_vida', $registro->equilibrio_vida ?? '') == 0 ? 'checked' : '' }}>
-                    <label class="form-check-label" for="equilibrio_vida_no_aplica">No aplica</label>
-                </div>
-            </div>
-        </div>
-        <!-- Pregunta 23 -->
-        <div class="card mb-4">
-            <div class="card-header bg-primary text-white">23. ¿El trabajo interfiere en la capacidad de cuidar a los niños/as, adultos mayores o personas con discapacidad tu núcleo familiar?</div>
-            <div class="card-body">
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" name="trabajo_interfiere" id="trabajo_interfiere_si" value="1" {{ old('trabajo_interfiere', $registro->trabajo_interfiere ?? '') == 1 ? 'checked' : '' }}>
-                    <label class="form-check-label" for="trabajo_interfiere_si">Sí</label>
-                </div>
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" name="trabajo_interfiere" id="trabajo_interfiere_no" value="2" {{ old('trabajo_interfiere', $registro->trabajo_interfiere ?? '') == 2 ? 'checked' : '' }}>
-                    <label class="form-check-label" for="trabajo_interfiere_no">No</label>
-                </div>
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" name="trabajo_interfiere" id="trabajo_interfiere_no_aplica" value="0" {{ old('trabajo_interfiere', $registro->trabajo_interfiere ?? '') == 0 ? 'checked' : '' }}>
-                    <label class="form-check-label" for="trabajo_interfiere_no_aplica">No aplica</label>
-                </div>
-            </div>
-        </div>
-        <!-- Pregunta 24 -->
-        <div class="card mb-4">
-            <div class="card-header bg-primary text-white">24. Los trabajos de cuidado y domésticos le impiden acceder a tu familia a trabajos remunerados?</div>
-            <div class="card-body">
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" name="trabajo_cuidado" id="trabajo_cuidado_totalmente_acuerdo" value="129" {{ old('trabajo_cuidado', $registro->trabajo_cuidado ?? '') == 129 ? 'checked' : '' }}>
-                    <label class="form-check-label" for="trabajo_cuidado_totalmente_acuerdo">Totalmente de acuerdo</label>
-                </div>
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" name="trabajo_cuidado" id="trabajo_cuidado_acuerdo" value="130" {{ old('trabajo_cuidado', $registro->trabajo_cuidado ?? '') == 130 ? 'checked' : '' }}>
-                    <label class="form-check-label" for="trabajo_cuidado_acuerdo">De acuerdo</label>
-                </div>
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" name="trabajo_cuidado" id="trabajo_cuidado_neutro" value="131" {{ old('trabajo_cuidado', $registro->trabajo_cuidado ?? '') == 131 ? 'checked' : '' }}>
-                    <label class="form-check-label" for="trabajo_cuidado_neutro">Ni de acuerdo, ni en desacuerdo</label>
-                </div>
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" name="trabajo_cuidado" id="trabajo_cuidado_desacuerdo" value="132" {{ old('trabajo_cuidado', $registro->trabajo_cuidado ?? '') == 132 ? 'checked' : '' }}>
-                    <label class="form-check-label" for="trabajo_cuidado_desacuerdo">En desacuerdo</label>
-                </div>
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" name="trabajo_cuidado" id="trabajo_cuidado_totalmente_desacuerdo" value="133" {{ old('trabajo_cuidado', $registro->trabajo_cuidado ?? '') == 133 ? 'checked' : '' }}>
-                    <label class="form-check-label" for="trabajo_cuidado_totalmente_desacuerdo">Totalmente en desacuerdo</label>
-                </div>
-            </div>
-        </div>
-        <!-- Pregunta 25 -->
-        <div class="card mb-4">
-            <div class="card-header bg-primary text-white">25. ¿Cuál es el principal medio a través del cual tu núcleo familiar obtiene los alimentos?</div>
-            <div class="card-body">
-                <div class="form-check form-switch">
-                    <input class="form-check-input" type="checkbox" name="medio_alimentos_almacenes" id="medio_alimentos_almacenes" value="1" {{ old('medio_alimentos_almacenes', $registro->medio_alimentos_almacenes ?? 2) == 1 ? 'checked' : '' }}>
-                    <label class="form-check-label" for="medio_alimentos_almacenes">Compras en almacenes</label>
-                </div>
-                <div class="form-check form-switch">
-                    <input class="form-check-input" type="checkbox" name="medio_alimentos_bonos_gob" id="medio_alimentos_bonos_gob" value="1" {{ old('medio_alimentos_bonos_gob', $registro->medio_alimentos_bonos_gob ?? 2) == 1 ? 'checked' : '' }}>
-                    <label class="form-check-label" for="medio_alimentos_bonos_gob">Bonos y paquetes alimentarios del gobierno</label>
-                </div>
-                <div class="form-check form-switch">
-                    <input class="form-check-input" type="checkbox" name="medio_alimentos_bonos_empresa" id="medio_alimentos_bonos_empresa" value="1" {{ old('medio_alimentos_bonos_empresa', $registro->medio_alimentos_bonos_empresa ?? 2) == 1 ? 'checked' : '' }}>
-                    <label class="form-check-label" for="medio_alimentos_bonos_empresa">Bonos de la empresa</label>
-                </div>
-                <div class="form-check form-switch">
-                    <input class="form-check-input" type="checkbox" name="medio_alimentos_cultivos" id="medio_alimentos_cultivos" value="1" {{ old('medio_alimentos_cultivos', $registro->medio_alimentos_cultivos ?? 2) == 1 ? 'checked' : '' }}>
-                    <label class="form-check-label" for="medio_alimentos_cultivos">Cultivos propios</label>
-                </div>
-                <div class="form-check form-switch">
-                    <input class="form-check-input" type="checkbox" name="medio_alimentos_redes" id="medio_alimentos_redes" value="1" {{ old('medio_alimentos_redes', $registro->medio_alimentos_redes ?? 2) == 1 ? 'checked' : '' }}>
-                    <label class="form-check-label" for="medio_alimentos_redes">Redes comunitarias</label>
-                </div>
-            </div>
-        </div>
-        <!-- Pregunta 26 -->
-        <div class="card mb-4">
-            <div class="card-header bg-primary text-white">26. ¿Tu núcleo familiar cuenta con algún patrimonio que les permita solventarse ante una eventualidad o crisis?</div>
-            <div class="card-body">
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" name="patrimonio" id="patrimonio_si" value="1" {{ old('patrimonio', $registro->patrimonio ?? '') == 1 ? 'checked' : '' }}>
-                    <label class="form-check-label" for="patrimonio_si">Sí</label>
-                </div>
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" name="patrimonio" id="patrimonio_no" value="2" {{ old('patrimonio', $registro->patrimonio ?? '') == 2 ? 'checked' : '' }}>
-                    <label class="form-check-label" for="patrimonio_no">No</label>
-                </div>
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" name="patrimonio" id="patrimonio_no_sabe" value="44" {{ old('patrimonio', $registro->patrimonio ?? '') == 44 ? 'checked' : '' }}>
-                    <label class="form-check-label" for="patrimonio_no_sabe">No sabe</label>
-                </div>
-            </div>
-        </div>
-        <div class="d-flex justify-content-between">
-            <a href="{{ route('form.show', ['block' => 2, 'tipo_documento' => $tipo_documento, 'numero_documento' => $numero_documento]) }}" class="btn btn-secondary">Anterior</a>
-            <button type="submit" class="btn btn-primary">Guardar</button>
-        </div>
-    </form>
+    </div>
 </div>
 @endsection
+
 @section('scripts')
 <!-- SweetAlert2 -->
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-    // SweetAlert éxito
+    // Mostrar SweetAlert de éxito si existe mensaje en sesión
     @if(session('success'))
         Swal.fire({
             icon: 'success',
@@ -200,7 +143,8 @@ document.addEventListener('DOMContentLoaded', function() {
             confirmButtonColor: '#0c6efd'
         });
     @endif
-    // SweetAlert error
+
+    // Mostrar SweetAlert de error si existe error de usuario existente
     @if($errors->has('usuario_existente'))
         Swal.fire({
             icon: 'error',
@@ -209,7 +153,8 @@ document.addEventListener('DOMContentLoaded', function() {
             confirmButtonColor: '#d33'
         });
     @endif
-    // Spinner al guardar
+
+    // Spinner y deshabilitar botón al guardar
     const form = document.getElementById('bloque3Form');
     if (form) {
         form.addEventListener('submit', function(e) {
