@@ -86,7 +86,10 @@
                             <i class="bi bi-arrow-left-circle"></i> Anterior
                         </a>
                         <button type="submit" class="btn btn-primary btn-lg me-2" id="guardarBtn">Guardar</button>
-                        <a href="#" id="siguienteBtn" class="btn btn-success btn-lg" @if(!isset($registro)) disabled style="pointer-events: none; opacity: 0.6;" @endif>
+                        <a href="/observatorioapp/public/form/9/{{ $registro->tipo_documento ?? request('tipo_documento', request()->route('tipo_documento')) }}/{{ $registro->numero_documento ?? request('numero_documento', request()->route('numero_documento')) }}"
+                           id="siguienteBtn"
+                           class="btn btn-success btn-lg"
+                           @if(!isset($registro)) disabled style="pointer-events: none; opacity: 0.6;" @endif>
                             Siguiente <i class="bi bi-arrow-right-circle"></i>
                         </a>
                     </div>
@@ -109,7 +112,6 @@ document.addEventListener('DOMContentLoaded', function() {
             siguienteBtn.removeAttribute('disabled');
             siguienteBtn.style.pointerEvents = 'auto';
             siguienteBtn.style.opacity = '1';
-            siguienteBtn.href = '#'; // Aquí puedes poner la ruta del siguiente bloque si existe
         }
     @endif
 

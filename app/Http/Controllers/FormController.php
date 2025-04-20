@@ -33,6 +33,8 @@ class FormController extends Controller
             $table = 't_participacion_bloque7';
         } elseif ($block == 8) {
             $table = 't_representacion_bloque8';
+        } elseif ($block == 9) {
+            $table = 't_derechos_bloque9';
         } else {
             abort(404, 'Bloque no soportado aún');
         }
@@ -69,6 +71,8 @@ class FormController extends Controller
             $table = 't_participacion_bloque7';
         } elseif ($block == 8) {
             $table = 't_representacion_bloque8';
+        } elseif ($block == 9) {
+            $table = 't_derechos_bloque9';
         } else {
             abort(404, 'Bloque no soportado aún');
         }
@@ -178,6 +182,51 @@ class FormController extends Controller
             // Bloque 8: Representación
             $data['p44_participacion_decisiones'] = $request->input('p44_participacion_decisiones');
             $data['p45_jefatura_familia'] = $request->input('p45_jefatura_familia');
+        } elseif ($block == 9) {
+            // Bloque 9: Derechos (opción múltiple, máximo 5)
+            $campos = [
+                'p46_vida_libre_violencia',
+                'p46_participacion_representacion',
+                'p46_trabajo_digno',
+                'p46_salud_seguridad',
+                'p46_educacion_igualdad',
+                'p46_recreacion_cultura',
+                'p46_honra_dignidad',
+                'p46_igualdad',
+                'p46_armonia_unidad',
+                'p46_proteccion_asistencia',
+                'p46_entornos_seguros',
+                'p46_decidir_hijos',
+                'p46_orientacion_asesoria',
+                'p46_respetar_formacion_hijos',
+                'p46_respeto_reciproco',
+                'p46_proteccion_patrimonio',
+                'p46_alimentacion_necesidades',
+                'p46_bienestar',
+                'p46_apoyo_estado_mayores',
+                'p46_ninguno_anteriores',
+            ];
+            $seleccionados = 0;
+            foreach ($campos as $campo) {
+                if ($campo === 'p46_ninguno_anteriores') {
+                    $data[$campo] = $request->has($campo) ? 1 : 2;
+                } else {
+                    $data[$campo] = $request->has($campo) ? 1 : 2;
+                    if ($request->has($campo)) $seleccionados++;
+                }
+            }
+            // Lógica de exclusividad para "Ninguno de los anteriores"
+            if ($data['p46_ninguno_anteriores'] == 1) {
+                foreach ($campos as $campo) {
+                    if ($campo !== 'p46_ninguno_anteriores') {
+                        $data[$campo] = 2;
+                    }
+                }
+            }
+            // Validar máximo 5 opciones
+            if ($data['p46_ninguno_anteriores'] != 1 && $seleccionados > 5) {
+                return back()->withErrors(['max_opciones' => 'Solo puede seleccionar hasta 5 derechos.'])->withInput();
+            }
         } else {
             // --- Normalizar campos de selección múltiple a 1 o 0 (según checkboxes) ---
             // Orientación sexual
@@ -291,6 +340,10 @@ class FormController extends Controller
                 return redirect()->route('form.show', ['block' => 8, 'tipo_documento' => $data['tipo_documento'], 'numero_documento' => $data['numero_documento']])
                     ->with('success', 'Bloque 8 guardado exitosamente.');
             }
+            if ($block == 9 && !$request->has('es_actualizacion')) {
+                return redirect()->route('form.show', ['block' => 9, 'tipo_documento' => $data['tipo_documento'], 'numero_documento' => $data['numero_documento']])
+                    ->with('success', 'Bloque 9 guardado exitosamente.');
+            }
             return redirect()->route('form.show', ['block' => $block, 'tipo_documento' => $data['tipo_documento'], 'numero_documento' => $data['numero_documento']])
                 ->with('success', 'Formulario actualizado exitosamente.');
         }
@@ -330,6 +383,10 @@ class FormController extends Controller
             return redirect()->route('form.show', ['block' => 8, 'tipo_documento' => $data['tipo_documento'], 'numero_documento' => $data['numero_documento']])
                 ->with('success', 'Bloque 8 guardado exitosamente.');
         }
+        if ($block == 9 && !$request->has('es_actualizacion')) {
+            return redirect()->route('form.show', ['block' => 9, 'tipo_documento' => $data['tipo_documento'], 'numero_documento' => $data['numero_documento']])
+                ->with('success', 'Bloque 9 guardado exitosamente.');
+        }
         // Redirigir a la URL con llaves primarias
         return redirect()->route('form.show', ['block' => $block, 'tipo_documento' => $data['tipo_documento'], 'numero_documento' => $data['numero_documento']])
             ->with('success', 'Formulario guardado exitosamente.');
@@ -354,6 +411,8 @@ class FormController extends Controller
             $table = 't_participacion_bloque7';
         } elseif ($block == 8) {
             $table = 't_representacion_bloque8';
+        } elseif ($block == 9) {
+            $table = 't_derechos_bloque9';
         } else {
             abort(404, 'Bloque no soportado aún');
         }
