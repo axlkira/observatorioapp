@@ -25,6 +25,14 @@ class FormController extends Controller
             $table = 't_trabajo_digno_bloque3';
         } elseif ($block == 4) {
             $table = 't_salud_bloque4';
+        } elseif ($block == 5) {
+            $table = 't_proteccion_bloque5';
+        } elseif ($block == 6) {
+            $table = 't_respeto_bloque6';
+        } elseif ($block == 7) {
+            $table = 't_participacion_bloque7';
+        } elseif ($block == 8) {
+            $table = 't_representacion_bloque8';
         } else {
             abort(404, 'Bloque no soportado aún');
         }
@@ -53,6 +61,14 @@ class FormController extends Controller
             $table = 't_trabajo_digno_bloque3';
         } elseif ($block == 4) {
             $table = 't_salud_bloque4';
+        } elseif ($block == 5) {
+            $table = 't_proteccion_bloque5';
+        } elseif ($block == 6) {
+            $table = 't_respeto_bloque6';
+        } elseif ($block == 7) {
+            $table = 't_participacion_bloque7';
+        } elseif ($block == 8) {
+            $table = 't_representacion_bloque8';
         } else {
             abort(404, 'Bloque no soportado aún');
         }
@@ -89,6 +105,79 @@ class FormController extends Controller
             foreach ($fields as $field) {
                 $data[$field] = $request->input($field, null);
             }
+        } elseif ($block == 5) {
+            // Bloque 5: Protección
+            $data['p30_vivienda'] = $request->input('p30_vivienda');
+            $data['p30_vivienda_otro'] = ($request->input('p30_vivienda') == '152') ? $request->input('p30_vivienda_otro') : null;
+            $data['p31_migracion'] = $request->input('p31_migracion');
+            // Red de apoyo múltiple: switches individuales
+            $data['red_apoyo_estado'] = $request->has('red_apoyo_estado') ? 1 : 0;
+            $data['red_apoyo_organizaciones_internacionales'] = $request->has('red_apoyo_organizaciones_internacionales') ? 1 : 0;
+            $data['red_apoyo_organizaciones_no_gubernamentales'] = $request->has('red_apoyo_organizaciones_no_gubernamentales') ? 1 : 0;
+            $data['red_apoyo_iglesia'] = $request->has('red_apoyo_iglesia') ? 1 : 0;
+            $data['red_apoyo_amigos'] = $request->has('red_apoyo_amigos') ? 1 : 0;
+            $data['red_apoyo_vecinos'] = $request->has('red_apoyo_vecinos') ? 1 : 0;
+            $data['red_apoyo_otros_familiares'] = $request->has('red_apoyo_otros_familiares') ? 1 : 0;
+            $data['red_apoyo_otros'] = $request->has('red_apoyo_otros') ? 1 : 0;
+            $data['red_apoyo_no_hemos_tenido'] = $request->has('red_apoyo_no_hemos_tenido') ? 1 : 0;
+            $data['red_apoyo_no_aplica'] = $request->has('red_apoyo_no_aplica') ? 1 : 0;
+        } elseif ($block == 6) {
+            // Bloque 6: Respeto y Comunicación Familiar
+            $data['p33_acceso_metodos_anticonceptivos'] = $request->input('p33_acceso_metodos_anticonceptivos');
+            // Pregunta 34: opción múltiple (cada campo 1/2)
+            $data['p34_ninos_adolescentes_adultos'] = $request->has('p34_ninos_adolescentes_adultos') ? 1 : 2;
+            $data['p34_ninos_adolescentes_adultos_mayores'] = $request->has('p34_ninos_adolescentes_adultos_mayores') ? 1 : 2;
+            $data['p34_jovenes_adultos'] = $request->has('p34_jovenes_adultos') ? 1 : 2;
+            $data['p34_jovenes_adultos_mayores'] = $request->has('p34_jovenes_adultos_mayores') ? 1 : 2;
+            $data['p34_adultos_adultos_mayores'] = $request->has('p34_adultos_adultos_mayores') ? 1 : 2;
+            $data['p34_nunca'] = $request->has('p34_nunca') ? 1 : 2;
+            $data['p34_no_sabe'] = $request->has('p34_no_sabe') ? 1 : 2;
+            $data['p34_no_aplica'] = $request->has('p34_no_aplica') ? 1 : 2;
+            // Únicas respuesta
+            $data['p35_orientacion_asesoria'] = $request->input('p35_orientacion_asesoria');
+            $data['p36_calidad_comunicacion'] = $request->input('p36_calidad_comunicacion');
+            $data['p37_medio_comunicacion'] = $request->input('p37_medio_comunicacion');
+            $data['p38_impacto_tecnologia'] = $request->input('p38_impacto_tecnologia');
+            $data['p39_frecuencia_comidas'] = $request->input('p39_frecuencia_comidas');
+        } elseif ($block == 7) {
+            // Bloque 7: Participación
+            $data['p40_igualdad_oportunidades'] = $request->input('p40_igualdad_oportunidades');
+            $data['p41_valoracion_posturas'] = $request->input('p41_valoracion_posturas');
+            $data['p42_trabajos_cuidado'] = $request->input('p42_trabajos_cuidado');
+            // Pregunta 43: opción múltiple (cada campo 1/2)
+            $data['p43_subsidios_economicos'] = $request->has('p43_subsidios_economicos') ? 1 : 2;
+            $data['p43_acceso_centros_cuidado'] = $request->has('p43_acceso_centros_cuidado') ? 1 : 2;
+            $data['p43_atencion_medica'] = $request->has('p43_atencion_medica') ? 1 : 2;
+            $data['p43_capacitacion_cuidadores'] = $request->has('p43_capacitacion_cuidadores') ? 1 : 2;
+            $data['p43_paquetes_alimentarios'] = $request->has('p43_paquetes_alimentarios') ? 1 : 2;
+            $data['p43_redes_apoyo_cuidadores'] = $request->has('p43_redes_apoyo_cuidadores') ? 1 : 2;
+            $data['p43_incentivos_economicos'] = $request->has('p43_incentivos_economicos') ? 1 : 2;
+            $data['p43_ninguno'] = $request->has('p43_ninguno') ? 1 : 2;
+            $data['p43_no_aplica'] = $request->has('p43_no_aplica') ? 1 : 2;
+            // Exclusividad lógica: si "Ninguno" o "No aplica" está chequeado, los demás deben ser 2
+            if ($data['p43_ninguno'] == 1 || $data['p43_no_aplica'] == 1) {
+                foreach ([
+                    'p43_subsidios_economicos', 'p43_acceso_centros_cuidado', 'p43_atencion_medica',
+                    'p43_capacitacion_cuidadores', 'p43_paquetes_alimentarios', 'p43_redes_apoyo_cuidadores', 'p43_incentivos_economicos'
+                ] as $campo) {
+                    $data[$campo] = 2;
+                }
+            } else {
+                // Si alguno de los otros está chequeado, "Ninguno" y "No aplica" deben ser 2
+                if (
+                    $data['p43_subsidios_economicos'] == 1 || $data['p43_acceso_centros_cuidado'] == 1 ||
+                    $data['p43_atencion_medica'] == 1 || $data['p43_capacitacion_cuidadores'] == 1 ||
+                    $data['p43_paquetes_alimentarios'] == 1 || $data['p43_redes_apoyo_cuidadores'] == 1 ||
+                    $data['p43_incentivos_economicos'] == 1
+                ) {
+                    $data['p43_ninguno'] = 2;
+                    $data['p43_no_aplica'] = 2;
+                }
+            }
+        } elseif ($block == 8) {
+            // Bloque 8: Representación
+            $data['p44_participacion_decisiones'] = $request->input('p44_participacion_decisiones');
+            $data['p45_jefatura_familia'] = $request->input('p45_jefatura_familia');
         } else {
             // --- Normalizar campos de selección múltiple a 1 o 0 (según checkboxes) ---
             // Orientación sexual
@@ -182,6 +271,26 @@ class FormController extends Controller
                 return redirect()->route('form.show', ['block' => 4, 'tipo_documento' => $data['tipo_documento'], 'numero_documento' => $data['numero_documento']])
                     ->with('success', 'Bloque 3 guardado exitosamente. Continúa con el Bloque 4.');
             }
+            if ($block == 4 && !$request->has('es_actualizacion')) {
+                return redirect()->route('form.show', ['block' => 5, 'tipo_documento' => $data['tipo_documento'], 'numero_documento' => $data['numero_documento']])
+                    ->with('success', 'Bloque 4 guardado exitosamente. Continúa con el Bloque 5.');
+            }
+            if ($block == 5 && !$request->has('es_actualizacion')) {
+                return redirect()->route('form.show', ['block' => 6, 'tipo_documento' => $data['tipo_documento'], 'numero_documento' => $data['numero_documento']])
+                    ->with('success', 'Bloque 5 guardado exitosamente. Continúa con el Bloque 6.');
+            }
+            if ($block == 6 && !$request->has('es_actualizacion')) {
+                return redirect()->route('form.show', ['block' => 7, 'tipo_documento' => $data['tipo_documento'], 'numero_documento' => $data['numero_documento']])
+                    ->with('success', 'Bloque 6 guardado exitosamente. Continúa con el Bloque 7.');
+            }
+            if ($block == 7 && !$request->has('es_actualizacion')) {
+                return redirect()->route('form.show', ['block' => 8, 'tipo_documento' => $data['tipo_documento'], 'numero_documento' => $data['numero_documento']])
+                    ->with('success', 'Bloque 7 guardado exitosamente. Continúa con el Bloque 8.');
+            }
+            if ($block == 8 && !$request->has('es_actualizacion')) {
+                return redirect()->route('form.show', ['block' => 8, 'tipo_documento' => $data['tipo_documento'], 'numero_documento' => $data['numero_documento']])
+                    ->with('success', 'Bloque 8 guardado exitosamente.');
+            }
             return redirect()->route('form.show', ['block' => $block, 'tipo_documento' => $data['tipo_documento'], 'numero_documento' => $data['numero_documento']])
                 ->with('success', 'Formulario actualizado exitosamente.');
         }
@@ -201,6 +310,26 @@ class FormController extends Controller
             return redirect()->route('form.show', ['block' => 4, 'tipo_documento' => $data['tipo_documento'], 'numero_documento' => $data['numero_documento']])
                 ->with('success', 'Bloque 3 guardado exitosamente. Continúa con el Bloque 4.');
         }
+        if ($block == 4 && !$request->has('es_actualizacion')) {
+            return redirect()->route('form.show', ['block' => 5, 'tipo_documento' => $data['tipo_documento'], 'numero_documento' => $data['numero_documento']])
+                ->with('success', 'Bloque 4 guardado exitosamente. Continúa con el Bloque 5.');
+        }
+        if ($block == 5 && !$request->has('es_actualizacion')) {
+            return redirect()->route('form.show', ['block' => 6, 'tipo_documento' => $data['tipo_documento'], 'numero_documento' => $data['numero_documento']])
+                ->with('success', 'Bloque 5 guardado exitosamente. Continúa con el Bloque 6.');
+        }
+        if ($block == 6 && !$request->has('es_actualizacion')) {
+            return redirect()->route('form.show', ['block' => 7, 'tipo_documento' => $data['tipo_documento'], 'numero_documento' => $data['numero_documento']])
+                ->with('success', 'Bloque 6 guardado exitosamente. Continúa con el Bloque 7.');
+        }
+        if ($block == 7 && !$request->has('es_actualizacion')) {
+            return redirect()->route('form.show', ['block' => 8, 'tipo_documento' => $data['tipo_documento'], 'numero_documento' => $data['numero_documento']])
+                ->with('success', 'Bloque 7 guardado exitosamente. Continúa con el Bloque 8.');
+        }
+        if ($block == 8 && !$request->has('es_actualizacion')) {
+            return redirect()->route('form.show', ['block' => 8, 'tipo_documento' => $data['tipo_documento'], 'numero_documento' => $data['numero_documento']])
+                ->with('success', 'Bloque 8 guardado exitosamente.');
+        }
         // Redirigir a la URL con llaves primarias
         return redirect()->route('form.show', ['block' => $block, 'tipo_documento' => $data['tipo_documento'], 'numero_documento' => $data['numero_documento']])
             ->with('success', 'Formulario guardado exitosamente.');
@@ -217,6 +346,14 @@ class FormController extends Controller
             $table = 't_trabajo_digno_bloque3';
         } elseif ($block == 4) {
             $table = 't_salud_bloque4';
+        } elseif ($block == 5) {
+            $table = 't_proteccion_bloque5';
+        } elseif ($block == 6) {
+            $table = 't_respeto_bloque6';
+        } elseif ($block == 7) {
+            $table = 't_participacion_bloque7';
+        } elseif ($block == 8) {
+            $table = 't_representacion_bloque8';
         } else {
             abort(404, 'Bloque no soportado aún');
         }

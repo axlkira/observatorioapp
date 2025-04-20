@@ -78,7 +78,13 @@
                         <a href="/observatorioapp/public/form/3/{{ $registro->tipo_documento ?? request('tipo_documento', request()->route('tipo_documento')) }}/{{ $registro->numero_documento ?? request('numero_documento', request()->route('numero_documento')) }}" class="btn btn-secondary btn-lg me-2">
                             <i class="bi bi-arrow-left-circle"></i> Anterior
                         </a>
-                        <button type="submit" class="btn btn-primary btn-lg">Guardar</button>
+                        <button type="submit" class="btn btn-primary btn-lg me-2">Guardar</button>
+                        <a href="/observatorioapp/public/form/5/{{ $registro->tipo_documento ?? request('tipo_documento', request()->route('tipo_documento')) }}/{{ $registro->numero_documento ?? request('numero_documento', request()->route('numero_documento')) }}"
+                           class="btn btn-success btn-lg{{ empty($registro) ? ' disabled' : '' }}"
+                           tabindex="{{ empty($registro) ? '-1' : '0' }}"
+                           aria-disabled="{{ empty($registro) ? 'true' : 'false' }}">
+                            Siguiente <i class="bi bi-arrow-right-circle"></i>
+                        </a>
                     </div>
                 </form>
             </div>
