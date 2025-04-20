@@ -23,12 +23,14 @@
                     <input type="hidden" name="block" value="2">
                     <input type="hidden" name="tipo_documento" value="{{ $registro->tipo_documento ?? request('tipo_documento', request()->route('tipo_documento')) }}">
                     <input type="hidden" name="numero_documento" value="{{ $registro->numero_documento ?? request('numero_documento', request()->route('numero_documento')) }}">
+                    <input type="hidden" name="profesional_documento" value="{{ session('profesional_documento', old('profesional_documento', isset($registro) ? $registro->profesional_documento : '0')) }}">
                     @if(isset($registro))
                         <input type="hidden" name="es_actualizacion" value="1">
                     @endif
                     <div class="card mb-4">
                         <div class="card-header bg-primary text-white">15. ¿Alguien de tu núcleo familiar ha sido víctima de algún tipo de las siguientes violencias al interior del hogar?</div>
                         <div class="card-body">
+                            @php $violencia_requerida = !isset($registro); @endphp
                             <div class="form-check form-switch">
                                 <input class="form-check-input violencia-multiple" type="checkbox" name="violencia_sexual" id="violencia_sexual" value="1" {{ old('violencia_sexual', $registro->violencia_sexual ?? 2) == 1 ? 'checked' : '' }}>
                                 <label class="form-check-label" for="violencia_sexual">Violencia sexual</label>
@@ -58,7 +60,7 @@
                     <div class="card mb-4">
                         <div class="card-header bg-primary text-white">16. ¿Consideras que el entorno en el que habita tu núcleo familiar es seguro?</div>
                         <div class="card-body">
-                            <select class="form-select" name="entorno_seguro">
+                            <select class="form-select" name="entorno_seguro" required>
                                 <option value="">Seleccione...</option>
                                 <option value="1" {{ old('entorno_seguro', $registro->entorno_seguro ?? '') == 1 ? 'selected' : '' }}>Sí</option>
                                 <option value="2" {{ old('entorno_seguro', $registro->entorno_seguro ?? '') == 2 ? 'selected' : '' }}>No</option>
@@ -114,7 +116,7 @@
                     <div class="card mb-4">
                         <div class="card-header bg-primary text-white">18. ¿Con qué frecuencia en tu núcleo familiar dedican tiempo a compartir actividades juntos?</div>
                         <div class="card-body">
-                            <select class="form-select" name="frecuencia_compartir">
+                            <select class="form-select" name="frecuencia_compartir" required>
                                 <option value="">Seleccione...</option>
                                 <option value="103" {{ old('frecuencia_compartir', $registro->frecuencia_compartir ?? '') == 103 ? 'selected' : '' }}>Muy frecuentemente</option>
                                 <option value="104" {{ old('frecuencia_compartir', $registro->frecuencia_compartir ?? '') == 104 ? 'selected' : '' }}>Frecuentemente</option>
@@ -126,6 +128,7 @@
                     <div class="card mb-4">
                         <div class="card-header bg-primary text-white">19. En algún momento en tu familia han acudido a alguna de las siguientes instituciones por razón de violencia intrafamiliar:</div>
                         <div class="card-body">
+                            @php $institucion_requerida = !isset($registro); @endphp
                             <div class="form-check form-switch">
                                 <input class="form-check-input institucion-multiple" type="checkbox" name="institucion_cavif" id="institucion_cavif" value="1" {{ old('institucion_cavif', $registro->institucion_cavif ?? 2) == 1 ? 'checked' : '' }}>
                                 <label class="form-check-label" for="institucion_cavif">CAVIF. Centro de Atención para la Violencia Intrafamiliar</label>
@@ -173,11 +176,11 @@
                         </div>
                     </div>
                     <div class="mt-4 text-end">
-                        <a href="/form/1/{{ $registro->tipo_documento ?? request('tipo_documento', request()->route('tipo_documento')) }}/{{ $registro->numero_documento ?? request('numero_documento', request()->route('numero_documento')) }}" class="btn btn-secondary btn-lg me-2">
+                        <a href="/observatorioapp/public/form/1/{{ $registro->tipo_documento ?? request('tipo_documento', request()->route('tipo_documento')) }}/{{ $registro->numero_documento ?? request('numero_documento', request()->route('numero_documento')) }}" class="btn btn-secondary btn-lg me-2">
                             <i class="bi bi-arrow-left-circle"></i> Anterior
                         </a>
                         <button type="submit" class="btn btn-primary btn-lg me-2">Guardar</button>
-                        <button id="btnSiguiente" type="button" class="btn btn-success btn-lg" {{ !isset($registro) ? 'disabled' : '' }}>
+                        <button id="btnSiguienteBloque3" type="button" class="btn btn-success btn-lg" {{ !isset($registro) ? 'disabled' : '' }}>
                             Siguiente <i class="bi bi-arrow-right-circle"></i>
                         </button>
                     </div>
@@ -204,36 +207,96 @@ document.addEventListener('DOMContentLoaded', function() {
     @endif
 
     // Mostrar SweetAlert de error si existe error de usuario existente
-    @if($errors->has('usuario_existente'))
+    @if($errors->any()) {
+        let errorMsg = '';
+        @foreach ($errors->all() as $error)
+            errorMsg += '{{ $error }}\n';
+        @endforeach
         Swal.fire({
             icon: 'error',
-            title: 'Error',
-            text: '{{ $errors->first('usuario_existente') }}',
+            title: 'Error en el formulario',
+            text: errorMsg,
             confirmButtonColor: '#d33'
         });
+    }
     @endif
 
-    // Spinner y deshabilitar botón al guardar
+    // Spinner al guardar y validación avanzada
     const form = document.getElementById('bloque2Form');
-    if (form) {
-        form.addEventListener('submit', function(e) {
-            Swal.fire({
-                title: 'Guardando...',
-                allowOutsideClick: false,
-                didOpen: () => { Swal.showLoading(); }
-            });
+    form.addEventListener('submit', function(e) {
+        // Validación amigable: solo mostrar SweetAlert para el primer campo vacío o grupo no respondido
+        const campos = [
+            {selector: 'select[name="entorno_seguro"]', label: '16. ¿El entorno es seguro?'},
+            {selector: 'select[name="frecuencia_compartir"]', label: '18. ¿Con qué frecuencia comparten actividades?'}
+        ];
+        for(let campo of campos) {
+            let el = document.querySelector(campo.selector);
+            if(el && (el.value === '' || el.value === null)) {
+                e.preventDefault();
+                Swal.fire({
+                    icon: 'warning',
+                    title: 'Campo obligatorio',
+                    text: `Debes llenar el campo: ${campo.label}`,
+                    confirmButtonColor: '#0c6efd'
+                });
+                el.focus();
+                return false;
+            }
+        }
+        // Validar selección múltiple: al menos uno marcado
+        const grupos = [
+            {name: 'violencia', className: 'violencia-multiple', label: '15. ¿Alguien ha sido víctima de violencia?', ninguna: 'violencia_ninguna'},
+            {name: 'discriminacion', className: 'discriminacion-multiple', label: '17. ¿Han sido discriminados?', ninguna: 'discriminacion_no_hemos'},
+            {name: 'institucion', className: 'institucion-multiple', label: '19. ¿Han acudido a instituciones por violencia?', ninguna: 'institucion_no_hemos_asistido'}
+        ];
+        for(let grupo of grupos) {
+            let checks = this.querySelectorAll(`input[type=checkbox].${grupo.className}`);
+            let checked = Array.from(checks).some(chk => chk.checked);
+            if(!checked) {
+                e.preventDefault();
+                Swal.fire({
+                    icon: 'warning',
+                    title: 'Campo obligatorio',
+                    text: `Debes seleccionar al menos una opción en: ${grupo.label}`,
+                    confirmButtonColor: '#0c6efd'
+                });
+                checks[0].focus();
+                return false;
+            }
+            // Validar que NO obligue a seleccionar todas: si "ninguna" está marcada, ignora las otras
+            let ninguna = document.getElementById(grupo.ninguna);
+            if (ninguna && ninguna.checked) {
+                continue;
+            }
+            // Si ninguna no está marcada, debe haber al menos una de las otras marcada
+            let otros = Array.from(checks).filter(chk => chk.id !== grupo.ninguna);
+            let otrosMarcados = otros.some(chk => chk.checked);
+            if (!otrosMarcados && (!ninguna || !ninguna.checked)) {
+                e.preventDefault();
+                Swal.fire({
+                    icon: 'warning',
+                    title: 'Campo obligatorio',
+                    text: `Debes seleccionar al menos una opción en: ${grupo.label}`,
+                    confirmButtonColor: '#0c6efd'
+                });
+                checks[0].focus();
+                return false;
+            }
+        }
+        Swal.fire({
+            title: 'Guardando...',
+            allowOutsideClick: false,
+            didOpen: () => { Swal.showLoading(); }
         });
-    }
-
+    });
     // Lógica para el botón Siguiente
-    const btnSiguiente = document.getElementById('btnSiguiente');
+    const btnSiguiente = document.getElementById('btnSiguienteBloque3');
     @if(isset($registro))
         btnSiguiente.disabled = false;
         btnSiguiente.addEventListener('click', function() {
-            // Redirige a bloque 3 con las llaves actuales
-            const tipo_documento = '{{ $registro->tipo_documento }}';
-            const numero_documento = '{{ $registro->numero_documento }}';
-            window.location.href = "/form/3/" + tipo_documento + "/" + numero_documento;
+            const tipo_documento = '{{ $registro->tipo_documento ?? request('tipo_documento', request()->route('tipo_documento')) }}';
+            const numero_documento = '{{ $registro->numero_documento ?? request('numero_documento', request()->route('numero_documento')) }}';
+            window.location.href = "/observatorioapp/public/form/3/" + tipo_documento + "/" + numero_documento;
         });
     @else
         btnSiguiente.disabled = true;

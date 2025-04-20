@@ -13,7 +13,7 @@
         </li>
         @if(isset($registro))
         <li class="nav-item" role="presentation">
-            <a class="nav-link" id="bloque2-tab" href="{{ route('form.show', ['block' => 2, 'tipo_documento' => $registro->tipo_documento, 'numero_documento' => $registro->numero_documento]) }}" role="tab" aria-controls="bloque2-tab-pane" aria-selected="false">
+            <a class="nav-link" id="bloque2-tab" href="/observatorioapp/public/form/2/{{ $registro->tipo_documento }}/{{ $registro->numero_documento }}" role="tab" aria-controls="bloque2-tab-pane" aria-selected="false">
                 Bloque 2: Vida Digna
             </a>
         </li>
@@ -371,7 +371,7 @@
                 // Usar SIEMPRE las llaves del registro guardado para URL limpia
                 const tipo_documento = '{{ $registro->tipo_documento }}';
                 const numero_documento = '{{ $registro->numero_documento }}';
-                window.location.href = "/form/2/" + tipo_documento + "/" + numero_documento;
+                window.location.href = "/observatorioapp/public/form/2/" + tipo_documento + "/" + numero_documento;
             });
         @endif
 

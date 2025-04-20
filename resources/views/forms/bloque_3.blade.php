@@ -26,6 +26,7 @@
                 @endif
                 <input type="hidden" name="tipo_documento" value="{{ $tipo_documento }}">
                 <input type="hidden" name="numero_documento" value="{{ $numero_documento }}">
+                <input type="hidden" name="profesional_documento" value="{{ session('profesional_documento', old('profesional_documento', isset($registro) ? $registro->profesional_documento : '0')) }}">
                 <!-- Pregunta 20 -->
                 <div class="card mb-4 shadow-sm">
                     <div class="card-header bg-primary text-white">20. ¿Cuál es la principal fuente de ingresos de tu núcleo familiar?</div>
@@ -119,9 +120,14 @@
                         </select>
                     </div>
                 </div>
-                <div class="d-flex justify-content-between mt-4">
-                    <a href="{{ route('form.show', ['block' => 2, 'tipo_documento' => $tipo_documento, 'numero_documento' => $numero_documento]) }}" class="btn btn-secondary">Anterior</a>
-                    <button type="submit" class="btn btn-primary">Guardar</button>
+                <div class="mt-4 text-end">
+                    <a href="{{ route('form.show', ['block' => 2, 'tipo_documento' => $tipo_documento, 'numero_documento' => $numero_documento]) }}" class="btn btn-secondary btn-lg me-2">
+                        <i class="bi bi-arrow-left-circle"></i> Anterior
+                    </a>
+                    <button type="submit" class="btn btn-primary btn-lg me-2">Guardar</button>
+                    <button id="btnSiguienteBloque4" type="button" class="btn btn-success btn-lg" {{ !isset($registro) ? 'disabled' : '' }}>
+                        Siguiente <i class="bi bi-arrow-right-circle"></i>
+                    </button>
                 </div>
             </form>
         </div>
@@ -165,6 +171,19 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         });
     }
+    // Lógica para el botón Siguiente
+    const btnSiguiente = document.getElementById('btnSiguienteBloque4');
+    @if(isset($registro))
+        btnSiguiente.disabled = false;
+        btnSiguiente.addEventListener('click', function() {
+            const tipo_documento = '{{ $registro->tipo_documento ?? $tipo_documento }}';
+            const numero_documento = '{{ $registro->numero_documento ?? $numero_documento }}';
+            // Construye la URL relativa correcta
+            window.location.href = "/observatorioapp/public/form/4/" + tipo_documento + "/" + numero_documento;
+        });
+    @else
+        btnSiguiente.disabled = true;
+    @endif
 });
 </script>
 @endsection

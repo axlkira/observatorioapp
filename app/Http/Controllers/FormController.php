@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Schema;
 
 class FormController extends Controller
 {
@@ -22,6 +23,8 @@ class FormController extends Controller
             $table = 't_vida_digna_bloque2';
         } elseif ($block == 3) {
             $table = 't_trabajo_digno_bloque3';
+        } elseif ($block == 4) {
+            $table = 't_salud_bloque4';
         } else {
             abort(404, 'Bloque no soportado aún');
         }
@@ -48,11 +51,12 @@ class FormController extends Controller
             $table = 't_vida_digna_bloque2';
         } elseif ($block == 3) {
             $table = 't_trabajo_digno_bloque3';
+        } elseif ($block == 4) {
+            $table = 't_salud_bloque4';
         } else {
             abort(404, 'Bloque no soportado aún');
         }
         $data = $request->except(['_token', 'block', 'es_actualizacion']);
-
         // Normalización dinámica de campos de selección múltiple para bloque 2
         if ($block == 2) {
             $multichecks = [
@@ -72,6 +76,15 @@ class FormController extends Controller
             // Todos los campos ya vienen del select, solo aseguramos que existan
             $fields = [
                 'fuente_ingreso', 'ingreso_fijo', 'equilibrio_vida_laboral', 'interfiere_cuidado', 'trabajos_domesticos_impiden', 'medio_obtencion_alimentos', 'patrimonio'
+            ];
+            foreach ($fields as $field) {
+                $data[$field] = $request->input($field, null);
+            }
+        } elseif ($block == 4) {
+            $fields = [
+                'sistema_salud',
+                'enfermedad_mental',
+                'acceso_espacios_recreativos',
             ];
             foreach ($fields as $field) {
                 $data[$field] = $request->input($field, null);
@@ -131,6 +144,9 @@ class FormController extends Controller
                 return back()->withErrors($validator)->withInput();
             }
         }
+        // Filtrar SOLO los campos que existen en la tabla
+        $columns = Schema::getColumnListing($table);
+        $data = array_intersect_key($data, array_flip($columns));
 
         // Separar llaves primarias
         $keys = [
@@ -162,6 +178,10 @@ class FormController extends Controller
                 return redirect()->route('form.show', ['block' => 3, 'tipo_documento' => $data['tipo_documento'], 'numero_documento' => $data['numero_documento']])
                     ->with('success', 'Bloque 2 guardado exitosamente. Continúa con el Bloque 3.');
             }
+            if ($block == 3 && !$request->has('es_actualizacion')) {
+                return redirect()->route('form.show', ['block' => 4, 'tipo_documento' => $data['tipo_documento'], 'numero_documento' => $data['numero_documento']])
+                    ->with('success', 'Bloque 3 guardado exitosamente. Continúa con el Bloque 4.');
+            }
             return redirect()->route('form.show', ['block' => $block, 'tipo_documento' => $data['tipo_documento'], 'numero_documento' => $data['numero_documento']])
                 ->with('success', 'Formulario actualizado exitosamente.');
         }
@@ -177,6 +197,10 @@ class FormController extends Controller
             return redirect()->route('form.show', ['block' => 3, 'tipo_documento' => $data['tipo_documento'], 'numero_documento' => $data['numero_documento']])
                 ->with('success', 'Bloque 2 guardado exitosamente. Continúa con el Bloque 3.');
         }
+        if ($block == 3 && !$request->has('es_actualizacion')) {
+            return redirect()->route('form.show', ['block' => 4, 'tipo_documento' => $data['tipo_documento'], 'numero_documento' => $data['numero_documento']])
+                ->with('success', 'Bloque 3 guardado exitosamente. Continúa con el Bloque 4.');
+        }
         // Redirigir a la URL con llaves primarias
         return redirect()->route('form.show', ['block' => $block, 'tipo_documento' => $data['tipo_documento'], 'numero_documento' => $data['numero_documento']])
             ->with('success', 'Formulario guardado exitosamente.');
@@ -191,6 +215,8 @@ class FormController extends Controller
             $table = 't_vida_digna_bloque2';
         } elseif ($block == 3) {
             $table = 't_trabajo_digno_bloque3';
+        } elseif ($block == 4) {
+            $table = 't_salud_bloque4';
         } else {
             abort(404, 'Bloque no soportado aún');
         }
