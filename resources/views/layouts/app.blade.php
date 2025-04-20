@@ -33,13 +33,13 @@
                     </a>
                 </li>
                 <li>
-                    <a href="#" class="nav-link">
-                        <i class="bi bi-file-earmark-text"></i> Formularios
+                    <a href="{{ url('/usuarios') }}" class="nav-link">
+                        <i class="bi bi-search"></i> Buscar
                     </a>
                 </li>
                 <li>
-                    <a href="{{ url('/form/1') }}" class="nav-link">
-                        <i class="bi bi-plus-circle"></i> Crear formulario nuevo
+                    <a href="{{ url('/form/1/0/0') }}" class="nav-link">
+                        <i class="bi bi-person-plus"></i> Gestionar nuevo usuario
                     </a>
                 </li>
             </ul>
@@ -48,6 +48,8 @@
             @yield('content')
         </div>
     </div>
+    <!-- jQuery (necesario para DataTables) -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <!-- Bootstrap JS Bundle -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     @yield('scripts')
