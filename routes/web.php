@@ -18,5 +18,7 @@ use App\Http\Controllers\FormController;
 
 Route::get('/', [welcome::class, 'welcome'])->name('welcome');
 
-Route::get('/form/{block}', [FormController::class, 'show'])->name('form.show');
-Route::post('/form/store', [FormController::class, 'store'])->name('form.store');
+Route::get('/form/{block}/{tipo_documento}/{numero_documento}', [FormController::class, 'show'])
+    ->name('form.show');
+Route::post('/form/store', [FormController::class, 'store'])
+    ->name('form.store');

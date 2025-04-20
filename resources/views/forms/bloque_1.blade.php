@@ -11,6 +11,13 @@
                 Bloque 1: Caracterización Familiar
             </a>
         </li>
+        @if(isset($registro))
+        <li class="nav-item" role="presentation">
+            <a class="nav-link" id="bloque2-tab" href="{{ route('form.show', ['block' => 2, 'tipo_documento' => $registro->tipo_documento, 'numero_documento' => $registro->numero_documento]) }}" role="tab" aria-controls="bloque2-tab-pane" aria-selected="false">
+                Bloque 2: Vida Digna
+            </a>
+        </li>
+        @endif
     </ul>
     <div class="tab-content" id="bloque1TabsContent">
         <div class="tab-pane fade show active" id="bloque1-tab-pane" role="tabpanel" aria-labelledby="bloque1-tab">
@@ -20,6 +27,8 @@
                 @if(isset($registro))
                     <input type="hidden" name="es_actualizacion" value="1">
                 @endif
+                <input type="hidden" name="tipo_documento" value="{{ $registro->tipo_documento ?? request('tipo_documento', request()->route('tipo_documento')) }}">
+                <input type="hidden" name="numero_documento" value="{{ $registro->numero_documento ?? request('numero_documento', request()->route('numero_documento')) }}">
                 <!-- Identificación -->
                 <div class="card mb-4 shadow-sm">
                     <div class="card-header bg-primary text-white">Identificación</div>
@@ -329,7 +338,7 @@
                     <button type="submit" class="btn btn-primary btn-lg">
                         Guardar
                     </button>
-                    <button type="button" class="btn btn-secondary btn-lg ms-2" id="btnSiguiente">
+                    <button type="button" class="btn btn-secondary btn-lg ms-2" id="btnSiguiente" {{ isset($registro) ? '' : 'disabled' }}>
                         Siguiente <i class="bi bi-arrow-right-circle"></i>
                     </button>
                 </div>
@@ -353,6 +362,19 @@
                 confirmButtonColor: '#0c6efd'
             });
         @endif
+
+        // Lógica para el botón Siguiente
+        const btnSiguiente = document.getElementById('btnSiguiente');
+        @if(isset($registro))
+            btnSiguiente.disabled = false;
+            btnSiguiente.addEventListener('click', function() {
+                // Usar SIEMPRE las llaves del registro guardado para URL limpia
+                const tipo_documento = '{{ $registro->tipo_documento }}';
+                const numero_documento = '{{ $registro->numero_documento }}';
+                window.location.href = "/form/2/" + tipo_documento + "/" + numero_documento;
+            });
+        @endif
+
         // Mostrar SweetAlert de error si existe error de usuario existente
         @if($errors->has('usuario_existente'))
             Swal.fire({
