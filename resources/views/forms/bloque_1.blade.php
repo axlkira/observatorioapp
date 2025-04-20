@@ -76,37 +76,37 @@
                             <div class="row">
                                 <div class="col-md-3">
                                     <div class="form-check form-switch">
-                                        <input class="form-check-input" type="checkbox" name="orientacion_lesbiana" id="orientacion_lesbiana" value="1" {{ old('orientacion_lesbiana', isset($registro) ? $registro->orientacion_lesbiana : '') ? 'checked' : '' }}>
+                                        <input class="form-check-input" type="checkbox" name="orientacion_lesbiana" id="orientacion_lesbiana" value="1" {{ old('orientacion_lesbiana', isset($registro) ? $registro->orientacion_lesbiana : '') == 1 ? 'checked' : '' }}>
                                         <label class="form-check-label" for="orientacion_lesbiana">Lesbiana</label>
                                     </div>
                                 </div>
                                 <div class="col-md-3">
                                     <div class="form-check form-switch">
-                                        <input class="form-check-input" type="checkbox" name="orientacion_gay" id="orientacion_gay" value="1" {{ old('orientacion_gay', isset($registro) ? $registro->orientacion_gay : '') ? 'checked' : '' }}>
+                                        <input class="form-check-input" type="checkbox" name="orientacion_gay" id="orientacion_gay" value="1" {{ old('orientacion_gay', isset($registro) ? $registro->orientacion_gay : '') == 1 ? 'checked' : '' }}>
                                         <label class="form-check-label" for="orientacion_gay">Gay</label>
                                     </div>
                                 </div>
                                 <div class="col-md-3">
                                     <div class="form-check form-switch">
-                                        <input class="form-check-input" type="checkbox" name="orientacion_bisexual" id="orientacion_bisexual" value="1" {{ old('orientacion_bisexual', isset($registro) ? $registro->orientacion_bisexual : '') ? 'checked' : '' }}>
+                                        <input class="form-check-input" type="checkbox" name="orientacion_bisexual" id="orientacion_bisexual" value="1" {{ old('orientacion_bisexual', isset($registro) ? $registro->orientacion_bisexual : '') == 1 ? 'checked' : '' }}>
                                         <label class="form-check-label" for="orientacion_bisexual">Bisexual</label>
                                     </div>
                                 </div>
                                 <div class="col-md-3">
                                     <div class="form-check form-switch">
-                                        <input class="form-check-input" type="checkbox" name="orientacion_pansexual" id="orientacion_pansexual" value="1" {{ old('orientacion_pansexual', isset($registro) ? $registro->orientacion_pansexual : '') ? 'checked' : '' }}>
+                                        <input class="form-check-input" type="checkbox" name="orientacion_pansexual" id="orientacion_pansexual" value="1" {{ old('orientacion_pansexual', isset($registro) ? $registro->orientacion_pansexual : '') == 1 ? 'checked' : '' }}>
                                         <label class="form-check-label" for="orientacion_pansexual">Pansexual</label>
                                     </div>
                                 </div>
                                 <div class="col-md-3">
                                     <div class="form-check form-switch">
-                                        <input class="form-check-input" type="checkbox" name="orientacion_asexual" id="orientacion_asexual" value="1" {{ old('orientacion_asexual', isset($registro) ? $registro->orientacion_asexual : '') ? 'checked' : '' }}>
+                                        <input class="form-check-input" type="checkbox" name="orientacion_asexual" id="orientacion_asexual" value="1" {{ old('orientacion_asexual', isset($registro) ? $registro->orientacion_asexual : '') == 1 ? 'checked' : '' }}>
                                         <label class="form-check-label" for="orientacion_asexual">Asexual</label>
                                     </div>
                                 </div>
                                 <div class="col-md-3">
                                     <div class="form-check form-switch">
-                                        <input class="form-check-input" type="checkbox" name="orientacion_otra" id="orientacion_otra" value="1" {{ old('orientacion_otra', isset($registro) ? $registro->orientacion_otra : '') ? 'checked' : '' }}>
+                                        <input class="form-check-input" type="checkbox" name="orientacion_otra" id="orientacion_otra" value="1" {{ old('orientacion_otra', isset($registro) ? $registro->orientacion_otra : '') == 1 ? 'checked' : '' }}>
                                         <label class="form-check-label" for="orientacion_otra">Otra</label>
                                     </div>
                                 </div>
@@ -115,13 +115,13 @@
                                 </div>
                                 <div class="col-md-3">
                                     <div class="form-check form-switch">
-                                        <input class="form-check-input" type="checkbox" name="orientacion_prefiere_no_responder" id="orientacion_prefiere_no_responder" value="1" {{ old('orientacion_prefiere_no_responder', isset($registro) ? $registro->orientacion_prefiere_no_responder : '') ? 'checked' : '' }}>
+                                        <input class="form-check-input" type="checkbox" name="orientacion_prefiere_no_responder" id="orientacion_prefiere_no_responder" value="1" {{ old('orientacion_prefiere_no_responder', isset($registro) ? $registro->orientacion_prefiere_no_responder : '') == 1 ? 'checked' : '' }}>
                                         <label class="form-check-label" for="orientacion_prefiere_no_responder">Prefiere no responder</label>
                                     </div>
                                 </div>
                                 <div class="col-md-3">
                                     <div class="form-check form-switch">
-                                        <input class="form-check-input" type="checkbox" name="orientacion_no_aplica" id="orientacion_no_aplica" value="1" {{ old('orientacion_no_aplica', isset($registro) ? $registro->orientacion_no_aplica : '') ? 'checked' : '' }}>
+                                        <input class="form-check-input" type="checkbox" name="orientacion_no_aplica" id="orientacion_no_aplica" value="1" {{ old('orientacion_no_aplica', isset($registro) ? $registro->orientacion_no_aplica : '') == 1 ? 'checked' : '' }}>
                                         <label class="form-check-label" for="orientacion_no_aplica">No aplica</label>
                                     </div>
                                 </div>
@@ -133,25 +133,25 @@
                             <div class="row">
                                 <div class="col-md-3">
                                     <div class="form-check form-switch">
-                                        <input class="form-check-input" type="checkbox" name="grupo_primera_infancia" id="grupo_primera_infancia" value="1" {{ old('grupo_primera_infancia', isset($registro) ? $registro->grupo_primera_infancia : '') ? 'checked' : '' }}>
+                                        <input class="form-check-input" type="checkbox" name="grupo_primera_infancia" id="grupo_primera_infancia" value="1" {{ old('grupo_primera_infancia', isset($registro) ? $registro->grupo_primera_infancia : '') == 1 ? 'checked' : '' }}>
                                         <label class="form-check-label" for="grupo_primera_infancia">Primera infancia/adolescentes (0-13 años)</label>
                                     </div>
                                 </div>
                                 <div class="col-md-3">
                                     <div class="form-check form-switch">
-                                        <input class="form-check-input" type="checkbox" name="grupo_jovenes" id="grupo_jovenes" value="1" {{ old('grupo_jovenes', isset($registro) ? $registro->grupo_jovenes : '') ? 'checked' : '' }}>
+                                        <input class="form-check-input" type="checkbox" name="grupo_jovenes" id="grupo_jovenes" value="1" {{ old('grupo_jovenes', isset($registro) ? $registro->grupo_jovenes : '') == 1 ? 'checked' : '' }}>
                                         <label class="form-check-label" for="grupo_jovenes">Jóvenes (14-28 años)</label>
                                     </div>
                                 </div>
                                 <div class="col-md-3">
                                     <div class="form-check form-switch">
-                                        <input class="form-check-input" type="checkbox" name="grupo_adultos" id="grupo_adultos" value="1" {{ old('grupo_adultos', isset($registro) ? $registro->grupo_adultos : '') ? 'checked' : '' }}>
+                                        <input class="form-check-input" type="checkbox" name="grupo_adultos" id="grupo_adultos" value="1" {{ old('grupo_adultos', isset($registro) ? $registro->grupo_adultos : '') == 1 ? 'checked' : '' }}>
                                         <label class="form-check-label" for="grupo_adultos">Adultos (29-59 años)</label>
                                     </div>
                                 </div>
                                 <div class="col-md-3">
                                     <div class="form-check form-switch">
-                                        <input class="form-check-input" type="checkbox" name="grupo_adultos_mayores" id="grupo_adultos_mayores" value="1" {{ old('grupo_adultos_mayores', isset($registro) ? $registro->grupo_adultos_mayores : '') ? 'checked' : '' }}>
+                                        <input class="form-check-input" type="checkbox" name="grupo_adultos_mayores" id="grupo_adultos_mayores" value="1" {{ old('grupo_adultos_mayores', isset($registro) ? $registro->grupo_adultos_mayores : '') == 1 ? 'checked' : '' }}>
                                         <label class="form-check-label" for="grupo_adultos_mayores">Adultos mayores (más de 69 años)</label>
                                     </div>
                                 </div>
@@ -163,43 +163,43 @@
                             <div class="row">
                                 <div class="col-md-4">
                                     <div class="form-check form-switch">
-                                        <input class="form-check-input" type="checkbox" name="hecho_homicidio" id="hecho_homicidio" value="1" {{ old('hecho_homicidio', isset($registro) ? $registro->hecho_homicidio : '') ? 'checked' : '' }}>
+                                        <input class="form-check-input" type="checkbox" name="hecho_homicidio" id="hecho_homicidio" value="1" {{ old('hecho_homicidio', isset($registro) ? $registro->hecho_homicidio : '') == 1 ? 'checked' : '' }}>
                                         <label class="form-check-label" for="hecho_homicidio">Homicidio</label>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-check form-switch">
-                                        <input class="form-check-input" type="checkbox" name="hecho_desaparicion" id="hecho_desaparicion" value="1" {{ old('hecho_desaparicion', isset($registro) ? $registro->hecho_desaparicion : '') ? 'checked' : '' }}>
+                                        <input class="form-check-input" type="checkbox" name="hecho_desaparicion" id="hecho_desaparicion" value="1" {{ old('hecho_desaparicion', isset($registro) ? $registro->hecho_desaparicion : '') == 1 ? 'checked' : '' }}>
                                         <label class="form-check-label" for="hecho_desaparicion">Desaparición forzada</label>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-check form-switch">
-                                        <input class="form-check-input" type="checkbox" name="hecho_confinamiento" id="hecho_confinamiento" value="1" {{ old('hecho_confinamiento', isset($registro) ? $registro->hecho_confinamiento : '') ? 'checked' : '' }}>
+                                        <input class="form-check-input" type="checkbox" name="hecho_confinamiento" id="hecho_confinamiento" value="1" {{ old('hecho_confinamiento', isset($registro) ? $registro->hecho_confinamiento : '') == 1 ? 'checked' : '' }}>
                                         <label class="form-check-label" for="hecho_confinamiento">Confinamiento</label>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-check form-switch">
-                                        <input class="form-check-input" type="checkbox" name="hecho_desplazamiento" id="hecho_desplazamiento" value="1" {{ old('hecho_desplazamiento', isset($registro) ? $registro->hecho_desplazamiento : '') ? 'checked' : '' }}>
+                                        <input class="form-check-input" type="checkbox" name="hecho_desplazamiento" id="hecho_desplazamiento" value="1" {{ old('hecho_desplazamiento', isset($registro) ? $registro->hecho_desplazamiento : '') == 1 ? 'checked' : '' }}>
                                         <label class="form-check-label" for="hecho_desplazamiento">Desplazamiento forzado</label>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-check form-switch">
-                                        <input class="form-check-input" type="checkbox" name="hecho_tortura" id="hecho_tortura" value="1" {{ old('hecho_tortura', isset($registro) ? $registro->hecho_tortura : '') ? 'checked' : '' }}>
+                                        <input class="form-check-input" type="checkbox" name="hecho_tortura" id="hecho_tortura" value="1" {{ old('hecho_tortura', isset($registro) ? $registro->hecho_tortura : '') == 1 ? 'checked' : '' }}>
                                         <label class="form-check-label" for="hecho_tortura">Tortura</label>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-check form-switch">
-                                        <input class="form-check-input" type="checkbox" name="hecho_amenaza" id="hecho_amenaza" value="1" {{ old('hecho_amenaza', isset($registro) ? $registro->hecho_amenaza : '') ? 'checked' : '' }}>
+                                        <input class="form-check-input" type="checkbox" name="hecho_amenaza" id="hecho_amenaza" value="1" {{ old('hecho_amenaza', isset($registro) ? $registro->hecho_amenaza : '') == 1 ? 'checked' : '' }}>
                                         <label class="form-check-label" for="hecho_amenaza">Amenaza</label>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-check form-switch">
-                                        <input class="form-check-input" type="checkbox" name="hecho_otro" id="hecho_otro" value="1" {{ old('hecho_otro', isset($registro) ? $registro->hecho_otro : '') ? 'checked' : '' }}>
+                                        <input class="form-check-input" type="checkbox" name="hecho_otro" id="hecho_otro" value="1" {{ old('hecho_otro', isset($registro) ? $registro->hecho_otro : '') == 1 ? 'checked' : '' }}>
                                         <label class="form-check-label" for="hecho_otro">Otro</label>
                                     </div>
                                 </div>
@@ -208,7 +208,7 @@
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-check form-switch">
-                                        <input class="form-check-input" type="checkbox" name="hecho_no_aplica" id="hecho_no_aplica" value="1" {{ old('hecho_no_aplica', isset($registro) ? $registro->hecho_no_aplica : '') ? 'checked' : '' }}>
+                                        <input class="form-check-input" type="checkbox" name="hecho_no_aplica" id="hecho_no_aplica" value="1" {{ old('hecho_no_aplica', isset($registro) ? $registro->hecho_no_aplica : '') == 1 ? 'checked' : '' }}>
                                         <label class="form-check-label" for="hecho_no_aplica">No aplica</label>
                                     </div>
                                 </div>

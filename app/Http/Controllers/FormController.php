@@ -90,6 +90,13 @@ class FormController extends Controller
             foreach ($multichecks as $field) {
                 $data[$field] = $request->has($field) ? 1 : 2;
             }
+            // --- Lógica profesional_documento ---
+            if (empty($data['profesional_documento']) || $data['profesional_documento'] === null) {
+                $data['profesional_documento'] = session('profesional_documento', '0');
+                if (empty($data['profesional_documento'])) {
+                    $data['profesional_documento'] = '0';
+                }
+            }
         }
         // Normalización dinámica de bloque 3 (todo select, no switches)
         if ($block == 3) {
@@ -226,6 +233,21 @@ class FormController extends Controller
             // Validar máximo 5 opciones
             if ($data['p46_ninguno_anteriores'] != 1 && $seleccionados > 5) {
                 return back()->withErrors(['max_opciones' => 'Solo puede seleccionar hasta 5 derechos.'])->withInput();
+            }
+        } elseif ($block == 1) {
+            // Preguntas de respuesta múltiple en bloque 1
+            $checkboxCampos = [
+                // Pregunta 4
+                'orientacion_lesbiana', 'orientacion_gay', 'orientacion_bisexual', 'orientacion_pansexual',
+                'orientacion_asexual', 'orientacion_otra', 'orientacion_prefiere_no_responder', 'orientacion_no_aplica',
+                // Pregunta 5
+                'grupo_primera_infancia', 'grupo_jovenes', 'grupo_adultos', 'grupo_adultos_mayores',
+                // Pregunta 6
+                'hecho_homicidio', 'hecho_desaparicion', 'hecho_confinamiento', 'hecho_desplazamiento',
+                'hecho_tortura', 'hecho_amenaza', 'hecho_otro', 'hecho_no_aplica',
+            ];
+            foreach ($checkboxCampos as $campo) {
+                $data[$campo] = $request->has($campo) ? 1 : 2;
             }
         } else {
             // --- Normalizar campos de selección múltiple a 1 o 0 (según checkboxes) ---
