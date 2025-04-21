@@ -145,6 +145,46 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     checkboxes.forEach(cb => cb.addEventListener('change', updateChecks));
 
+    // VALIDACIÓN ESTRICTA + SPINNER AL ENVIAR EL FORMULARIO
+    const form = document.getElementById('bloque9Form');
+    if (form) {
+        form.addEventListener('submit', function(e) {
+            // Pregunta 46 (opción múltiple, mínimo 1, máximo 5)
+            const p46Checks = Array.from(document.querySelectorAll('.p46-switch'));
+            let p46Marcada = false;
+            let checkedCount = 0;
+            p46Checks.forEach(chk => { if (chk.checked) { p46Marcada = true; checkedCount++; } });
+            if (!p46Marcada) {
+                e.preventDefault();
+                Swal.fire({
+                    icon: 'warning',
+                    title: 'Campo requerido',
+                    text: 'Debes seleccionar al menos un derecho vulnerado (Pregunta 46).'
+                });
+                p46Checks[0].focus();
+                return;
+            }
+            if (checkedCount > 5) {
+                e.preventDefault();
+                Swal.fire({
+                    icon: 'warning',
+                    title: 'Límite excedido',
+                    text: 'Solo puedes seleccionar hasta 5 derechos vulnerados (Pregunta 46).'
+                });
+                return;
+            }
+            // Si pasa la validación, mostrar spinner
+            Swal.fire({
+                title: 'Guardando...',
+                allowOutsideClick: false,
+                allowEscapeKey: false,
+                didOpen: () => {
+                    Swal.showLoading();
+                }
+            });
+        });
+    }
+
     // SweetAlert de éxito
     @if(session('success'))
         Swal.fire({
@@ -164,21 +204,6 @@ document.addEventListener('DOMContentLoaded', function() {
             confirmButtonColor: '#d33'
         });
     @endif
-
-    // Spinner SweetAlert al guardar
-    const form = document.getElementById('bloque9Form');
-    if (form) {
-        form.addEventListener('submit', function(e) {
-            Swal.fire({
-                title: 'Guardando...',
-                allowOutsideClick: false,
-                allowEscapeKey: false,
-                didOpen: () => {
-                    Swal.showLoading();
-                }
-            });
-        });
-    }
 });
 </script>
 @endsection

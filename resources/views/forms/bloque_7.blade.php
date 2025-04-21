@@ -166,7 +166,7 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-    // Exclusividad de switches en pregunta 43
+    // Exclusividad de switches en pregunta 43 (opción múltiple)
     function exclusividadP43() {
         const checkboxes = document.querySelectorAll('.p43-switch');
         const ninguno = document.getElementById('p43_ninguno');
@@ -196,40 +196,59 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     @endif
 
-    // SweetAlert de éxito
-    @if(session('success'))
-        Swal.fire({
-            icon: 'success',
-            title: '¡Guardado exitosamente!',
-            text: '{{ session('success') }}',
-            confirmButtonColor: '#0c6efd'
-        });
-    @endif
-
-    // SweetAlert de error si existe error de usuario existente
-    @if($errors->has('usuario_existente'))
-        Swal.fire({
-            icon: 'error',
-            title: 'Error',
-            text: '{{ $errors->first('usuario_existente') }}',
-            confirmButtonColor: '#d33'
-        });
-    @endif
-
-    // Spinner SweetAlert al guardar
-    const form = document.getElementById('bloque7Form');
-    if (form) {
-        form.addEventListener('submit', function(e) {
+    // VALIDACIÓN ESTRICTA AL ENVIAR EL FORMULARIO
+    document.getElementById('bloque7Form').addEventListener('submit', function(e) {
+        // Pregunta 40
+        const p40 = document.querySelector('[name="p40_igualdad_oportunidades"]');
+        if (!p40.value) {
+            e.preventDefault();
             Swal.fire({
-                title: 'Guardando...',
-                allowOutsideClick: false,
-                allowEscapeKey: false,
-                didOpen: () => {
-                    Swal.showLoading();
-                }
+                icon: 'warning',
+                title: 'Campo requerido',
+                text: 'Debes seleccionar una opción en la pregunta 40.'
             });
-        });
-    }
+            p40.focus();
+            return;
+        }
+        // Pregunta 41
+        const p41 = document.querySelector('[name="p41_valoracion_posturas"]');
+        if (!p41.value) {
+            e.preventDefault();
+            Swal.fire({
+                icon: 'warning',
+                title: 'Campo requerido',
+                text: 'Debes seleccionar una opción en la pregunta 41.'
+            });
+            p41.focus();
+            return;
+        }
+        // Pregunta 42
+        const p42 = document.querySelector('[name="p42_trabajos_cuidado"]');
+        if (!p42.value) {
+            e.preventDefault();
+            Swal.fire({
+                icon: 'warning',
+                title: 'Campo requerido',
+                text: 'Debes seleccionar una opción en la pregunta 42.'
+            });
+            p42.focus();
+            return;
+        }
+        // Pregunta 43 (opción múltiple)
+        const p43Checks = document.querySelectorAll('.p43-switch');
+        let p43Marcada = false;
+        p43Checks.forEach(chk => { if (chk.checked) p43Marcada = true; });
+        if (!p43Marcada) {
+            e.preventDefault();
+            Swal.fire({
+                icon: 'warning',
+                title: 'Campo requerido',
+                text: 'Debes seleccionar al menos una opción en la pregunta 43.'
+            });
+            p43Checks[0].focus();
+            return;
+        }
+    });
 });
 </script>
 @endsection

@@ -338,7 +338,7 @@
                     <button type="submit" class="btn btn-primary btn-lg">
                         Guardar
                     </button>
-                    <button type="button" class="btn btn-secondary btn-lg ms-2" id="btnSiguiente" {{ isset($registro) ? '' : 'disabled' }}>
+                    <button type="button" class="btn btn-success btn-lg ms-2" id="btnSiguiente"  {{ isset($registro) ? '' : 'disabled' }}>
                         Siguiente <i class="bi bi-arrow-right-circle"></i>
                     </button>
                 </div>

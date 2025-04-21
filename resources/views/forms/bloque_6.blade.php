@@ -198,59 +198,25 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-    // Exclusividad de switches en Pregunta 34
+    // Exclusividad de switches en pregunta 34 (opción múltiple)
     function exclusividadP34() {
-        const p34Switches = document.querySelectorAll('.p34-switch');
+        const checkboxes = document.querySelectorAll('.p34-switch');
         const nunca = document.getElementById('p34_nunca');
-        const noSabe = document.getElementById('p34_no_sabe');
-        const noAplica = document.getElementById('p34_no_aplica');
-        p34Switches.forEach(chk => {
+        const noaplica = document.getElementById('p34_no_aplica');
+        checkboxes.forEach(chk => {
             chk.addEventListener('change', function() {
-                if (this.checked && (this.id == 'p34_nunca' || this.id == 'p34_no_sabe' || this.id == 'p34_no_aplica')) {
-                    p34Switches.forEach(cb => {
+                if (this.checked && (this.id == 'p34_nunca' || this.id == 'p34_no_aplica')) {
+                    checkboxes.forEach(cb => {
                         if (cb !== this) cb.checked = false;
                     });
                 } else if (this.checked) {
                     nunca.checked = false;
-                    noSabe.checked = false;
-                    noAplica.checked = false;
+                    noaplica.checked = false;
                 }
             });
         });
     }
     exclusividadP34();
-
-    // SweetAlert de éxito
-    @if(session('success'))
-        Swal.fire({
-            icon: 'success',
-            title: '¡Guardado exitosamente!',
-            text: '{{ session('success') }}',
-            confirmButtonColor: '#0c6efd'
-        });
-    @endif
-
-    // SweetAlert de error si existe error de usuario existente
-    @if($errors->has('usuario_existente'))
-        Swal.fire({
-            icon: 'error',
-            title: 'Error',
-            text: '{{ $errors->first('usuario_existente') }}',
-            confirmButtonColor: '#d33'
-        });
-    @endif
-
-    // Spinner SweetAlert al guardar
-    const form = document.getElementById('bloque6Form');
-    if (form) {
-        form.addEventListener('submit', function(e) {
-            Swal.fire({
-                title: 'Guardando...',
-                allowOutsideClick: false,
-                didOpen: () => { Swal.showLoading(); }
-            });
-        });
-    }
 
     // Activar botón Siguiente si hay registro guardado
     const siguienteBtn = document.getElementById('siguienteBtn');
@@ -261,6 +227,96 @@ document.addEventListener('DOMContentLoaded', function() {
             siguienteBtn.style.opacity = '1';
         }
     @endif
+
+    // VALIDACIÓN ESTRICTA AL ENVIAR EL FORMULARIO
+    document.getElementById('bloque6Form').addEventListener('submit', function(e) {
+        // Pregunta 33
+        const p33 = document.querySelector('[name="p33_acceso_metodos_anticonceptivos"]');
+        if (!p33.value) {
+            e.preventDefault();
+            Swal.fire({
+                icon: 'warning',
+                title: 'Campo requerido',
+                text: 'Debes seleccionar una opción en la pregunta 33.'
+            });
+            p33.focus();
+            return;
+        }
+        // Pregunta 34 (opción múltiple)
+        const p34Checks = document.querySelectorAll('.p34-switch');
+        let p34Marcada = false;
+        p34Checks.forEach(chk => { if (chk.checked) p34Marcada = true; });
+        if (!p34Marcada) {
+            e.preventDefault();
+            Swal.fire({
+                icon: 'warning',
+                title: 'Campo requerido',
+                text: 'Debes seleccionar al menos una opción en la pregunta 34.'
+            });
+            p34Checks[0].focus();
+            return;
+        }
+        // Pregunta 35
+        const p35 = document.querySelector('[name="p35_orientacion_asesoria"]');
+        if (!p35.value) {
+            e.preventDefault();
+            Swal.fire({
+                icon: 'warning',
+                title: 'Campo requerido',
+                text: 'Debes seleccionar una opción en la pregunta 35.'
+            });
+            p35.focus();
+            return;
+        }
+        // Pregunta 36
+        const p36 = document.querySelector('[name="p36_calidad_comunicacion"]');
+        if (!p36.value) {
+            e.preventDefault();
+            Swal.fire({
+                icon: 'warning',
+                title: 'Campo requerido',
+                text: 'Debes seleccionar una opción en la pregunta 36.'
+            });
+            p36.focus();
+            return;
+        }
+        // Pregunta 37
+        const p37 = document.querySelector('[name="p37_medio_comunicacion"]');
+        if (!p37.value) {
+            e.preventDefault();
+            Swal.fire({
+                icon: 'warning',
+                title: 'Campo requerido',
+                text: 'Debes seleccionar una opción en la pregunta 37.'
+            });
+            p37.focus();
+            return;
+        }
+        // Pregunta 38
+        const p38 = document.querySelector('[name="p38_impacto_tecnologia"]');
+        if (!p38.value) {
+            e.preventDefault();
+            Swal.fire({
+                icon: 'warning',
+                title: 'Campo requerido',
+                text: 'Debes seleccionar una opción en la pregunta 38.'
+            });
+            p38.focus();
+            return;
+        }
+        // Pregunta 39
+        const p39 = document.querySelector('[name="p39_frecuencia_comidas"]');
+        if (!p39.value) {
+            e.preventDefault();
+            Swal.fire({
+                icon: 'warning',
+                title: 'Campo requerido',
+                text: 'Debes seleccionar una opción en la pregunta 39.'
+            });
+            p39.focus();
+            return;
+        }
+    });
 });
 </script>
 @endsection

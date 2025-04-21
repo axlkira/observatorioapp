@@ -198,48 +198,61 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     @endif
 
-    // SweetAlert de éxito
-    @if(session('success'))
-        Swal.fire({
-            icon: 'success',
-            title: '¡Guardado exitosamente!',
-            text: '{{ session('success') }}',
-            confirmButtonColor: '#0c6efd'
-        });
-    @endif
-
-    // SweetAlert de error si existe error de usuario existente
-    @if($errors->has('usuario_existente'))
-        Swal.fire({
-            icon: 'error',
-            title: 'Error',
-            text: '{{ $errors->first('usuario_existente') }}',
-            confirmButtonColor: '#d33'
-        });
-    @endif
-
-    // Spinner SweetAlert al guardar
-    const form = document.getElementById('bloque5Form');
-    if (form) {
-        form.addEventListener('submit', function(e) {
-            const vivienda = document.getElementById('p30_vivienda').value;
-            const otro = document.getElementById('p30_vivienda_otro').value.trim();
-            if (vivienda == '152' && !otro) {
+    // VALIDACIÓN ESTRICTA AL ENVIAR EL FORMULARIO
+    document.getElementById('bloque5Form').addEventListener('submit', function(e) {
+        // Pregunta 30
+        const vivienda = document.getElementById('p30_vivienda');
+        if (!vivienda.value) {
+            e.preventDefault();
+            Swal.fire({
+                icon: 'warning',
+                title: 'Campo requerido',
+                text: 'Debes seleccionar el tipo de vivienda (Pregunta 30).'
+            });
+            vivienda.focus();
+            return;
+        }
+        // Si elige "Otro", debe llenar el campo adicional
+        if (vivienda.value == '152') {
+            const viviendaOtro = document.getElementById('p30_vivienda_otro');
+            if (!viviendaOtro.value.trim()) {
                 e.preventDefault();
                 Swal.fire({
-                    icon: 'error',
+                    icon: 'warning',
                     title: 'Campo requerido',
-                    text: 'Por favor especifique cuál es el tipo de vivienda.'
+                    text: 'Debes especificar el tipo de vivienda en "¿Cuál?" (Pregunta 30).'
                 });
-            } else {
-                Swal.fire({
-                    title: 'Guardando...',
-                    allowOutsideClick: false,
-                    didOpen: () => { Swal.showLoading(); }
-                });
+                viviendaOtro.focus();
+                return;
             }
-        });
-    }
+        }
+        // Pregunta 31
+        const migracion = document.querySelector('[name="p31_migracion"]');
+        if (!migracion.value) {
+            e.preventDefault();
+            Swal.fire({
+                icon: 'warning',
+                title: 'Campo requerido',
+                text: 'Debes seleccionar una opción en la pregunta 31.'
+            });
+            migracion.focus();
+            return;
+        }
+        // Pregunta 32 (opción múltiple)
+        const redApoyoChecks = document.querySelectorAll('.red-apoyo-switch');
+        let algunaMarcada = false;
+        redApoyoChecks.forEach(chk => { if (chk.checked) algunaMarcada = true; });
+        if (!algunaMarcada) {
+            e.preventDefault();
+            Swal.fire({
+                icon: 'warning',
+                title: 'Campo requerido',
+                text: 'Debes seleccionar al menos una red de apoyo (Pregunta 32).'
+            });
+            redApoyoChecks[0].focus();
+            return;
+        }
+    });
 });
 </script>
 @endsection
