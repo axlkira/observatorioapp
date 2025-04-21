@@ -152,7 +152,7 @@
                                 <div class="col-md-3">
                                     <div class="form-check form-switch">
                                         <input class="form-check-input" type="checkbox" name="grupo_adultos_mayores" id="grupo_adultos_mayores" value="1" {{ old('grupo_adultos_mayores', isset($registro) ? $registro->grupo_adultos_mayores : '') == 1 ? 'checked' : '' }}>
-                                        <label class="form-check-label" for="grupo_adultos_mayores">Adultos mayores (más de 69 años)</label>
+                                        <label class="form-check-label" for="grupo_adultos_mayores">Adultos mayores (más de 60 años)</label>
                                     </div>
                                 </div>
                             </div>
