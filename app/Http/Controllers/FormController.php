@@ -152,6 +152,33 @@ class FormController extends Controller
             $data['red_apoyo_otros'] = $request->has('red_apoyo_otros') ? 1 : 0;
             $data['red_apoyo_no_hemos_tenido'] = $request->has('red_apoyo_no_hemos_tenido') ? 1 : 0;
             $data['red_apoyo_no_aplica'] = $request->has('red_apoyo_no_aplica') ? 1 : 0;
+            $fields = [
+                'p30_vivienda',
+                'p30_vivienda_otro',
+                'p31_migracion',
+                'entorno_seguro',
+                'estado',
+                'red_apoyo_estado',
+                'red_apoyo_organizaciones_internacionales',
+                'red_apoyo_organizaciones_no_gubernamentales',
+                'red_apoyo_iglesia',
+                'red_apoyo_amigos',
+                'red_apoyo_vecinos',
+                'red_apoyo_otros_familiares',
+                'red_apoyo_otros',
+                'red_apoyo_no_hemos_tenido',
+                'red_apoyo_no_aplica',
+                'profesional_documento'
+            ];
+            foreach ($fields as $field) {
+                if (strpos($field, 'red_apoyo_') === 0) {
+                    $data[$field] = $request->input($field, 0);
+                } elseif ($field === 'estado') {
+                    $data[$field] = $request->input($field, 0);
+                } else {
+                    $data[$field] = $request->input($field, null);
+                }
+            }
         } elseif ($block == 6) {
             // Bloque 6: Respeto y Comunicación Familiar
             $data['p33_acceso_metodos_anticonceptivos'] = $request->input('p33_acceso_metodos_anticonceptivos');

@@ -42,11 +42,11 @@
                         <div class="card-body">
                             <select class="form-select" name="sistema_salud" required>
                                 <option value="">Seleccione...</option>
-                                <option value="139" {{ old('sistema_salud', $registro->sistema_salud ?? '') == 139 ? 'selected' : '' }}>Régimen Subsidiado (Sisben)</option>
-                                <option value="140" {{ old('sistema_salud', $registro->sistema_salud ?? '') == 140 ? 'selected' : '' }}>Régimen Contributivo (Cotizante)</option>
-                                <option value="141" {{ old('sistema_salud', $registro->sistema_salud ?? '') == 141 ? 'selected' : '' }}>Régimen Contributivo (Beneficiario)</option>
-                                <option value="142" {{ old('sistema_salud', $registro->sistema_salud ?? '') == 142 ? 'selected' : '' }}>Régimen Especial y de excepción (fuerzas militares, policía nacional, ecopetrol magisterio, universidades públicas)</option>
-                                <option value="42" {{ old('sistema_salud', $registro->sistema_salud ?? '') == 42 ? 'selected' : '' }}>Ninguno</option>
+                                <option value="176" {{ old('sistema_salud', $registro->sistema_salud ?? '') == 176 ? 'selected' : '' }}>Régimen Subsidiado (personas que no tienen capacidad de pagar la salud)</option>
+                                <option value="177" {{ old('sistema_salud', $registro->sistema_salud ?? '') == 177 ? 'selected' : '' }}>Régimen Contributivo (personas que tienen capacidad de pago)</option>
+                                <option value="178" {{ old('sistema_salud', $registro->sistema_salud ?? '') == 178 ? 'selected' : '' }}>Régimen Contributivo (personas beneficiarias de quienes tienen capacidad de pago)</option>
+                                <option value="179" {{ old('sistema_salud', $registro->sistema_salud ?? '') == 179 ? 'selected' : '' }}>Régimen Especial y de excepción (fuerzas militares, policía nacional, ecopetrol, magisterio, universidades públicas)</option>
+                                <option value="180" {{ old('sistema_salud', $registro->sistema_salud ?? '') == 180 ? 'selected' : '' }}>Ninguno</option>
                             </select>
                         </div>
                     </div>
@@ -56,9 +56,9 @@
                             <select class="form-select" name="enfermedad_mental" required>
                                 <option value="">Seleccione...</option>
                                 <option value="1" {{ old('enfermedad_mental', $registro->enfermedad_mental ?? '') == 1 ? 'selected' : '' }}>Sí</option>
-                                <option value="2" {{ old('enfermedad_mental', $registro->enfermedad_mental ?? '') == 2 ? 'selected' : '' }}>No</option>
-                                <option value="44" {{ old('enfermedad_mental', $registro->enfermedad_mental ?? '') == 44 ? 'selected' : '' }}>No sabe</option>
-                                <option value="92" {{ old('enfermedad_mental', $registro->enfermedad_mental ?? '') == 92 ? 'selected' : '' }}>No responde</option>
+                                <option value="0" {{ old('enfermedad_mental', $registro->enfermedad_mental ?? '') == 0 ? 'selected' : '' }}>No</option>
+                                <option value="145" {{ old('enfermedad_mental', $registro->enfermedad_mental ?? '') == 145 ? 'selected' : '' }}>No sabe</option>
+                                <option value="184" {{ old('enfermedad_mental', $registro->enfermedad_mental ?? '') == 184 ? 'selected' : '' }}>No responde</option>
                             </select>
                         </div>
                     </div>
@@ -67,10 +67,10 @@
                         <div class="card-body">
                             <select class="form-select" name="acceso_espacios_recreativos" required>
                                 <option value="">Seleccione...</option>
-                                <option value="103" {{ old('acceso_espacios_recreativos', $registro->acceso_espacios_recreativos ?? '') == 103 ? 'selected' : '' }}>Frecuentemente</option>
-                                <option value="143" {{ old('acceso_espacios_recreativos', $registro->acceso_espacios_recreativos ?? '') == 143 ? 'selected' : '' }}>A veces</option>
-                                <option value="144" {{ old('acceso_espacios_recreativos', $registro->acceso_espacios_recreativos ?? '') == 144 ? 'selected' : '' }}>Rara vez</option>
-                                <option value="106" {{ old('acceso_espacios_recreativos', $registro->acceso_espacios_recreativos ?? '') == 106 ? 'selected' : '' }}>Nunca</option>
+                                <option value="185" {{ old('acceso_espacios_recreativos', $registro->acceso_espacios_recreativos ?? '') == 185 ? 'selected' : '' }}>Frecuentemente</option>
+                                <option value="186" {{ old('acceso_espacios_recreativos', $registro->acceso_espacios_recreativos ?? '') == 186 ? 'selected' : '' }}>A veces</option>
+                                <option value="187" {{ old('acceso_espacios_recreativos', $registro->acceso_espacios_recreativos ?? '') == 187 ? 'selected' : '' }}>Rara vez</option>
+                                <option value="188" {{ old('acceso_espacios_recreativos', $registro->acceso_espacios_recreativos ?? '') == 188 ? 'selected' : '' }}>Nunca</option>
                             </select>
                         </div>
                     </div>

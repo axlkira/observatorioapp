@@ -38,14 +38,14 @@
                         <div class="card-body">
                             <select class="form-select" name="p30_vivienda" id="p30_vivienda" required>
                                 <option value="">Seleccione...</option>
-                                <option value="145" {{ old('p30_vivienda', $registro->p30_vivienda ?? '') == 145 ? 'selected' : '' }}>Propia</option>
-                                <option value="146" {{ old('p30_vivienda', $registro->p30_vivienda ?? '') == 146 ? 'selected' : '' }}>Arrendada</option>
-                                <option value="147" {{ old('p30_vivienda', $registro->p30_vivienda ?? '') == 147 ? 'selected' : '' }}>Heredada</option>
-                                <option value="148" {{ old('p30_vivienda', $registro->p30_vivienda ?? '') == 148 ? 'selected' : '' }}>Cedida (prestada)</option>
-                                <option value="149" {{ old('p30_vivienda', $registro->p30_vivienda ?? '') == 149 ? 'selected' : '' }}>Familiar</option>
-                                <option value="150" {{ old('p30_vivienda', $registro->p30_vivienda ?? '') == 150 ? 'selected' : '' }}>Inquilinato</option>
-                                <option value="151" {{ old('p30_vivienda', $registro->p30_vivienda ?? '') == 151 ? 'selected' : '' }}>Albergue</option>
-                                <option value="152" {{ old('p30_vivienda', $registro->p30_vivienda ?? '') == 152 ? 'selected' : '' }}>Otro</option>
+                                <option value="189" {{ old('p30_vivienda', $registro->p30_vivienda ?? '') == 189 ? 'selected' : '' }}>Propia</option>
+                                <option value="190" {{ old('p30_vivienda', $registro->p30_vivienda ?? '') == 190 ? 'selected' : '' }}>Arrendada</option>
+                                <option value="191" {{ old('p30_vivienda', $registro->p30_vivienda ?? '') == 191 ? 'selected' : '' }}>Heredada</option>
+                                <option value="192" {{ old('p30_vivienda', $registro->p30_vivienda ?? '') == 192 ? 'selected' : '' }}>Cedida (prestada)</option>
+                                <option value="193" {{ old('p30_vivienda', $registro->p30_vivienda ?? '') == 193 ? 'selected' : '' }}>Familiar</option>
+                                <option value="194" {{ old('p30_vivienda', $registro->p30_vivienda ?? '') == 194 ? 'selected' : '' }}>Inquilinato</option>
+                                <option value="195" {{ old('p30_vivienda', $registro->p30_vivienda ?? '') == 195 ? 'selected' : '' }}>Albergue</option>
+                                <option value="196" {{ old('p30_vivienda', $registro->p30_vivienda ?? '') == 196 ? 'selected' : '' }}>Otro</option>
                             </select>
                             <div class="mt-3" id="p30_vivienda_otro_div" style="display: none;">
                                 <label for="p30_vivienda_otro" class="form-label">¿Cuál?</label>
@@ -59,13 +59,14 @@
                         <div class="card-body">
                             <select class="form-select" name="p31_migracion" required>
                                 <option value="">Seleccione...</option>
-                                <option value="153" {{ old('p31_migracion', $registro->p31_migracion ?? '') == 153 ? 'selected' : '' }}>Sí, por razones de seguridad</option>
-                                <option value="154" {{ old('p31_migracion', $registro->p31_migracion ?? '') == 154 ? 'selected' : '' }}>Sí, para mejorar la calidad de vida</option>
-                                <option value="155" {{ old('p31_migracion', $registro->p31_migracion ?? '') == 155 ? 'selected' : '' }}>Sí, por ambas razones</option>
-                                <option value="156" {{ old('p31_migracion', $registro->p31_migracion ?? '') == 156 ? 'selected' : '' }}>No, nunca lo hemos considerado</option>
+                                <option value="197" {{ old('p31_migracion', $registro->p31_migracion ?? '') == 197 ? 'selected' : '' }}>Sí, por razones de seguridad</option>
+                                <option value="198" {{ old('p31_migracion', $registro->p31_migracion ?? '') == 198 ? 'selected' : '' }}>Sí, para mejorar la calidad de vida</option>
+                                <option value="199" {{ old('p31_migracion', $registro->p31_migracion ?? '') == 199 ? 'selected' : '' }}>Sí, por ambas razones</option>
+                                <option value="200" {{ old('p31_migracion', $registro->p31_migracion ?? '') == 200 ? 'selected' : '' }}>No, nunca lo hemos considerado</option>
                             </select>
                         </div>
                     </div>
+                   
                     <!-- Pregunta 32 -->
                     <div class="card mb-4">
                         <div class="card-header bg-primary text-white">32. Cuando en tu núcleo familiar se han presentado casos de vulneración de derechos o amenazas en el contexto familiar o por conflicto armado, ¿cuál de las siguientes opciones ha servido como red de apoyo para tramitarlas? (opción múltiple)</div>
@@ -126,6 +127,21 @@
                             </div>
                         </div>
                     </div>
+
+                     <!-- Pregunta 33 -->
+                     <div class="card mb-4">
+                        <div class="card-header bg-primary text-white">33. ¿Consideras que el entorno en el que habita tu núcleo familiar es seguro?</div>
+                        <div class="card-body">
+                            <select class="form-select" name="entorno_seguro" required>
+                                <option value="">Seleccione...</option>
+                                <option value="1" {{ old('entorno_seguro', $registro->entorno_seguro ?? '') == 1 ? 'selected' : '' }}>Sí</option>
+                                <option value="0" {{ old('entorno_seguro', $registro->entorno_seguro ?? '') == 0 ? 'selected' : '' }}>No</option>
+                                <option value="145" {{ old('entorno_seguro', $registro->entorno_seguro ?? '') == 145 ? 'selected' : '' }}>No sabe</option>
+                                <option value="184" {{ old('entorno_seguro', $registro->entorno_seguro ?? '') == 184 ? 'selected' : '' }}>No responde</option>
+                            </select>
+                        </div>
+                    </div>
+
                     <div class="mt-4 text-end">
                         <a href="/observatorioapp/public/form/4/{{ $registro->tipo_documento ?? request('tipo_documento', request()->route('tipo_documento')) }}/{{ $registro->numero_documento ?? request('numero_documento', request()->route('numero_documento')) }}" class="btn btn-secondary btn-lg me-2">
                             <i class="bi bi-arrow-left-circle"></i> Anterior
@@ -156,7 +172,7 @@ document.addEventListener('DOMContentLoaded', function() {
     function toggleOtroVivienda() {
         const select = document.getElementById('p30_vivienda');
         const otroDiv = document.getElementById('p30_vivienda_otro_div');
-        if (select.value == '152') {
+        if (select.value == '196') {
             otroDiv.style.display = 'block';
             document.getElementById('p30_vivienda_otro').required = true;
         } else {
@@ -188,71 +204,140 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     exclusividadRedApoyo();
 
-    // Activar botón Siguiente si hay registro guardado
-    const siguienteBtn = document.getElementById('siguienteBtn');
-    @if(isset($registro))
-        if (siguienteBtn) {
-            siguienteBtn.removeAttribute('disabled');
-            siguienteBtn.style.pointerEvents = 'auto';
-            siguienteBtn.style.opacity = '1';
-        }
-    @endif
-
     // VALIDACIÓN ESTRICTA AL ENVIAR EL FORMULARIO
-    document.getElementById('bloque5Form').addEventListener('submit', function(e) {
-        // Pregunta 30
-        const vivienda = document.getElementById('p30_vivienda');
-        if (!vivienda.value) {
-            e.preventDefault();
-            Swal.fire({
-                icon: 'warning',
-                title: 'Campo requerido',
-                text: 'Debes seleccionar el tipo de vivienda (Pregunta 30).'
-            });
-            vivienda.focus();
-            return;
-        }
-        // Si elige "Otro", debe llenar el campo adicional
-        if (vivienda.value == '152') {
-            const viviendaOtro = document.getElementById('p30_vivienda_otro');
-            if (!viviendaOtro.value.trim()) {
+    const form = document.getElementById('bloque5Form');
+    if (form) {
+        form.addEventListener('submit', function(e) {
+            // Pregunta 30
+            const vivienda = document.getElementById('p30_vivienda');
+            if (!vivienda.value) {
                 e.preventDefault();
                 Swal.fire({
                     icon: 'warning',
                     title: 'Campo requerido',
-                    text: 'Debes especificar el tipo de vivienda en "¿Cuál?" (Pregunta 30).'
+                    text: 'Debes seleccionar el tipo de vivienda (Pregunta 30).',
+                    confirmButtonColor: '#7c3aed',
+                    confirmButtonText: 'OK',
+                    allowOutsideClick: false,
+                    allowEscapeKey: false,
+                    showConfirmButton: true,
+                    showCancelButton: false,
+                    showLoaderOnConfirm: false
                 });
-                viviendaOtro.focus();
+                vivienda.focus();
                 return;
             }
-        }
-        // Pregunta 31
-        const migracion = document.querySelector('[name="p31_migracion"]');
-        if (!migracion.value) {
-            e.preventDefault();
+            // Si elige "Otro", debe llenar el campo adicional
+            if (vivienda.value == '196') {
+                const viviendaOtro = document.getElementById('p30_vivienda_otro');
+                if (!viviendaOtro.value.trim()) {
+                    e.preventDefault();
+                    Swal.fire({
+                        icon: 'warning',
+                        title: 'Campo requerido',
+                        text: 'Debes especificar el tipo de vivienda en "¿Cuál?" (Pregunta 30).',
+                        confirmButtonColor: '#7c3aed',
+                        confirmButtonText: 'OK',
+                        allowOutsideClick: false,
+                        allowEscapeKey: false,
+                        showConfirmButton: true,
+                        showCancelButton: false,
+                        showLoaderOnConfirm: false
+                    });
+                    viviendaOtro.focus();
+                    return;
+                }
+            }
+            // Pregunta 31
+            const migracion = document.querySelector('[name="p31_migracion"]');
+            if (!migracion.value) {
+                e.preventDefault();
+                Swal.fire({
+                    icon: 'warning',
+                    title: 'Campo requerido',
+                    text: 'Debes seleccionar una opción en la pregunta 31.',
+                    confirmButtonColor: '#7c3aed',
+                    confirmButtonText: 'OK',
+                    allowOutsideClick: false,
+                    allowEscapeKey: false,
+                    showConfirmButton: true,
+                    showCancelButton: false,
+                    showLoaderOnConfirm: false
+                });
+                migracion.focus();
+                return;
+            }
+            // Pregunta 33
+            const entornoSeguro = document.querySelector('[name="entorno_seguro"]');
+            if (!entornoSeguro.value) {
+                e.preventDefault();
+                Swal.fire({
+                    icon: 'warning',
+                    title: 'Campo requerido',
+                    text: 'Debes seleccionar una opción en la pregunta 33.',
+                    confirmButtonColor: '#7c3aed',
+                    confirmButtonText: 'OK',
+                    allowOutsideClick: false,
+                    allowEscapeKey: false,
+                    showConfirmButton: true,
+                    showCancelButton: false,
+                    showLoaderOnConfirm: false
+                });
+                entornoSeguro.focus();
+                return;
+            }
+            // Pregunta 32 (opción múltiple)
+            const redApoyoChecks = document.querySelectorAll('.red-apoyo-switch');
+            let algunaMarcada = false;
+            redApoyoChecks.forEach(chk => { if (chk.checked) algunaMarcada = true; });
+            if (!algunaMarcada) {
+                e.preventDefault();
+                Swal.fire({
+                    icon: 'warning',
+                    title: 'Campo requerido',
+                    text: 'Debes seleccionar al menos una red de apoyo (Pregunta 32).',
+                    confirmButtonColor: '#7c3aed',
+                    confirmButtonText: 'OK',
+                    allowOutsideClick: false,
+                    allowEscapeKey: false,
+                    showConfirmButton: true,
+                    showCancelButton: false,
+                    showLoaderOnConfirm: false
+                });
+                redApoyoChecks[0].focus();
+                return;
+            }
+            // Si todas las validaciones pasan, mostrar spinner y permitir submit
             Swal.fire({
-                icon: 'warning',
-                title: 'Campo requerido',
-                text: 'Debes seleccionar una opción en la pregunta 31.'
+                title: 'Guardando...',
+                allowOutsideClick: false,
+                allowEscapeKey: false,
+                didOpen: () => {
+                    Swal.showLoading();
+                }
             });
-            migracion.focus();
-            return;
-        }
-        // Pregunta 32 (opción múltiple)
-        const redApoyoChecks = document.querySelectorAll('.red-apoyo-switch');
-        let algunaMarcada = false;
-        redApoyoChecks.forEach(chk => { if (chk.checked) algunaMarcada = true; });
-        if (!algunaMarcada) {
-            e.preventDefault();
-            Swal.fire({
-                icon: 'warning',
-                title: 'Campo requerido',
-                text: 'Debes seleccionar al menos una red de apoyo (Pregunta 32).'
-            });
-            redApoyoChecks[0].focus();
-            return;
-        }
-    });
+        });
+    }
+
+    // Mostrar SweetAlert de éxito si existe mensaje en sesión
+    @if(session('success'))
+        Swal.fire({
+            icon: 'success',
+            title: '¡Guardado exitosamente!',
+            text: '{{ session('success') }}',
+            confirmButtonColor: '#0c6efd'
+        });
+    @endif
+
+    // Mostrar SweetAlert de error si existe error de usuario existente
+    @if($errors->has('usuario_existente'))
+        Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: '{{ $errors->first('usuario_existente') }}',
+            confirmButtonColor: '#d33'
+        });
+    @endif
 });
 </script>
 @endsection

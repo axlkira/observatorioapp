@@ -38,9 +38,9 @@
                                 <label for="tipo_documento" class="form-label">Tipo de documento</label>
                                 <select class="form-select" id="tipo_documento" name="tipo_documento">
                                     <option value="">Seleccione...</option>
-                                    <option value="4" {{ old('tipo_documento', isset($registro) ? $registro->tipo_documento : '') == '3' ? 'selected' : '' }}>Cédula de ciudadanía</option>
-                                    <option value="5" {{ old('tipo_documento', isset($registro) ? $registro->tipo_documento : '') == '4' ? 'selected' : '' }}>Cédula de extranjería</option>
-                                    <option value="6" {{ old('tipo_documento', isset($registro) ? $registro->tipo_documento : '') == '5' ? 'selected' : '' }}>Permiso por Protección Temporal (PPT)</option>
+                                    <option value="4" {{ old('tipo_documento', isset($registro) ? $registro->tipo_documento : '') == '4' ? 'selected' : '' }}>Cédula de ciudadanía</option>
+                                    <option value="5" {{ old('tipo_documento', isset($registro) ? $registro->tipo_documento : '') == '5' ? 'selected' : '' }}>Cédula de extranjería</option>
+                                    <option value="6" {{ old('tipo_documento', isset($registro) ? $registro->tipo_documento : '') == '6' ? 'selected' : '' }}>Estatuto de Protección Temporal PPT</option>
                                 </select>
                                 @error('tipo_documento')<div class="text-danger small">{{ $message }}</div>@enderror
                             </div>
@@ -87,10 +87,10 @@
                             <label class="form-label">¿Cuántas personas integran su núcleo familiar?</label>
                             <select class="form-select" name="personas_nucleo">
                                 <option value="">Seleccione...</option>
-                                <option value="66" {{ old('personas_nucleo', isset($registro) ? $registro->personas_nucleo : '') == '66' ? 'selected' : '' }}>1 persona</option>
-                                <option value="67" {{ old('personas_nucleo', isset($registro) ? $registro->personas_nucleo : '') == '67' ? 'selected' : '' }}>2 personas</option>
-                                <option value="68" {{ old('personas_nucleo', isset($registro) ? $registro->personas_nucleo : '') == '68' ? 'selected' : '' }}>Entre 3 y 5 personas</option>
-                                <option value="69" {{ old('personas_nucleo', isset($registro) ? $registro->personas_nucleo : '') == '69' ? 'selected' : '' }}>Más de 5 personas</option>
+                                <option value="34" {{ old('personas_nucleo', isset($registro) ? $registro->personas_nucleo : '') == '34' ? 'selected' : '' }}>1 persona</option>
+                                <option value="35" {{ old('personas_nucleo', isset($registro) ? $registro->personas_nucleo : '') == '35' ? 'selected' : '' }}>2 personas</option>
+                                <option value="36" {{ old('personas_nucleo', isset($registro) ? $registro->personas_nucleo : '') == '36' ? 'selected' : '' }}>Entre 3 y 5 personas</option>
+                                <option value="37" {{ old('personas_nucleo', isset($registro) ? $registro->personas_nucleo : '') == '37' ? 'selected' : '' }}>Más de 5 personas</option>
                             </select>
                             @error('personas_nucleo')<div class="text-danger small">{{ $message }}</div>@enderror
                         </div>

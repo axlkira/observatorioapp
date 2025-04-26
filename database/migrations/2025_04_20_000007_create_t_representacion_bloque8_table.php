@@ -10,7 +10,7 @@ return new class extends Migration {
             $table->string('tipo_documento', 3);
             $table->string('numero_documento', 32);
             $table->integer('p44_participacion_decisiones')->nullable(); // Única respuesta
-            $table->integer('p45_jefatura_familia')->nullable(); // Única respuesta
+            // Eliminada columna p45_jefatura_familia
             $table->tinyInteger('estado')->default(0);
             $table->string('profesional_documento', 32)->nullable();
             $table->primary(['tipo_documento', 'numero_documento']);

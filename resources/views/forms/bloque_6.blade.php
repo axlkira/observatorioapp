@@ -35,25 +35,39 @@
                     @if(isset($registro))
                         <input type="hidden" name="es_actualizacion" value="1">
                     @endif
+                    <!-- Pregunta 39 -->
+                    <div class="card mb-4">
+                        <div class="card-header bg-primary text-white">34. ¿Con qué frecuencia en tu núcleo familiar comparten comidas juntos?</div>
+                        <div class="card-body">
+                            <select class="form-select" name="p39_frecuencia_comidas" required>
+                                <option value="">Seleccione...</option>
+                                <option value="215" {{ old('p39_frecuencia_comidas', $registro->p39_frecuencia_comidas ?? '') == 215 ? 'selected' : '' }}>Siempre</option>
+                                <option value="216" {{ old('p39_frecuencia_comidas', $registro->p39_frecuencia_comidas ?? '') == 216 ? 'selected' : '' }}>Casi siempre</option>
+                                <option value="217" {{ old('p39_frecuencia_comidas', $registro->p39_frecuencia_comidas ?? '') == 217 ? 'selected' : '' }}>Algunas veces</option>
+                                <option value="218" {{ old('p39_frecuencia_comidas', $registro->p39_frecuencia_comidas ?? '') == 218 ? 'selected' : '' }}>Casi nunca</option>
+                                <option value="219" {{ old('p39_frecuencia_comidas', $registro->p39_frecuencia_comidas ?? '') == 219 ? 'selected' : '' }}>Nunca</option>
+                                <option value="220" {{ old('p39_frecuencia_comidas', $registro->p39_frecuencia_comidas ?? '') == 220 ? 'selected' : '' }}>No aplica</option>
+                            </select>
+                        </div>
+                    </div>
                     <!-- Pregunta 33 -->
                     <div class="card mb-4">
-                        <div class="card-header bg-primary text-white">33. ¿En tu núcleo familiar cuentan con acceso a métodos anticonceptivos para la planificación familiar?</div>
+                        <div class="card-header bg-primary text-white">35. ¿En tu núcleo familiar cuentan con acceso a métodos anticonceptivos para la planificación familiar?</div>
                         <div class="card-body">
                             <select class="form-select" name="p33_acceso_metodos_anticonceptivos" required>
                                 <option value="">Seleccione...</option>
-                                <option value="166" {{ old('p33_acceso_metodos_anticonceptivos', $registro->p33_acceso_metodos_anticonceptivos ?? '') == 166 ? 'selected' : '' }}>Sí, contamos con acceso suficiente y sin dificultades</option>
-                                <option value="167" {{ old('p33_acceso_metodos_anticonceptivos', $registro->p33_acceso_metodos_anticonceptivos ?? '') == 167 ? 'selected' : '' }}>Sí, pero con algunas limitaciones</option>
-                                <option value="168" {{ old('p33_acceso_metodos_anticonceptivos', $registro->p33_acceso_metodos_anticonceptivos ?? '') == 168 ? 'selected' : '' }}>No, por falta de información</option>
-                                <option value="169" {{ old('p33_acceso_metodos_anticonceptivos', $registro->p33_acceso_metodos_anticonceptivos ?? '') == 169 ? 'selected' : '' }}>No, por barreras económicas o de acceso</option>
-                                <option value="170" {{ old('p33_acceso_metodos_anticonceptivos', $registro->p33_acceso_metodos_anticonceptivos ?? '') == 170 ? 'selected' : '' }}>No, por razones personales, culturales o religiosas</option>
-                                <option value="44" {{ old('p33_acceso_metodos_anticonceptivos', $registro->p33_acceso_metodos_anticonceptivos ?? '') == 44 ? 'selected' : '' }}>No sabe</option>
-                                <option value="0" {{ old('p33_acceso_metodos_anticonceptivos', $registro->p33_acceso_metodos_anticonceptivos ?? '') == 0 ? 'selected' : '' }}>No aplica</option>
+                                <option value="221" {{ old('p33_acceso_metodos_anticonceptivos', $registro->p33_acceso_metodos_anticonceptivos ?? '') == 221 ? 'selected' : '' }}>Sí, contamos con acceso suficiente y sin dificultades</option>
+                                <option value="222" {{ old('p33_acceso_metodos_anticonceptivos', $registro->p33_acceso_metodos_anticonceptivos ?? '') == 222 ? 'selected' : '' }}>Sí, pero con algunas limitaciones</option>
+                                <option value="223" {{ old('p33_acceso_metodos_anticonceptivos', $registro->p33_acceso_metodos_anticonceptivos ?? '') == 223 ? 'selected' : '' }}>No, por falta de información</option>
+                                <option value="224" {{ old('p33_acceso_metodos_anticonceptivos', $registro->p33_acceso_metodos_anticonceptivos ?? '') == 224 ? 'selected' : '' }}>No, por barreras económicas o de acceso</option>
+                                <option value="225" {{ old('p33_acceso_metodos_anticonceptivos', $registro->p33_acceso_metodos_anticonceptivos ?? '') == 225 ? 'selected' : '' }}>No, por razones personales, culturales o religiosas</option>
+                                <option value="226" {{ old('p33_acceso_metodos_anticonceptivos', $registro->p33_acceso_metodos_anticonceptivos ?? '') == 226 ? 'selected' : '' }}>No sabe</option>
                             </select>
                         </div>
                     </div>
                     <!-- Pregunta 34 (opción múltiple) -->
                     <div class="card mb-4">
-                        <div class="card-header bg-primary text-white">34. ¿Entre cuáles integrantes de tu núcleo familiar se han presentado dificultades/tensiones generacionales respecto a la formación y educación? (Opción múltiple)</div>
+                        <div class="card-header bg-primary text-white">36. ¿Entre cuáles integrantes de tu núcleo familiar se han presentado dificultades/tensiones generacionales respecto a la formación y educación? (Opción múltiple)</div>
                         <div class="card-body">
                             @php
                                 $p34 = [
@@ -103,77 +117,63 @@
                     </div>
                     <!-- Pregunta 35 -->
                     <div class="card mb-4">
-                        <div class="card-header bg-primary text-white">35. ¿En tu núcleo familiar han recibido orientación o asesoría sobre relaciones familiares a través de instituciones de salud, educativas, religiosas o programas comunitarios?</div>
+                        <div class="card-header bg-primary text-white">37. ¿En tu núcleo familiar han recibido orientación o asesoría sobre relaciones familiares a través de instituciones de salud, educativas, religiosas o programas comunitarios?</div>
                         <div class="card-body">
                             <select class="form-select" name="p35_orientacion_asesoria" required>
                                 <option value="">Seleccione...</option>
                                 <option value="1" {{ old('p35_orientacion_asesoria', $registro->p35_orientacion_asesoria ?? '') == 1 ? 'selected' : '' }}>Sí</option>
-                                <option value="2" {{ old('p35_orientacion_asesoria', $registro->p35_orientacion_asesoria ?? '') == 2 ? 'selected' : '' }}>No</option>
-                                <option value="44" {{ old('p35_orientacion_asesoria', $registro->p35_orientacion_asesoria ?? '') == 44 ? 'selected' : '' }}>No sabe</option>
-                                <option value="0" {{ old('p35_orientacion_asesoria', $registro->p35_orientacion_asesoria ?? '') == 0 ? 'selected' : '' }}>No aplica</option>
+                                <option value="0" {{ old('p35_orientacion_asesoria', $registro->p35_orientacion_asesoria ?? '') == 0 ? 'selected' : '' }}>No</option>
+                                <option value="145" {{ old('p35_orientacion_asesoria', $registro->p35_orientacion_asesoria ?? '') == 145 ? 'selected' : '' }}>No sabe</option>
+                                <option value="59" {{ old('p35_orientacion_asesoria', $registro->p35_orientacion_asesoria ?? '') == 59 ? 'selected' : '' }}>No aplica</option>
                             </select>
                         </div>
                     </div>
                     <!-- Pregunta 36 -->
                     <div class="card mb-4">
-                        <div class="card-header bg-primary text-white">36. ¿Cómo describirías la calidad de la comunicación dentro de tu núcleo familiar?</div>
+                        <div class="card-header bg-primary text-white">38. ¿Cómo describirías la calidad de la comunicación dentro de tu núcleo familiar?</div>
                         <div class="card-body">
                             <select class="form-select" name="p36_calidad_comunicacion" required>
                                 <option value="">Seleccione...</option>
-                                <option value="177" {{ old('p36_calidad_comunicacion', $registro->p36_calidad_comunicacion ?? '') == 177 ? 'selected' : '' }}>Fluida y efectiva</option>
-                                <option value="178" {{ old('p36_calidad_comunicacion', $registro->p36_calidad_comunicacion ?? '') == 178 ? 'selected' : '' }}>Buena, pero con áreas de mejora</option>
-                                <option value="179" {{ old('p36_calidad_comunicacion', $registro->p36_calidad_comunicacion ?? '') == 179 ? 'selected' : '' }}>Intermitente y poco clara</option>
-                                <option value="180" {{ old('p36_calidad_comunicacion', $registro->p36_calidad_comunicacion ?? '') == 180 ? 'selected' : '' }}>Tensa o conflictiva</option>
-                                <option value="181" {{ old('p36_calidad_comunicacion', $registro->p36_calidad_comunicacion ?? '') == 181 ? 'selected' : '' }}>Limitada o inexistente</option>
-                                <option value="182" {{ old('p36_calidad_comunicacion', $registro->p36_calidad_comunicacion ?? '') == 182 ? 'selected' : '' }}>Mala, no hay comunicación</option>
-                                <option value="0" {{ old('p36_calidad_comunicacion', $registro->p36_calidad_comunicacion ?? '') == 0 ? 'selected' : '' }}>No aplica</option>
+                                <option value="240" {{ old('p36_calidad_comunicacion', $registro->p36_calidad_comunicacion ?? '') == 240 ? 'selected' : '' }}>Fluida y efectiva</option>
+                                <option value="241" {{ old('p36_calidad_comunicacion', $registro->p36_calidad_comunicacion ?? '') == 241 ? 'selected' : '' }}>Buena, pero con áreas de mejora</option>
+                                <option value="242" {{ old('p36_calidad_comunicacion', $registro->p36_calidad_comunicacion ?? '') == 242 ? 'selected' : '' }}>Intermitente y poco clara</option>
+                                <option value="243" {{ old('p36_calidad_comunicacion', $registro->p36_calidad_comunicacion ?? '') == 243 ? 'selected' : '' }}>Tensa o conflictiva</option>
+                                <option value="244" {{ old('p36_calidad_comunicacion', $registro->p36_calidad_comunicacion ?? '') == 244 ? 'selected' : '' }}>Limitada o inexistente</option>
+                                <option value="245" {{ old('p36_calidad_comunicacion', $registro->p36_calidad_comunicacion ?? '') == 245 ? 'selected' : '' }}>Mala, no hay comunicación</option>
+                                <option value="246" {{ old('p36_calidad_comunicacion', $registro->p36_calidad_comunicacion ?? '') == 246 ? 'selected' : '' }}>No aplica</option>
                             </select>
                         </div>
                     </div>
                     <!-- Pregunta 37 -->
                     <div class="card mb-4">
-                        <div class="card-header bg-primary text-white">37. ¿Cuál es el principal medio de comunicación en tu núcleo familiar?</div>
+                        <div class="card-header bg-primary text-white">39. ¿Cuál es el principal medio de comunicación en tu núcleo familiar?</div>
                         <div class="card-body">
                             <select class="form-select" name="p37_medio_comunicacion" required>
                                 <option value="">Seleccione...</option>
-                                <option value="183" {{ old('p37_medio_comunicacion', $registro->p37_medio_comunicacion ?? '') == 183 ? 'selected' : '' }}>Medios digitales (grupos de whatsapp, correos, llamadas, redes sociales)</option>
-                                <option value="184" {{ old('p37_medio_comunicacion', $registro->p37_medio_comunicacion ?? '') == 184 ? 'selected' : '' }}>Reuniones familiares presenciales</option>
-                                <option value="185" {{ old('p37_medio_comunicacion', $registro->p37_medio_comunicacion ?? '') == 185 ? 'selected' : '' }}>Notas escritas en papel</option>
-                                <option value="186" {{ old('p37_medio_comunicacion', $registro->p37_medio_comunicacion ?? '') == 186 ? 'selected' : '' }}>Comunicación verbal entre los integrantes</option>
-                                <option value="187" {{ old('p37_medio_comunicacion', $registro->p37_medio_comunicacion ?? '') == 187 ? 'selected' : '' }}>Por ningún medio</option>
-                                <option value="0" {{ old('p37_medio_comunicacion', $registro->p37_medio_comunicacion ?? '') == 0 ? 'selected' : '' }}>No aplica</option>
+                                <option value="247" {{ old('p37_medio_comunicacion', $registro->p37_medio_comunicacion ?? '') == 247 ? 'selected' : '' }}>Medios digitales (grupos de whatsapp, correos, llamadas, redes sociales)</option>
+                                <option value="248" {{ old('p37_medio_comunicacion', $registro->p37_medio_comunicacion ?? '') == 248 ? 'selected' : '' }}>Reuniones familiares presenciales</option>
+                                <option value="249" {{ old('p37_medio_comunicacion', $registro->p37_medio_comunicacion ?? '') == 249 ? 'selected' : '' }}>Notas escritas en papel</option>
+                                <option value="250" {{ old('p37_medio_comunicacion', $registro->p37_medio_comunicacion ?? '') == 250 ? 'selected' : '' }}>Comunicación verbal entre los integrantes</option>
+                                <option value="251" {{ old('p37_medio_comunicacion', $registro->p37_medio_comunicacion ?? '') == 251 ? 'selected' : '' }}>Por ningún medio</option>
+                                <option value="252" {{ old('p37_medio_comunicacion', $registro->p37_medio_comunicacion ?? '') == 252 ? 'selected' : '' }}>No aplica</option>
                             </select>
                         </div>
                     </div>
                     <!-- Pregunta 38 -->
                     <div class="card mb-4">
-                        <div class="card-header bg-primary text-white">38. ¿Cuál de los siguientes impactos crees que ha tenido el uso de la tecnología en las dinámicas de tu núcleo familiar?</div>
+                        <div class="card-header bg-primary text-white">40.¿Cuál de los siguientes impactos crees que ha tenido el uso de la tecnología en las dinámicas de tu núcleo familiar?</div>
                         <div class="card-body">
                             <select class="form-select" name="p38_impacto_tecnologia" required>
                                 <option value="">Seleccione...</option>
-                                <option value="188" {{ old('p38_impacto_tecnologia', $registro->p38_impacto_tecnologia ?? '') == 188 ? 'selected' : '' }}>Positivo, ha mejorado las relaciones</option>
-                                <option value="189" {{ old('p38_impacto_tecnologia', $registro->p38_impacto_tecnologia ?? '') == 189 ? 'selected' : '' }}>Neutro, la dinámica se ha mantenido estable</option>
-                                <option value="190" {{ old('p38_impacto_tecnologia', $registro->p38_impacto_tecnologia ?? '') == 190 ? 'selected' : '' }}>Negativo, ha causado conflictos</option>
-                                <option value="191" {{ old('p38_impacto_tecnologia', $registro->p38_impacto_tecnologia ?? '') == 191 ? 'selected' : '' }}>Ninguno de los anteriores</option>
-                                <option value="0" {{ old('p38_impacto_tecnologia', $registro->p38_impacto_tecnologia ?? '') == 0 ? 'selected' : '' }}>No aplica</option>
+                                <option value="253" {{ old('p38_impacto_tecnologia', $registro->p38_impacto_tecnologia ?? '') == 253 ? 'selected' : '' }}>Positivo, ha mejorado las relaciones</option>
+                                <option value="254" {{ old('p38_impacto_tecnologia', $registro->p38_impacto_tecnologia ?? '') == 254 ? 'selected' : '' }}>Neutro, la dinámica se ha mantenido estable</option>
+                                <option value="255" {{ old('p38_impacto_tecnologia', $registro->p38_impacto_tecnologia ?? '') == 255 ? 'selected' : '' }}>Negativo, ha causado conflictos</option>
+                                <option value="256" {{ old('p38_impacto_tecnologia', $registro->p38_impacto_tecnologia ?? '') == 256 ? 'selected' : '' }}>Ninguno de los anteriores</option>
+                                <option value="59" {{ old('p38_impacto_tecnologia', $registro->p38_impacto_tecnologia ?? '') == 59 ? 'selected' : '' }}>No aplica</option>
                             </select>
                         </div>
                     </div>
-                    <!-- Pregunta 39 -->
-                    <div class="card mb-4">
-                        <div class="card-header bg-primary text-white">39. ¿Con qué frecuencia en tu núcleo familiar comparten comidas juntos?</div>
-                        <div class="card-body">
-                            <select class="form-select" name="p39_frecuencia_comidas" required>
-                                <option value="">Seleccione...</option>
-                                <option value="192" {{ old('p39_frecuencia_comidas', $registro->p39_frecuencia_comidas ?? '') == 192 ? 'selected' : '' }}>Siempre</option>
-                                <option value="193" {{ old('p39_frecuencia_comidas', $registro->p39_frecuencia_comidas ?? '') == 193 ? 'selected' : '' }}>Casi siempre</option>
-                                <option value="194" {{ old('p39_frecuencia_comidas', $registro->p39_frecuencia_comidas ?? '') == 194 ? 'selected' : '' }}>Algunas veces</option>
-                                <option value="195" {{ old('p39_frecuencia_comidas', $registro->p39_frecuencia_comidas ?? '') == 195 ? 'selected' : '' }}>Casi nunca</option>
-                                <option value="106" {{ old('p39_frecuencia_comidas', $registro->p39_frecuencia_comidas ?? '') == 106 ? 'selected' : '' }}>Nunca</option>
-                                <option value="0" {{ old('p39_frecuencia_comidas', $registro->p39_frecuencia_comidas ?? '') == 0 ? 'selected' : '' }}>No aplica</option>
-                            </select>
-                        </div>
-                    </div>
+                    
                     <div class="mt-4 text-end">
                         <a href="/observatorioapp/public/form/5/{{ $registro->tipo_documento ?? request('tipo_documento', request()->route('tipo_documento')) }}/{{ $registro->numero_documento ?? request('numero_documento', request()->route('numero_documento')) }}" class="btn btn-secondary btn-lg me-2">
                             <i class="bi bi-arrow-left-circle"></i> Anterior
@@ -198,6 +198,177 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
 document.addEventListener('DOMContentLoaded', function() {
+    // Mostrar SweetAlert de éxito si existe mensaje en sesión
+    @if(session('success'))
+        Swal.fire({
+            icon: 'success',
+            title: '¡Guardado exitosamente!',
+            text: '{{ session('success') }}',
+            confirmButtonColor: '#0c6efd'
+        });
+    @endif
+
+    // Mostrar SweetAlert de error si existe error de usuario existente
+    @if($errors->has('usuario_existente'))
+        Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: '{{ $errors->first('usuario_existente') }}',
+            confirmButtonColor: '#d33'
+        });
+    @endif
+
+    // VALIDACIÓN ESTRICTA AL ENVIAR EL FORMULARIO
+    const form = document.getElementById('bloque6Form');
+    if (form) {
+        form.addEventListener('submit', function(e) {
+            // Pregunta 33
+            const p33 = document.querySelector('[name="p33_acceso_metodos_anticonceptivos"]');
+            if (!p33.value) {
+                e.preventDefault();
+                Swal.fire({
+                    icon: 'warning',
+                    title: 'Campo requerido',
+                    text: 'Debes seleccionar una opción en la pregunta 33.',
+                    confirmButtonColor: '#7c3aed',
+                    confirmButtonText: 'OK',
+                    allowOutsideClick: false,
+                    allowEscapeKey: false,
+                    showConfirmButton: true,
+                    showCancelButton: false,
+                    showLoaderOnConfirm: false
+                });
+                p33.focus();
+                return;
+            }
+            // Pregunta 34 (opción múltiple)
+            const p34Checks = document.querySelectorAll('.p34-switch');
+            let p34Marcada = false;
+            p34Checks.forEach(chk => { if (chk.checked) p34Marcada = true; });
+            if (!p34Marcada) {
+                e.preventDefault();
+                Swal.fire({
+                    icon: 'warning',
+                    title: 'Campo obligatorio',
+                    text: 'Debes seleccionar al menos una opción en la pregunta 34.',
+                    confirmButtonColor: '#7c3aed',
+                    confirmButtonText: 'OK',
+                    allowOutsideClick: false,
+                    allowEscapeKey: false,
+                    showConfirmButton: true,
+                    showCancelButton: false,
+                    showLoaderOnConfirm: false
+                });
+                p34Checks[0].focus();
+                return;
+            }
+            // Pregunta 35
+            const p35 = document.querySelector('[name="p35_orientacion_asesoria"]');
+            if (!p35.value) {
+                e.preventDefault();
+                Swal.fire({
+                    icon: 'warning',
+                    title: 'Campo requerido',
+                    text: 'Debes seleccionar una opción en la pregunta 35.',
+                    confirmButtonColor: '#7c3aed',
+                    confirmButtonText: 'OK',
+                    allowOutsideClick: false,
+                    allowEscapeKey: false,
+                    showConfirmButton: true,
+                    showCancelButton: false,
+                    showLoaderOnConfirm: false
+                });
+                p35.focus();
+                return;
+            }
+            // Pregunta 36
+            const p36 = document.querySelector('[name="p36_calidad_comunicacion"]');
+            if (!p36.value) {
+                e.preventDefault();
+                Swal.fire({
+                    icon: 'warning',
+                    title: 'Campo requerido',
+                    text: 'Debes seleccionar una opción en la pregunta 36.',
+                    confirmButtonColor: '#7c3aed',
+                    confirmButtonText: 'OK',
+                    allowOutsideClick: false,
+                    allowEscapeKey: false,
+                    showConfirmButton: true,
+                    showCancelButton: false,
+                    showLoaderOnConfirm: false
+                });
+                p36.focus();
+                return;
+            }
+            // Pregunta 37
+            const p37 = document.querySelector('[name="p37_medio_comunicacion"]');
+            if (!p37.value) {
+                e.preventDefault();
+                Swal.fire({
+                    icon: 'warning',
+                    title: 'Campo requerido',
+                    text: 'Debes seleccionar una opción en la pregunta 37.',
+                    confirmButtonColor: '#7c3aed',
+                    confirmButtonText: 'OK',
+                    allowOutsideClick: false,
+                    allowEscapeKey: false,
+                    showConfirmButton: true,
+                    showCancelButton: false,
+                    showLoaderOnConfirm: false
+                });
+                p37.focus();
+                return;
+            }
+            // Pregunta 38
+            const p38 = document.querySelector('[name="p38_impacto_tecnologia"]');
+            if (!p38.value) {
+                e.preventDefault();
+                Swal.fire({
+                    icon: 'warning',
+                    title: 'Campo requerido',
+                    text: 'Debes seleccionar una opción en la pregunta 38.',
+                    confirmButtonColor: '#7c3aed',
+                    confirmButtonText: 'OK',
+                    allowOutsideClick: false,
+                    allowEscapeKey: false,
+                    showConfirmButton: true,
+                    showCancelButton: false,
+                    showLoaderOnConfirm: false
+                });
+                p38.focus();
+                return;
+            }
+            // Pregunta 39
+            const p39 = document.querySelector('[name="p39_frecuencia_comidas"]');
+            if (!p39.value) {
+                e.preventDefault();
+                Swal.fire({
+                    icon: 'warning',
+                    title: 'Campo requerido',
+                    text: 'Debes seleccionar una opción en la pregunta 39.',
+                    confirmButtonColor: '#7c3aed',
+                    confirmButtonText: 'OK',
+                    allowOutsideClick: false,
+                    allowEscapeKey: false,
+                    showConfirmButton: true,
+                    showCancelButton: false,
+                    showLoaderOnConfirm: false
+                });
+                p39.focus();
+                return;
+            }
+            // Si todas las validaciones pasan, mostrar spinner y permitir submit
+            Swal.fire({
+                title: 'Guardando...',
+                allowOutsideClick: false,
+                allowEscapeKey: false,
+                didOpen: () => {
+                    Swal.showLoading();
+                }
+            });
+        });
+    }
+
     // Exclusividad de switches en pregunta 34 (opción múltiple)
     function exclusividadP34() {
         const checkboxes = document.querySelectorAll('.p34-switch');
@@ -227,96 +398,6 @@ document.addEventListener('DOMContentLoaded', function() {
             siguienteBtn.style.opacity = '1';
         }
     @endif
-
-    // VALIDACIÓN ESTRICTA AL ENVIAR EL FORMULARIO
-    document.getElementById('bloque6Form').addEventListener('submit', function(e) {
-        // Pregunta 33
-        const p33 = document.querySelector('[name="p33_acceso_metodos_anticonceptivos"]');
-        if (!p33.value) {
-            e.preventDefault();
-            Swal.fire({
-                icon: 'warning',
-                title: 'Campo requerido',
-                text: 'Debes seleccionar una opción en la pregunta 33.'
-            });
-            p33.focus();
-            return;
-        }
-        // Pregunta 34 (opción múltiple)
-        const p34Checks = document.querySelectorAll('.p34-switch');
-        let p34Marcada = false;
-        p34Checks.forEach(chk => { if (chk.checked) p34Marcada = true; });
-        if (!p34Marcada) {
-            e.preventDefault();
-            Swal.fire({
-                icon: 'warning',
-                title: 'Campo requerido',
-                text: 'Debes seleccionar al menos una opción en la pregunta 34.'
-            });
-            p34Checks[0].focus();
-            return;
-        }
-        // Pregunta 35
-        const p35 = document.querySelector('[name="p35_orientacion_asesoria"]');
-        if (!p35.value) {
-            e.preventDefault();
-            Swal.fire({
-                icon: 'warning',
-                title: 'Campo requerido',
-                text: 'Debes seleccionar una opción en la pregunta 35.'
-            });
-            p35.focus();
-            return;
-        }
-        // Pregunta 36
-        const p36 = document.querySelector('[name="p36_calidad_comunicacion"]');
-        if (!p36.value) {
-            e.preventDefault();
-            Swal.fire({
-                icon: 'warning',
-                title: 'Campo requerido',
-                text: 'Debes seleccionar una opción en la pregunta 36.'
-            });
-            p36.focus();
-            return;
-        }
-        // Pregunta 37
-        const p37 = document.querySelector('[name="p37_medio_comunicacion"]');
-        if (!p37.value) {
-            e.preventDefault();
-            Swal.fire({
-                icon: 'warning',
-                title: 'Campo requerido',
-                text: 'Debes seleccionar una opción en la pregunta 37.'
-            });
-            p37.focus();
-            return;
-        }
-        // Pregunta 38
-        const p38 = document.querySelector('[name="p38_impacto_tecnologia"]');
-        if (!p38.value) {
-            e.preventDefault();
-            Swal.fire({
-                icon: 'warning',
-                title: 'Campo requerido',
-                text: 'Debes seleccionar una opción en la pregunta 38.'
-            });
-            p38.focus();
-            return;
-        }
-        // Pregunta 39
-        const p39 = document.querySelector('[name="p39_frecuencia_comidas"]');
-        if (!p39.value) {
-            e.preventDefault();
-            Swal.fire({
-                icon: 'warning',
-                title: 'Campo requerido',
-                text: 'Debes seleccionar una opción en la pregunta 39.'
-            });
-            p39.focus();
-            return;
-        }
-    });
 });
 </script>
 @endsection

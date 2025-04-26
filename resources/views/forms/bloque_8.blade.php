@@ -47,37 +47,17 @@
                         <div class="card-body">
                             <select class="form-select" name="p44_participacion_decisiones" required>
                                 <option value="">Seleccione...</option>
-                                <option value="202" {{ old('p44_participacion_decisiones', $registro->p44_participacion_decisiones ?? '') == 202 ? 'selected' : '' }}>1. Pareja</option>
-                                <option value="203" {{ old('p44_participacion_decisiones', $registro->p44_participacion_decisiones ?? '') == 203 ? 'selected' : '' }}>2. Madre y Padre</option>
-                                <option value="204" {{ old('p44_participacion_decisiones', $registro->p44_participacion_decisiones ?? '') == 204 ? 'selected' : '' }}>3. Madre</option>
-                                <option value="205" {{ old('p44_participacion_decisiones', $registro->p44_participacion_decisiones ?? '') == 205 ? 'selected' : '' }}>4. Padre</option>
-                                <option value="206" {{ old('p44_participacion_decisiones', $registro->p44_participacion_decisiones ?? '') == 206 ? 'selected' : '' }}>5. Hijos/as</option>
-                                <option value="207" {{ old('p44_participacion_decisiones', $registro->p44_participacion_decisiones ?? '') == 207 ? 'selected' : '' }}>6. Abuelos/as</option>
-                                <option value="208" {{ old('p44_participacion_decisiones', $registro->p44_participacion_decisiones ?? '') == 208 ? 'selected' : '' }}>7. Todos los integrantes de la familia</option>
-                                <option value="209" {{ old('p44_participacion_decisiones', $registro->p44_participacion_decisiones ?? '') == 209 ? 'selected' : '' }}>8. Solo yo (Hogar unipersonal)</option>
-                                <option value="210" {{ old('p44_participacion_decisiones', $registro->p44_participacion_decisiones ?? '') == 210 ? 'selected' : '' }}>9. Hermanos/as</option>
-                                <option value="211" {{ old('p44_participacion_decisiones', $registro->p44_participacion_decisiones ?? '') == 211 ? 'selected' : '' }}>10. Amigos/as</option>
-                                <option value="212" {{ old('p44_participacion_decisiones', $registro->p44_participacion_decisiones ?? '') == 212 ? 'selected' : '' }}>11. Otros familiares</option>
-                            </select>
-                        </div>
-                    </div>
-                    <!-- Pregunta 45 -->
-                    <div class="card mb-4">
-                        <div class="card-header bg-primary text-white">45. ¿Quién es la jefatura o figura de representación en tu núcleo familiar?</div>
-                        <div class="card-body">
-                            <select class="form-select" name="p45_jefatura_familia" required>
-                                <option value="">Seleccione...</option>
-                                <option value="202" {{ old('p45_jefatura_familia', $registro->p45_jefatura_familia ?? '') == 202 ? 'selected' : '' }}>1. Pareja</option>
-                                <option value="203" {{ old('p45_jefatura_familia', $registro->p45_jefatura_familia ?? '') == 203 ? 'selected' : '' }}>2. Madre y Padre</option>
-                                <option value="204" {{ old('p45_jefatura_familia', $registro->p45_jefatura_familia ?? '') == 204 ? 'selected' : '' }}>3. Madre</option>
-                                <option value="205" {{ old('p45_jefatura_familia', $registro->p45_jefatura_familia ?? '') == 205 ? 'selected' : '' }}>4. Padre</option>
-                                <option value="206" {{ old('p45_jefatura_familia', $registro->p45_jefatura_familia ?? '') == 206 ? 'selected' : '' }}>5. Hijos/as</option>
-                                <option value="207" {{ old('p45_jefatura_familia', $registro->p45_jefatura_familia ?? '') == 207 ? 'selected' : '' }}>6. Abuelos/as</option>
-                                <option value="208" {{ old('p45_jefatura_familia', $registro->p45_jefatura_familia ?? '') == 208 ? 'selected' : '' }}>7. Todos los integrantes de la familia</option>
-                                <option value="209" {{ old('p45_jefatura_familia', $registro->p45_jefatura_familia ?? '') == 209 ? 'selected' : '' }}>8. Solo yo (Hogar unipersonal)</option>
-                                <option value="210" {{ old('p45_jefatura_familia', $registro->p45_jefatura_familia ?? '') == 210 ? 'selected' : '' }}>9. Hermanos/as</option>
-                                <option value="211" {{ old('p45_jefatura_familia', $registro->p45_jefatura_familia ?? '') == 211 ? 'selected' : '' }}>10. Otros familiares</option>
-                                <option value="221" {{ old('p45_jefatura_familia', $registro->p45_jefatura_familia ?? '') == 221 ? 'selected' : '' }}>11. No hay jefatura</option>
+                                <option value="266" {{ old('p44_participacion_decisiones', $registro->p44_participacion_decisiones ?? '') == 266 ? 'selected' : '' }}>1. Pareja</option>
+                                <option value="267" {{ old('p44_participacion_decisiones', $registro->p44_participacion_decisiones ?? '') == 267 ? 'selected' : '' }}>2. Madre y Padre</option>
+                                <option value="268" {{ old('p44_participacion_decisiones', $registro->p44_participacion_decisiones ?? '') == 268 ? 'selected' : '' }}>3. Madre</option>
+                                <option value="269" {{ old('p44_participacion_decisiones', $registro->p44_participacion_decisiones ?? '') == 269 ? 'selected' : '' }}>4. Padre</option>
+                                <option value="270" {{ old('p44_participacion_decisiones', $registro->p44_participacion_decisiones ?? '') == 270 ? 'selected' : '' }}>5. Hijos/as</option>
+                                <option value="271" {{ old('p44_participacion_decisiones', $registro->p44_participacion_decisiones ?? '') == 271 ? 'selected' : '' }}>6. Abuelos/as</option>
+                                <option value="272" {{ old('p44_participacion_decisiones', $registro->p44_participacion_decisiones ?? '') == 272 ? 'selected' : '' }}>7. Todos los integrantes de la familia</option>
+                                <option value="273" {{ old('p44_participacion_decisiones', $registro->p44_participacion_decisiones ?? '') == 273 ? 'selected' : '' }}>8. Solo yo (Hogar unipersonal)</option>
+                                <option value="274" {{ old('p44_participacion_decisiones', $registro->p44_participacion_decisiones ?? '') == 274 ? 'selected' : '' }}>9. Hermanos/as</option>
+                                <option value="275" {{ old('p44_participacion_decisiones', $registro->p44_participacion_decisiones ?? '') == 275 ? 'selected' : '' }}>10. Amigos/as</option>
+                                <option value="276" {{ old('p44_participacion_decisiones', $registro->p44_participacion_decisiones ?? '') == 276 ? 'selected' : '' }}>11. Otros familiares</option>
                             </select>
                         </div>
                     </div>

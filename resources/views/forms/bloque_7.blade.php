@@ -40,54 +40,54 @@
                     @endif
                     <!-- Pregunta 40 -->
                     <div class="card mb-4">
-                        <div class="card-header bg-primary text-white">40. En tu núcleo familiar, ¿todos los miembros tienen igualdad de oportunidades con relación a educación, salud, trabajo, independientemente de su género, etnia, edad, religión, orientación sexual, discapacidad, estrato?</div>
+                        <div class="card-header bg-primary text-white">41. En tu núcleo familiar, ¿todos los miembros tienen igualdad de oportunidades con relación a educación, salud, trabajo y otros?</div>
                         <div class="card-body">
                             <select class="form-select" name="p40_igualdad_oportunidades" required>
                                 <option value="">Seleccione...</option>
-                                <option value="196" {{ old('p40_igualdad_oportunidades', $registro->p40_igualdad_oportunidades ?? '') == 196 ? 'selected' : '' }}>1. Sí, todos tienen igualdad de oportunidades</option>
-                                <option value="197" {{ old('p40_igualdad_oportunidades', $registro->p40_igualdad_oportunidades ?? '') == 197 ? 'selected' : '' }}>2. No siempre, algunos integrantes enfrentan más barreras que otros</option>
-                                <option value="198" {{ old('p40_igualdad_oportunidades', $registro->p40_igualdad_oportunidades ?? '') == 198 ? 'selected' : '' }}>3. No, hay desigualdades significativas dentro del núcleo familiar</option>
-                                <option value="44" {{ old('p40_igualdad_oportunidades', $registro->p40_igualdad_oportunidades ?? '') == 44 ? 'selected' : '' }}>4. No sabe</option>
+                                <option value="257" {{ old('p40_igualdad_oportunidades', $registro->p40_igualdad_oportunidades ?? '') == 257 ? 'selected' : '' }}>1. Sí, todos tienen igualdad de oportunidades</option>
+                                <option value="258" {{ old('p40_igualdad_oportunidades', $registro->p40_igualdad_oportunidades ?? '') == 258 ? 'selected' : '' }}>2. No siempre, algunos integrantes enfrentan más barreras que otros</option>
+                                <option value="259" {{ old('p40_igualdad_oportunidades', $registro->p40_igualdad_oportunidades ?? '') == 259 ? 'selected' : '' }}>3. No, hay desigualdades significativas dentro del núcleo familiar</option>
+                                <option value="260" {{ old('p40_igualdad_oportunidades', $registro->p40_igualdad_oportunidades ?? '') == 260 ? 'selected' : '' }}>4. No sabe</option>
                             </select>
                         </div>
                     </div>
                     <!-- Pregunta 41 -->
                     <div class="card mb-4">
-                        <div class="card-header bg-primary text-white">41. ¿En tu núcleo familiar las posturas políticas, sociales, económicas, religiosas y opiniones son valoradas por igual?</div>
+                        <div class="card-header bg-primary text-white">42. ¿En tu núcleo familiar las posturas políticas, sociales, económicas, religiosas y opiniones son valoradas por igual?</div>
                         <div class="card-body">
                             <select class="form-select" name="p41_valoracion_posturas" required>
                                 <option value="">Seleccione...</option>
-                                <option value="199" {{ old('p41_valoracion_posturas', $registro->p41_valoracion_posturas ?? '') == 199 ? 'selected' : '' }}>1. Sí, todas las posturas y opiniones son valoradas</option>
-                                <option value="200" {{ old('p41_valoracion_posturas', $registro->p41_valoracion_posturas ?? '') == 200 ? 'selected' : '' }}>2. No siempre, algunas posturas y opiniones son tenidas en cuenta más que otras dependiendo de las situaciones</option>
-                                <option value="201" {{ old('p41_valoracion_posturas', $registro->p41_valoracion_posturas ?? '') == 201 ? 'selected' : '' }}>3. No, las posturas y opiniones no son valoradas</option>
-                                <option value="44" {{ old('p41_valoracion_posturas', $registro->p41_valoracion_posturas ?? '') == 44 ? 'selected' : '' }}>4. No sabe</option>
+                                <option value="261" {{ old('p41_valoracion_posturas', $registro->p41_valoracion_posturas ?? '') == 261 ? 'selected' : '' }}>1. Sí, todas las posturas y opiniones son valoradas</option>
+                                <option value="262" {{ old('p41_valoracion_posturas', $registro->p41_valoracion_posturas ?? '') == 262 ? 'selected' : '' }}>2. No siempre, algunas posturas y opiniones son tenidas en cuenta más que otras dependiendo de las situaciones</option>
+                                <option value="263" {{ old('p41_valoracion_posturas', $registro->p41_valoracion_posturas ?? '') == 263 ? 'selected' : '' }}>3. No, las posturas y opiniones no son valoradas</option>
+                                <option value="264" {{ old('p41_valoracion_posturas', $registro->p41_valoracion_posturas ?? '') == 264 ? 'selected' : '' }}>4. No sabe</option>
                             </select>
                         </div>
                     </div>
                     <!-- Pregunta 42 -->
                     <div class="card mb-4">
-                        <div class="card-header bg-primary text-white">42. ¿Quiénes realizan principalmente trabajos de cuidado en tu núcleo familiar?</div>
+                        <div class="card-header bg-primary text-white">43. ¿Quiénes realizan principalmente trabajos de cuidado en tu núcleo familiar?</div>
                         <div class="card-body">
                             <select class="form-select" name="p42_trabajos_cuidado" required>
                                 <option value="">Seleccione...</option>
-                                <option value="202" {{ old('p42_trabajos_cuidado', $registro->p42_trabajos_cuidado ?? '') == 202 ? 'selected' : '' }}>1. Pareja</option>
-                                <option value="203" {{ old('p42_trabajos_cuidado', $registro->p42_trabajos_cuidado ?? '') == 203 ? 'selected' : '' }}>2. Madre y Padre</option>
-                                <option value="204" {{ old('p42_trabajos_cuidado', $registro->p42_trabajos_cuidado ?? '') == 204 ? 'selected' : '' }}>3. Madre</option>
-                                <option value="205" {{ old('p42_trabajos_cuidado', $registro->p42_trabajos_cuidado ?? '') == 205 ? 'selected' : '' }}>4. Padre</option>
-                                <option value="206" {{ old('p42_trabajos_cuidado', $registro->p42_trabajos_cuidado ?? '') == 206 ? 'selected' : '' }}>5. Hijos/as</option>
-                                <option value="207" {{ old('p42_trabajos_cuidado', $registro->p42_trabajos_cuidado ?? '') == 207 ? 'selected' : '' }}>6. Abuelos/as</option>
-                                <option value="208" {{ old('p42_trabajos_cuidado', $registro->p42_trabajos_cuidado ?? '') == 208 ? 'selected' : '' }}>7. Todos los integrantes de la familia</option>
-                                <option value="209" {{ old('p42_trabajos_cuidado', $registro->p42_trabajos_cuidado ?? '') == 209 ? 'selected' : '' }}>8. Solo yo (Hogar unipersonal)</option>
-                                <option value="210" {{ old('p42_trabajos_cuidado', $registro->p42_trabajos_cuidado ?? '') == 210 ? 'selected' : '' }}>9. Hermanos/as</option>
-                                <option value="211" {{ old('p42_trabajos_cuidado', $registro->p42_trabajos_cuidado ?? '') == 211 ? 'selected' : '' }}>10. Amigos/as</option>
-                                <option value="212" {{ old('p42_trabajos_cuidado', $registro->p42_trabajos_cuidado ?? '') == 212 ? 'selected' : '' }}>11. Otros familiares</option>
-                                <option value="213" {{ old('p42_trabajos_cuidado', $registro->p42_trabajos_cuidado ?? '') == 213 ? 'selected' : '' }}>12. Trabajador/a doméstico/a</option>
+                                <option value="266" {{ old('p42_trabajos_cuidado', $registro->p42_trabajos_cuidado ?? '') == 266 ? 'selected' : '' }}>1. Pareja</option>
+                                <option value="267" {{ old('p42_trabajos_cuidado', $registro->p42_trabajos_cuidado ?? '') == 267 ? 'selected' : '' }}>2. Madre y Padre</option>
+                                <option value="268" {{ old('p42_trabajos_cuidado', $registro->p42_trabajos_cuidado ?? '') == 268 ? 'selected' : '' }}>3. Madre</option>
+                                <option value="269" {{ old('p42_trabajos_cuidado', $registro->p42_trabajos_cuidado ?? '') == 269 ? 'selected' : '' }}>4. Padre</option>
+                                <option value="270" {{ old('p42_trabajos_cuidado', $registro->p42_trabajos_cuidado ?? '') == 270 ? 'selected' : '' }}>5. Hijos/as</option>
+                                <option value="271" {{ old('p42_trabajos_cuidado', $registro->p42_trabajos_cuidado ?? '') == 271 ? 'selected' : '' }}>6. Abuelos/as</option>
+                                <option value="272" {{ old('p42_trabajos_cuidado', $registro->p42_trabajos_cuidado ?? '') == 272 ? 'selected' : '' }}>7. Todos los integrantes de la familia</option>
+                                <option value="273" {{ old('p42_trabajos_cuidado', $registro->p42_trabajos_cuidado ?? '') == 273 ? 'selected' : '' }}>8. Solo yo (Hogar unipersonal)</option>
+                                <option value="274" {{ old('p42_trabajos_cuidado', $registro->p42_trabajos_cuidado ?? '') == 274 ? 'selected' : '' }}>9. Hermanos/as</option>
+                                <option value="275" {{ old('p42_trabajos_cuidado', $registro->p42_trabajos_cuidado ?? '') == 275 ? 'selected' : '' }}>10. Amigos/as</option>
+                                <option value="276" {{ old('p42_trabajos_cuidado', $registro->p42_trabajos_cuidado ?? '') == 276 ? 'selected' : '' }}>11. Otros familiares</option>
+                                <option value="277" {{ old('p42_trabajos_cuidado', $registro->p42_trabajos_cuidado ?? '') == 277 ? 'selected' : '' }}>12. Trabajador/a doméstico/a</option>
                             </select>
                         </div>
                     </div>
                     <!-- Pregunta 43 -->
                     <div class="card mb-4">
-                        <div class="card-header bg-primary text-white">43. Si en el núcleo familiar hay personas mayores ¿Qué tipo de apoyo consideran que debería proporcionar el Estado y la sociedad? (opción múltiple)</div>
+                        <div class="card-header bg-primary text-white">44. Si en el núcleo familiar hay personas mayores ¿Qué tipo de apoyo consideran que debería proporcionar el Estado y la sociedad? (opción múltiple)</div>
                         <div class="card-body">
                             @php
                                 $p43 = [
@@ -98,6 +98,7 @@
                                     'p43_paquetes_alimentarios' => old('p43_paquetes_alimentarios', $registro->p43_paquetes_alimentarios ?? 2),
                                     'p43_redes_apoyo_cuidadores' => old('p43_redes_apoyo_cuidadores', $registro->p43_redes_apoyo_cuidadores ?? 2),
                                     'p43_incentivos_economicos' => old('p43_incentivos_economicos', $registro->p43_incentivos_economicos ?? 2),
+                                    'p43_otros' => old('p43_otros', $registro->p43_otros ?? 2),
                                     'p43_ninguno' => old('p43_ninguno', $registro->p43_ninguno ?? 2),
                                     'p43_no_aplica' => old('p43_no_aplica', $registro->p43_no_aplica ?? 2),
                                 ];
@@ -131,12 +132,16 @@
                                 <label class="form-check-label" for="p43_incentivos_economicos">7. Incentivos económicos para cuidadores</label>
                             </div>
                             <div class="form-check form-switch">
+                                <input class="form-check-input p43-switch" type="checkbox" name="p43_otros" id="p43_otros" value="1" {{ $p43['p43_otros'] == 1 ? 'checked' : '' }}>
+                                <label class="form-check-label" for="p43_otros">8. Otros</label>
+                            </div>
+                            <div class="form-check form-switch">
                                 <input class="form-check-input p43-switch" type="checkbox" name="p43_ninguno" id="p43_ninguno" value="1" {{ $p43['p43_ninguno'] == 1 ? 'checked' : '' }}>
-                                <label class="form-check-label" for="p43_ninguno">8. Ninguno</label>
+                                <label class="form-check-label" for="p43_ninguno">9. Ninguno</label>
                             </div>
                             <div class="form-check form-switch">
                                 <input class="form-check-input p43-switch" type="checkbox" name="p43_no_aplica" id="p43_no_aplica" value="1" {{ $p43['p43_no_aplica'] == 1 ? 'checked' : '' }}>
-                                <label class="form-check-label" for="p43_no_aplica">9. No aplica</label>
+                                <label class="form-check-label" for="p43_no_aplica">10. No aplica</label>
                             </div>
                         </div>
                     </div>
@@ -197,7 +202,17 @@ document.addEventListener('DOMContentLoaded', function() {
     @endif
 
     // VALIDACIÓN ESTRICTA AL ENVIAR EL FORMULARIO
-    document.getElementById('bloque7Form').addEventListener('submit', function(e) {
+    const form = document.getElementById('bloque7Form');
+    form.addEventListener('submit', function(e) {
+        // Mostrar spinner de guardando
+        Swal.fire({
+            title: 'Guardando...',
+            allowOutsideClick: false,
+            didOpen: () => {
+                Swal.showLoading();
+            }
+        });
+
         // Pregunta 40
         const p40 = document.querySelector('[name="p40_igualdad_oportunidades"]');
         if (!p40.value) {
@@ -249,6 +264,15 @@ document.addEventListener('DOMContentLoaded', function() {
             return;
         }
     });
+
+    // Mostrar SweetAlert de éxito si hay mensaje de sesión
+    @if(session('success'))
+        Swal.fire({
+            icon: 'success',
+            title: '¡Guardado exitosamente!',
+            text: 'Formulario actualizado exitosamente.'
+        });
+    @endif
 });
 </script>
 @endsection

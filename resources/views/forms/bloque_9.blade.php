@@ -44,9 +44,9 @@
                     @if(isset($registro))
                         <input type="hidden" name="es_actualizacion" value="1">
                     @endif
-                    <!-- Pregunta 46: Opción múltiple (máx 5) -->
+                    <!-- Pregunta 46: Opción múltiple (máx 3) -->
                     <div class="card mb-4">
-                        <div class="card-header bg-primary text-white">46. ¿En tu núcleo familiar se han vulnerado algunos de los siguientes derechos? <span class="fw-normal">(seleccione máx 5)</span></div>
+                        <div class="card-header bg-primary text-white">46. ¿En tu núcleo familiar se han vulnerado algunos de los siguientes derechos? <span class="fw-normal">(seleccione máx 3)</span></div>
                         <div class="card-body">
                             @php
                                 $p46 = [
@@ -100,7 +100,7 @@
                                     <label class="form-check-label" for="{{ $campo }}">{{ $texto }}</label>
                                 </div>
                             @endforeach
-                            <div id="maxCheckMsg" class="text-danger mt-2" style="display:none;">Solo puede seleccionar hasta 5 opciones.</div>
+                            <div id="maxCheckMsg" class="text-danger mt-2" style="display:none;">Solo puede seleccionar hasta 3 opciones.</div>
                         </div>
                     </div>
                     <div class="mt-4 text-end">
@@ -121,7 +121,7 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-    // Lógica para máximo 5 checks y exclusividad de "Ninguno de los anteriores"
+    // Lógica para máximo 3 checks y exclusividad de "Ninguno de los anteriores"
     const checkboxes = document.querySelectorAll('.p46-switch');
     const ningunoCheckbox = document.getElementById('p46_ninguno_anteriores');
     const maxCheckMsg = document.getElementById('maxCheckMsg');
@@ -135,9 +135,9 @@ document.addEventListener('DOMContentLoaded', function() {
         if (e && e.target.id !== 'p46_ninguno_anteriores' && e.target.checked) {
             ningunoCheckbox.checked = false;
         }
-        // Máximo 5 checks
+        // Máximo 3 checks
         checked = Array.from(checkboxes).filter(cb => cb.checked && cb.id !== 'p46_ninguno_anteriores');
-        if (checked.length > 5) {
+        if (checked.length > 3) {
             e.target.checked = false;
             maxCheckMsg.style.display = 'block';
             setTimeout(() => { maxCheckMsg.style.display = 'none'; }, 2000);
@@ -149,7 +149,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const form = document.getElementById('bloque9Form');
     if (form) {
         form.addEventListener('submit', function(e) {
-            // Pregunta 46 (opción múltiple, mínimo 1, máximo 5)
+            // Pregunta 46 (opción múltiple, mínimo 1, máximo 3)
             const p46Checks = Array.from(document.querySelectorAll('.p46-switch'));
             let p46Marcada = false;
             let checkedCount = 0;
@@ -164,12 +164,12 @@ document.addEventListener('DOMContentLoaded', function() {
                 p46Checks[0].focus();
                 return;
             }
-            if (checkedCount > 5) {
+            if (checkedCount > 3) {
                 e.preventDefault();
                 Swal.fire({
                     icon: 'warning',
                     title: 'Límite excedido',
-                    text: 'Solo puedes seleccionar hasta 5 derechos vulnerados (Pregunta 46).'
+                    text: 'Solo puedes seleccionar hasta 3 derechos vulnerados (Pregunta 46).'
                 });
                 return;
             }

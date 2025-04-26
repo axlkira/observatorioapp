@@ -29,7 +29,7 @@
                 <input type="hidden" name="profesional_documento" value="{{ session('profesional_documento', old('profesional_documento', isset($registro) ? $registro->profesional_documento : '0')) }}">
                 <!-- Pregunta 20 -->
                 <div class="card mb-4 shadow-sm">
-                    <div class="card-header bg-primary text-white">20. ¿Cuál es la principal fuente de ingresos de tu núcleo familiar?</div>
+                    <div class="card-header bg-primary text-white">20. ¿Cuáles son las fuentes de ingreso de tu núcleo familiar?</div>
                     <div class="card-body">
                         <div class="row">
                             <div class="col-md-4">
@@ -77,88 +77,87 @@
                         </div>
                     </div>
                 </div>
-                <!-- Pregunta 22 -->
+                <!-- Pregunta 21 -->
                 <div class="card mb-4 shadow-sm">
                     <div class="card-header bg-primary text-white">21. ¿Considera que los integrantes de tu núcleo familiar tienen un equilibrio entre la vida laboral y familiar para compartir o tener espacios de recreación?</div>
                     <div class="card-body">
                         <select class="form-select" name="equilibrio_vida_laboral" required>
                             <option value="">Seleccione...</option>
                             <option value="1" {{ old('equilibrio_vida_laboral', $registro->equilibrio_vida_laboral ?? '') == 1 ? 'selected' : '' }}>Sí</option>
-                            <option value="2" {{ old('equilibrio_vida_laboral', $registro->equilibrio_vida_laboral ?? '') == 2 ? 'selected' : '' }}>No</option>
+                            <option value="0" {{ old('equilibrio_vida_laboral', $registro->equilibrio_vida_laboral ?? '') == 0 ? 'selected' : '' }}>No</option>
                             <option value="145" {{ old('equilibrio_vida_laboral', $registro->equilibrio_vida_laboral ?? '') == 145 ? 'selected' : '' }}>No sabe</option>
                             <option value="59" {{ old('equilibrio_vida_laboral', $registro->equilibrio_vida_laboral ?? '') == 59 ? 'selected' : '' }}>No aplica</option>
                         </select>
                     </div>
                 </div>
-                 <!-- Pregunta 23 -->
-                 <div class="card mb-4 shadow-sm">
-                    <div class="card-header bg-primary text-white">23. ¿El trabajo interfiere en la capacidad de cuidar a los niños/as, adultos mayores o personas con discapacidad de tu núcleo familiar?</div>
+                <!-- Pregunta 22 -->
+                <div class="card mb-4 shadow-sm">
+                    <div class="card-header bg-primary text-white">22. ¿El trabajo interfiere en la capacidad de cuidar a los niños/as, adultos mayores o personas con discapacidad de tu núcleo familiar?</div>
                     <div class="card-body">
                         <select class="form-select" name="interfiere_cuidado" required>
                             <option value="">Seleccione...</option>
                             <option value="1" {{ old('interfiere_cuidado', $registro->interfiere_cuidado ?? '') == 1 ? 'selected' : '' }}>Sí</option>
-                            <option value="2" {{ old('interfiere_cuidado', $registro->interfiere_cuidado ?? '') == 2 ? 'selected' : '' }}>No</option>
-                            <option value="128" {{ old('interfiere_cuidado', $registro->interfiere_cuidado ?? '') == 128 ? 'selected' : '' }}>No sabe</option>
+                            <option value="0" {{ old('interfiere_cuidado', $registro->interfiere_cuidado ?? '') == 0 ? 'selected' : '' }}>No</option>
+                            <option value="145" {{ old('interfiere_cuidado', $registro->interfiere_cuidado ?? '') == 145 ? 'selected' : '' }}>No sabe</option>
                             <option value="161" {{ old('interfiere_cuidado', $registro->interfiere_cuidado ?? '') == 161 ? 'selected' : '' }}>No tenemos personas que requieran cuidado</option>
                         </select>
                     </div>
                 </div>
-                <!-- Pregunta 21 -->
+                <!-- Pregunta 23 -->
                 <div class="card mb-4 shadow-sm">
-                    <div class="card-header bg-primary text-white">21. ¿Cuántas personas de tu núcleo familiar cuentan con un ingreso fijo?</div>
+                    <div class="card-header bg-primary text-white">23. ¿Los trabajos de cuidado y domésticos le impiden acceder a tu familia a trabajos remunerados?</div>
                     <div class="card-body">
-                        <select class="form-select" name="ingreso_fijo" required>
+                        <select class="form-select" name="trabajos_domesticos_impiden" required>
                             <option value="">Seleccione...</option>
-                            <option value="125" {{ old('ingreso_fijo', $registro->ingreso_fijo ?? '') == 125 ? 'selected' : '' }}>1 integrante del núcleo familiar</option>
-                            <option value="126" {{ old('ingreso_fijo', $registro->ingreso_fijo ?? '') == 126 ? 'selected' : '' }}>2 integrantes del núcleo familiar</option>
-                            <option value="127" {{ old('ingreso_fijo', $registro->ingreso_fijo ?? '') == 127 ? 'selected' : '' }}>Más de 2 integrantes del núcleo familiar</option>
-                            <option value="2" {{ old('ingreso_fijo', $registro->ingreso_fijo ?? '') == 2 ? 'selected' : '' }}>Ninguno</option>
+                            <option value="1" {{ old('trabajos_domesticos_impiden', $registro->trabajos_domesticos_impiden ?? '') == 1 ? 'selected' : '' }}>Sí</option>
+                            <option value="0" {{ old('trabajos_domesticos_impiden', $registro->trabajos_domesticos_impiden ?? '') == 0 ? 'selected' : '' }}>No</option>
                         </select>
                     </div>
                 </div>
 
-                 <!-- Pregunta 24 -->
-                 <div class="card mb-4 shadow-sm">
-                    <div class="card-header bg-primary text-white">24. ¿Los trabajos de cuidado y domésticos le impiden acceder a tu familia a trabajos remunerados?</div>
-                    <div class="card-body">
-                        <select class="form-select" name="trabajos_domesticos_impiden" required>
-                            <option value="">Seleccione...</option>
-                            <option value="129" {{ old('trabajos_domesticos_impiden', $registro->trabajos_domesticos_impiden ?? '') == 129 ? 'selected' : '' }}>Totalmente de acuerdo</option>
-                            <option value="130" {{ old('trabajos_domesticos_impiden', $registro->trabajos_domesticos_impiden ?? '') == 130 ? 'selected' : '' }}>De acuerdo</option>
-                            <option value="131" {{ old('trabajos_domesticos_impiden', $registro->trabajos_domesticos_impiden ?? '') == 131 ? 'selected' : '' }}>Ni de acuerdo, ni en desacuerdo</option>
-                            <option value="132" {{ old('trabajos_domesticos_impiden', $registro->trabajos_domesticos_impiden ?? '') == 132 ? 'selected' : '' }}>En desacuerdo</option>
-                            <option value="133" {{ old('trabajos_domesticos_impiden', $registro->trabajos_domesticos_impiden ?? '') == 133 ? 'selected' : '' }}>Totalmente en desacuerdo</option>
-                        </select>
-                    </div>
-                </div>
-               
-               
-                <!-- Pregunta 25 -->
+                <!-- Pregunta 24 -->
                 <div class="card mb-4 shadow-sm">
-                    <div class="card-header bg-primary text-white">25. ¿Cuál es el principal medio a través del cual tu núcleo familiar obtiene los alimentos?</div>
+                    <div class="card-header bg-primary text-white">24. ¿Cuál es el principal medio a través del cual tu núcleo familiar obtiene los alimentos?</div>
                     <div class="card-body">
                         <select class="form-select" name="medio_obtencion_alimentos" required>
                             <option value="">Seleccione...</option>
-                            <option value="134" {{ old('medio_obtencion_alimentos', $registro->medio_obtencion_alimentos ?? '') == 134 ? 'selected' : '' }}>Compras en almacenes</option>
-                            <option value="135" {{ old('medio_obtencion_alimentos', $registro->medio_obtencion_alimentos ?? '') == 135 ? 'selected' : '' }}>Bonos y paquetes alimentarios del gobierno</option>
-                            <option value="136" {{ old('medio_obtencion_alimentos', $registro->medio_obtencion_alimentos ?? '') == 136 ? 'selected' : '' }}>Bonos de la empresa</option>
-                            <option value="137" {{ old('medio_obtencion_alimentos', $registro->medio_obtencion_alimentos ?? '') == 137 ? 'selected' : '' }}>Cultivos propios</option>
-                            <option value="138" {{ old('medio_obtencion_alimentos', $registro->medio_obtencion_alimentos ?? '') == 138 ? 'selected' : '' }}>Redes comunitarias</option>
+                            <option value="164" {{ old('medio_obtencion_alimentos', $registro->medio_obtencion_alimentos ?? '') == 164 ? 'selected' : '' }}>Compras en almacenes</option>
+                            <option value="165" {{ old('medio_obtencion_alimentos', $registro->medio_obtencion_alimentos ?? '') == 165 ? 'selected' : '' }}>Bonos y paquetes alimentarios del gobierno</option>
+                            <option value="166" {{ old('medio_obtencion_alimentos', $registro->medio_obtencion_alimentos ?? '') == 166 ? 'selected' : '' }}>Bonos de la empresa</option>
+                            <option value="167" {{ old('medio_obtencion_alimentos', $registro->medio_obtencion_alimentos ?? '') == 167 ? 'selected' : '' }}>Cultivos propios</option>
+                            <option value="168" {{ old('medio_obtencion_alimentos', $registro->medio_obtencion_alimentos ?? '') == 168 ? 'selected' : '' }}>Redes comunitarias</option>
                         </select>
                     </div>
                 </div>
-                <!-- Pregunta 26 -->
+
+                <!-- Pregunta 25 -->
                 <div class="card mb-4 shadow-sm">
-                    <div class="card-header bg-primary text-white">26. ¿Tu núcleo familiar cuenta con algún patrimonio que les permita solventarse ante una eventualidad o crisis?</div>
+                    <div class="card-header bg-primary text-white">25. ¿Tu núcleo familiar cuenta con algún patrimonio que les permita solventarse ante una eventualidad o crisis?</div>
                     <div class="card-body">
                         <select class="form-select" name="patrimonio" required>
                             <option value="">Seleccione...</option>
                             <option value="1" {{ old('patrimonio', $registro->patrimonio ?? '') == 1 ? 'selected' : '' }}>Sí</option>
-                            <option value="2" {{ old('patrimonio', $registro->patrimonio ?? '') == 2 ? 'selected' : '' }}>No</option>
-                            <option value="44" {{ old('patrimonio', $registro->patrimonio ?? '') == 44 ? 'selected' : '' }}>No sabe</option>
+                            <option value="0" {{ old('patrimonio', $registro->patrimonio ?? '') == 0 ? 'selected' : '' }}>No</option>
+                            <option value="145" {{ old('patrimonio', $registro->patrimonio ?? '') == 145 ? 'selected' : '' }}>No sabe</option>
                         </select>
                     </div>
                 </div>
+
+                <!-- Pregunta 26 -->
+                <div class="card mb-4 shadow-sm">
+                    <div class="card-header bg-primary text-white">26. Si la respuesta anterior es afirmativa, ¿Por cuánto tiempo dispondrías de ese patrimonio para solventar una eventualidad o crisis?</div>
+                    <div class="card-body">
+                        <select class="form-select" name="tiempo_patrimonio_crisis" required>
+                            <option value="">Seleccione...</option>
+                            <option value="172" {{ old('tiempo_patrimonio_crisis', $registro->tiempo_patrimonio_crisis ?? '') == 172 ? 'selected' : '' }}>Tres meses o menos</option>
+                            <option value="173" {{ old('tiempo_patrimonio_crisis', $registro->tiempo_patrimonio_crisis ?? '') == 173 ? 'selected' : '' }}>Seis meses</option>
+                            <option value="174" {{ old('tiempo_patrimonio_crisis', $registro->tiempo_patrimonio_crisis ?? '') == 174 ? 'selected' : '' }}>Un año</option>
+                            <option value="175" {{ old('tiempo_patrimonio_crisis', $registro->tiempo_patrimonio_crisis ?? '') == 175 ? 'selected' : '' }}>Más de un año</option>
+                        </select>
+                        
+                    </div>
+                </div>
+
                 <div class="mt-4 text-end">
                     <a href="{{ route('form.show', ['block' => 2, 'tipo_documento' => $tipo_documento, 'numero_documento' => $numero_documento]) }}" class="btn btn-secondary btn-lg me-2">
                         <i class="bi bi-arrow-left-circle"></i> Anterior
@@ -220,7 +219,7 @@ document.addEventListener('DOMContentLoaded', function() {
             Swal.fire({
                 icon: 'warning',
                 title: 'Campo obligatorio',
-                text: 'Debes seleccionar al menos una opción en: 20. ¿Cuál es la principal fuente de ingresos de tu núcleo familiar?',
+                text: 'Debes seleccionar al menos una opción en: 20. ¿Cuáles son las fuentes de ingreso de tu núcleo familiar?',
                 confirmButtonText: 'OK',
                 allowOutsideClick: false,
                 allowEscapeKey: true,
