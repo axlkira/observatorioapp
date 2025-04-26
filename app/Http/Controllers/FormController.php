@@ -100,12 +100,32 @@ class FormController extends Controller
         }
         // Normalización dinámica de bloque 3 (todo select, no switches)
         if ($block == 3) {
-            // Todos los campos ya vienen del select, solo aseguramos que existan
+            // Pregunta 20: múltiples fuentes de ingreso
             $fields = [
-                'fuente_ingreso', 'ingreso_fijo', 'equilibrio_vida_laboral', 'interfiere_cuidado', 'trabajos_domesticos_impiden', 'medio_obtencion_alimentos', 'patrimonio'
+                'fuente_empleo_formal',
+                'fuente_empleo_informal',
+                'fuente_independiente',
+                'fuente_apoyo_familia_amigos',
+                'fuente_pension',
+                'fuente_subsidios_gobierno',
+                'fuente_ninguna',
+                'ingreso_fijo',
+                'equilibrio_vida_laboral',
+                'interfiere_cuidado',
+                'trabajos_domesticos_impiden',
+                'medio_obtencion_alimentos',
+                'patrimonio',
+                'tiempo_patrimonio_crisis'
             ];
             foreach ($fields as $field) {
-                $data[$field] = $request->input($field, null);
+                // Para los switches (checkbox): 1=Sí, 2=No
+                if (in_array($field, [
+                    'fuente_empleo_formal', 'fuente_empleo_informal', 'fuente_independiente',
+                    'fuente_apoyo_familia_amigos', 'fuente_pension', 'fuente_subsidios_gobierno', 'fuente_ninguna'])) {
+                    $data[$field] = $request->has($field) ? 1 : 2;
+                } else {
+                    $data[$field] = $request->input($field, null);
+                }
             }
         } elseif ($block == 4) {
             $fields = [
@@ -235,20 +255,31 @@ class FormController extends Controller
                 return back()->withErrors(['max_opciones' => 'Solo puede seleccionar hasta 5 derechos.'])->withInput();
             }
         } elseif ($block == 1) {
-            // Preguntas de respuesta múltiple en bloque 1
-            $checkboxCampos = [
-                // Pregunta 4
-                'orientacion_lesbiana', 'orientacion_gay', 'orientacion_bisexual', 'orientacion_pansexual',
-                'orientacion_asexual', 'orientacion_otra', 'orientacion_prefiere_no_responder', 'orientacion_no_aplica',
-                // Pregunta 5
-                'grupo_primera_infancia', 'grupo_jovenes', 'grupo_adultos', 'grupo_adultos_mayores',
-                // Pregunta 6
-                'hecho_homicidio', 'hecho_desaparicion', 'hecho_confinamiento', 'hecho_desplazamiento',
-                'hecho_tortura', 'hecho_amenaza', 'hecho_otro', 'hecho_no_aplica',
+            // Hechos victimizantes (opción múltiple)
+            $victimizantes = [
+                'hecho_homicidio',
+                'hecho_desaparicion',
+                'hecho_confinamiento',
+                'hecho_desplazamiento',
+                'hecho_tortura',
+                'hecho_amenaza',
+                'hecho_despojo',
+                'hecho_secuestro',
+                'hecho_vinculacion',
+                'hecho_perdida_bienes',
+                'hecho_minas',
+                'hecho_lesiones_psicologicas',
+                'hecho_lesiones_fisicas',
+                'hecho_s4ecuestro',
+                'hecho_terrorismo',
+                'hecho_delitos_sexuales',
+                'hecho_otro',
+                'hecho_no_aplica',
             ];
-            foreach ($checkboxCampos as $campo) {
-                $data[$campo] = $request->has($campo) ? 1 : 2;
+            foreach ($victimizantes as $campo) {
+                $data[$campo] = $request->has($campo) ? 1 : 0;
             }
+            $data['hecho_otro_cual'] = $request->input('hecho_otro_cual');
         } else {
             // --- Normalizar campos de selección múltiple a 1 o 0 (según checkboxes) ---
             // Orientación sexual
@@ -259,13 +290,11 @@ class FormController extends Controller
             foreach ($orientaciones as $campo) {
                 $data[$campo] = $request->has($campo) ? 1 : 0;
             }
-            // Grupos etarios
-            $grupos = [
-                'grupo_primera_infancia', 'grupo_jovenes', 'grupo_adultos', 'grupo_adultos_mayores'
-            ];
-            foreach ($grupos as $campo) {
-                $data[$campo] = $request->has($campo) ? 1 : 0;
-            }
+            // Grupos etarios (chequear por nombre real en DB)
+            $data['grupo_primera_infancia'] = $request->has('grupo_primera_infancia') ? 1 : 0;
+            $data['grupo_jovenes'] = $request->has('grupo_jovenes') ? 1 : 0;
+            $data['grupo_adultos'] = $request->has('grupo_adultos') ? 1 : 0;
+            $data['grupo_adultos_mayores'] = $request->has('grupo_adultos_mayores') ? 1 : 0;
             // Hechos victimizantes
             $hechos = [
                 'hecho_homicidio', 'hecho_desaparicion', 'hecho_confinamiento', 'hecho_desplazamiento',
@@ -299,6 +328,16 @@ class FormController extends Controller
                 'profesional_documento' => 'required',
                 'orientacion_otra_cual' => ($request->has('orientacion_otra') && !$request->has('orientacion_no_aplica')) ? 'required' : 'nullable',
                 'hecho_otro_cual' => ($request->has('hecho_otro') && !$request->has('hecho_no_aplica')) ? 'required' : 'nullable',
+            ]);
+            if ($validator->fails()) {
+                return back()->withErrors($validator)->withInput();
+            }
+        }
+        if ($block == 1) {
+            $validator = Validator::make($request->all(), [
+                'comuna_nucleo_familiar' => 'required',
+                'estrato_nucleo_familiar' => 'required',
+                // Agrega aquí otras reglas existentes si las hay
             ]);
             if ($validator->fails()) {
                 return back()->withErrors($validator)->withInput();

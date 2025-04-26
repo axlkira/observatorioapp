@@ -31,15 +31,75 @@
                 <div class="card mb-4 shadow-sm">
                     <div class="card-header bg-primary text-white">20. ¿Cuál es la principal fuente de ingresos de tu núcleo familiar?</div>
                     <div class="card-body">
-                        <select class="form-select" name="fuente_ingreso" required>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input" type="checkbox" name="fuente_empleo_formal" id="fuente_empleo_formal" value="1" {{ old('fuente_empleo_formal', $registro->fuente_empleo_formal ?? 2) == 1 ? 'checked' : '' }}>
+                                    <label class="form-check-label" for="fuente_empleo_formal">Empleo formal</label>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input" type="checkbox" name="fuente_empleo_informal" id="fuente_empleo_informal" value="1" {{ old('fuente_empleo_informal', $registro->fuente_empleo_informal ?? 2) == 1 ? 'checked' : '' }}>
+                                    <label class="form-check-label" for="fuente_empleo_informal">Empleo informal</label>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input" type="checkbox" name="fuente_independiente" id="fuente_independiente" value="1" {{ old('fuente_independiente', $registro->fuente_independiente ?? 2) == 1 ? 'checked' : '' }}>
+                                    <label class="form-check-label" for="fuente_independiente">Independiente</label>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input" type="checkbox" name="fuente_apoyo_familia_amigos" id="fuente_apoyo_familia_amigos" value="1" {{ old('fuente_apoyo_familia_amigos', $registro->fuente_apoyo_familia_amigos ?? 2) == 1 ? 'checked' : '' }}>
+                                    <label class="form-check-label" for="fuente_apoyo_familia_amigos">Apoyo de familiares y amigos</label>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input" type="checkbox" name="fuente_pension" id="fuente_pension" value="1" {{ old('fuente_pension', $registro->fuente_pension ?? 2) == 1 ? 'checked' : '' }}>
+                                    <label class="form-check-label" for="fuente_pension">Pensión</label>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input" type="checkbox" name="fuente_subsidios_gobierno" id="fuente_subsidios_gobierno" value="1" {{ old('fuente_subsidios_gobierno', $registro->fuente_subsidios_gobierno ?? 2) == 1 ? 'checked' : '' }}>
+                                    <label class="form-check-label" for="fuente_subsidios_gobierno">Subsidios del gobierno</label>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input" type="checkbox" name="fuente_ninguna" id="fuente_ninguna" value="1" {{ old('fuente_ninguna', $registro->fuente_ninguna ?? 2) == 1 ? 'checked' : '' }}>
+                                    <label class="form-check-label" for="fuente_ninguna">Ninguna</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Pregunta 22 -->
+                <div class="card mb-4 shadow-sm">
+                    <div class="card-header bg-primary text-white">21. ¿Considera que los integrantes de tu núcleo familiar tienen un equilibrio entre la vida laboral y familiar para compartir o tener espacios de recreación?</div>
+                    <div class="card-body">
+                        <select class="form-select" name="equilibrio_vida_laboral" required>
                             <option value="">Seleccione...</option>
-                            <option value="118" {{ old('fuente_ingreso', $registro->fuente_ingreso ?? '') == 118 ? 'selected' : '' }}>Empleo formal</option>
-                            <option value="119" {{ old('fuente_ingreso', $registro->fuente_ingreso ?? '') == 119 ? 'selected' : '' }}>Empleo informal</option>
-                            <option value="120" {{ old('fuente_ingreso', $registro->fuente_ingreso ?? '') == 120 ? 'selected' : '' }}>Independiente</option>
-                            <option value="121" {{ old('fuente_ingreso', $registro->fuente_ingreso ?? '') == 121 ? 'selected' : '' }}>Apoyo de familiares y amigos</option>
-                            <option value="122" {{ old('fuente_ingreso', $registro->fuente_ingreso ?? '') == 122 ? 'selected' : '' }}>Pensión</option>
-                            <option value="123" {{ old('fuente_ingreso', $registro->fuente_ingreso ?? '') == 123 ? 'selected' : '' }}>Subsidios del gobierno</option>
-                            <option value="124" {{ old('fuente_ingreso', $registro->fuente_ingreso ?? '') == 124 ? 'selected' : '' }}>Ninguna</option>
+                            <option value="1" {{ old('equilibrio_vida_laboral', $registro->equilibrio_vida_laboral ?? '') == 1 ? 'selected' : '' }}>Sí</option>
+                            <option value="2" {{ old('equilibrio_vida_laboral', $registro->equilibrio_vida_laboral ?? '') == 2 ? 'selected' : '' }}>No</option>
+                            <option value="145" {{ old('equilibrio_vida_laboral', $registro->equilibrio_vida_laboral ?? '') == 145 ? 'selected' : '' }}>No sabe</option>
+                            <option value="59" {{ old('equilibrio_vida_laboral', $registro->equilibrio_vida_laboral ?? '') == 59 ? 'selected' : '' }}>No aplica</option>
+                        </select>
+                    </div>
+                </div>
+                 <!-- Pregunta 23 -->
+                 <div class="card mb-4 shadow-sm">
+                    <div class="card-header bg-primary text-white">23. ¿El trabajo interfiere en la capacidad de cuidar a los niños/as, adultos mayores o personas con discapacidad de tu núcleo familiar?</div>
+                    <div class="card-body">
+                        <select class="form-select" name="interfiere_cuidado" required>
+                            <option value="">Seleccione...</option>
+                            <option value="1" {{ old('interfiere_cuidado', $registro->interfiere_cuidado ?? '') == 1 ? 'selected' : '' }}>Sí</option>
+                            <option value="2" {{ old('interfiere_cuidado', $registro->interfiere_cuidado ?? '') == 2 ? 'selected' : '' }}>No</option>
+                            <option value="128" {{ old('interfiere_cuidado', $registro->interfiere_cuidado ?? '') == 128 ? 'selected' : '' }}>No sabe</option>
+                            <option value="161" {{ old('interfiere_cuidado', $registro->interfiere_cuidado ?? '') == 161 ? 'selected' : '' }}>No tenemos personas que requieran cuidado</option>
                         </select>
                     </div>
                 </div>
@@ -56,32 +116,9 @@
                         </select>
                     </div>
                 </div>
-                <!-- Pregunta 22 -->
-                <div class="card mb-4 shadow-sm">
-                    <div class="card-header bg-primary text-white">22. ¿Considera que los integrantes de tu núcleo familiar tienen un equilibrio entre la vida laboral y familiar para compartir o tener espacios de recreación?</div>
-                    <div class="card-body">
-                        <select class="form-select" name="equilibrio_vida_laboral" required>
-                            <option value="">Seleccione...</option>
-                            <option value="1" {{ old('equilibrio_vida_laboral', $registro->equilibrio_vida_laboral ?? '') == 1 ? 'selected' : '' }}>Sí</option>
-                            <option value="2" {{ old('equilibrio_vida_laboral', $registro->equilibrio_vida_laboral ?? '') == 2 ? 'selected' : '' }}>No</option>
-                            <option value="44" {{ old('equilibrio_vida_laboral', $registro->equilibrio_vida_laboral ?? '') == 44 ? 'selected' : '' }}>No sabe</option>
-                        </select>
-                    </div>
-                </div>
-                <!-- Pregunta 23 -->
-                <div class="card mb-4 shadow-sm">
-                    <div class="card-header bg-primary text-white">23. ¿El trabajo interfiere en la capacidad de cuidar a los niños/as, adultos mayores o personas con discapacidad de tu núcleo familiar?</div>
-                    <div class="card-body">
-                        <select class="form-select" name="interfiere_cuidado" required>
-                            <option value="">Seleccione...</option>
-                            <option value="1" {{ old('interfiere_cuidado', $registro->interfiere_cuidado ?? '') == 1 ? 'selected' : '' }}>Sí</option>
-                            <option value="2" {{ old('interfiere_cuidado', $registro->interfiere_cuidado ?? '') == 2 ? 'selected' : '' }}>No</option>
-                            <option value="128" {{ old('interfiere_cuidado', $registro->interfiere_cuidado ?? '') == 128 ? 'selected' : '' }}>No tenemos personas que requieran cuidado</option>
-                        </select>
-                    </div>
-                </div>
-                <!-- Pregunta 24 -->
-                <div class="card mb-4 shadow-sm">
+
+                 <!-- Pregunta 24 -->
+                 <div class="card mb-4 shadow-sm">
                     <div class="card-header bg-primary text-white">24. ¿Los trabajos de cuidado y domésticos le impiden acceder a tu familia a trabajos remunerados?</div>
                     <div class="card-body">
                         <select class="form-select" name="trabajos_domesticos_impiden" required>
@@ -94,6 +131,8 @@
                         </select>
                     </div>
                 </div>
+               
+               
                 <!-- Pregunta 25 -->
                 <div class="card mb-4 shadow-sm">
                     <div class="card-header bg-primary text-white">25. ¿Cuál es el principal medio a través del cual tu núcleo familiar obtiene los alimentos?</div>
@@ -160,17 +199,66 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     @endif
 
-    // Spinner y deshabilitar botón al guardar
+    // Validación: al menos una fuente de ingreso seleccionada
     const form = document.getElementById('bloque3Form');
-    if (form) {
-        form.addEventListener('submit', function(e) {
+    form.addEventListener('submit', function(e) {
+        let checks = [
+            'fuente_empleo_formal',
+            'fuente_empleo_informal',
+            'fuente_independiente',
+            'fuente_apoyo_familia_amigos',
+            'fuente_pension',
+            'fuente_subsidios_gobierno',
+            'fuente_ninguna'
+        ];
+        let checkedCount = 0;
+        for (let id of checks) {
+            if (document.getElementById(id).checked) checkedCount++;
+        }
+        if (checkedCount === 0) {
+            e.preventDefault();
             Swal.fire({
-                title: 'Guardando...',
+                icon: 'warning',
+                title: 'Campo obligatorio',
+                text: 'Debes seleccionar al menos una opción en: 20. ¿Cuál es la principal fuente de ingresos de tu núcleo familiar?',
+                confirmButtonText: 'OK',
                 allowOutsideClick: false,
-                didOpen: () => { Swal.showLoading(); }
+                allowEscapeKey: true,
+                showConfirmButton: true,
+                showCancelButton: false,
+                showLoaderOnConfirm: false
             });
+            return false;
+        }
+        // Si la validación pasa, mostrar spinner
+        Swal.fire({
+            title: 'Guardando...',
+            allowOutsideClick: false,
+            didOpen: () => { Swal.showLoading(); }
+        });
+    });
+
+    // Lógica: Si seleccionan "Ninguna", desmarcar las demás y viceversa
+    let ninguna = document.getElementById('fuente_ninguna');
+    let otros = [
+        'fuente_empleo_formal',
+        'fuente_empleo_informal',
+        'fuente_independiente',
+        'fuente_apoyo_familia_amigos',
+        'fuente_pension',
+        'fuente_subsidios_gobierno'
+    ];
+    ninguna.addEventListener('change', function() {
+        if (ninguna.checked) {
+            for (let id of otros) document.getElementById(id).checked = false;
+        }
+    });
+    for (let id of otros) {
+        document.getElementById(id).addEventListener('change', function() {
+            if (this.checked) ninguna.checked = false;
         });
     }
+
     // Lógica para el botón Siguiente
     const btnSiguiente = document.getElementById('btnSiguienteBloque4');
     @if(isset($registro))

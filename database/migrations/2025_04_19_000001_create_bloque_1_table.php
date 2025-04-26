@@ -44,7 +44,7 @@ return new class extends Migration {
             $table->string('hecho_otro_cual', 128)->nullable();
             $table->tinyInteger('hecho_no_aplica')->nullable();
 
-            $table->tinyInteger('desplazado_conflicto')->nullable();
+            // Eliminar campo desplazado_conflicto
             $table->tinyInteger('nivel_educativo')->nullable();
             $table->tinyInteger('personas_nucleo')->nullable();
             $table->tinyInteger('config_familiar')->nullable();

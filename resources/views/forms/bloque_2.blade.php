@@ -28,7 +28,7 @@
                         <input type="hidden" name="es_actualizacion" value="1">
                     @endif
                     <div class="card mb-4">
-                        <div class="card-header bg-primary text-white">15. ¿Alguien de tu núcleo familiar ha sido víctima de algún tipo de las siguientes violencias al interior del hogar?</div>
+                        <div class="card-header bg-primary text-white">17. ¿Alguien de tu núcleo familiar ha sido víctima de algún tipo de las siguientes violencias al interior del hogar?</div>
                         <div class="card-body">
                             @php $violencia_requerida = !isset($registro); @endphp
                             <div class="form-check form-switch">
@@ -58,75 +58,7 @@
                         </div>
                     </div>
                     <div class="card mb-4">
-                        <div class="card-header bg-primary text-white">16. ¿Consideras que el entorno en el que habita tu núcleo familiar es seguro?</div>
-                        <div class="card-body">
-                            <select class="form-select" name="entorno_seguro" required>
-                                <option value="">Seleccione...</option>
-                                <option value="1" {{ old('entorno_seguro', $registro->entorno_seguro ?? '') == 1 ? 'selected' : '' }}>Sí</option>
-                                <option value="2" {{ old('entorno_seguro', $registro->entorno_seguro ?? '') == 2 ? 'selected' : '' }}>No</option>
-                                <option value="92" {{ old('entorno_seguro', $registro->entorno_seguro ?? '') == 92 ? 'selected' : '' }}>No responde</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="card mb-4">
-                        <div class="card-header bg-primary text-white">17. En tu núcleo familiar han sido discriminados en razón de:</div>
-                        <div class="card-body">
-                            <div class="form-check form-switch">
-                                <input class="form-check-input discriminacion-multiple" type="checkbox" name="discriminacion_sexo" id="discriminacion_sexo" value="1" {{ old('discriminacion_sexo', $registro->discriminacion_sexo ?? 2) == 1 ? 'checked' : '' }}>
-                                <label class="form-check-label" for="discriminacion_sexo">Sexo</label>
-                            </div>
-                            <div class="form-check form-switch">
-                                <input class="form-check-input discriminacion-multiple" type="checkbox" name="discriminacion_genero" id="discriminacion_genero" value="1" {{ old('discriminacion_genero', $registro->discriminacion_genero ?? 2) == 1 ? 'checked' : '' }}>
-                                <label class="form-check-label" for="discriminacion_genero">Identidad de género</label>
-                            </div>
-                            <div class="form-check form-switch">
-                                <input class="form-check-input discriminacion-multiple" type="checkbox" name="discriminacion_etnia" id="discriminacion_etnia" value="1" {{ old('discriminacion_etnia', $registro->discriminacion_etnia ?? 2) == 1 ? 'checked' : '' }}>
-                                <label class="form-check-label" for="discriminacion_etnia">Etnia</label>
-                            </div>
-                            <div class="form-check form-switch">
-                                <input class="form-check-input discriminacion-multiple" type="checkbox" name="discriminacion_nacionalidad" id="discriminacion_nacionalidad" value="1" {{ old('discriminacion_nacionalidad', $registro->discriminacion_nacionalidad ?? 2) == 1 ? 'checked' : '' }}>
-                                <label class="form-check-label" for="discriminacion_nacionalidad">Nacionalidad</label>
-                            </div>
-                            <div class="form-check form-switch">
-                                <input class="form-check-input discriminacion-multiple" type="checkbox" name="discriminacion_estrato" id="discriminacion_estrato" value="1" {{ old('discriminacion_estrato', $registro->discriminacion_estrato ?? 2) == 1 ? 'checked' : '' }}>
-                                <label class="form-check-label" for="discriminacion_estrato">Estrato</label>
-                            </div>
-                            <div class="form-check form-switch">
-                                <input class="form-check-input discriminacion-multiple" type="checkbox" name="discriminacion_edad" id="discriminacion_edad" value="1" {{ old('discriminacion_edad', $registro->discriminacion_edad ?? 2) == 1 ? 'checked' : '' }}>
-                                <label class="form-check-label" for="discriminacion_edad">Edad</label>
-                            </div>
-                            <div class="form-check form-switch">
-                                <input class="form-check-input discriminacion-multiple" type="checkbox" name="discriminacion_religion" id="discriminacion_religion" value="1" {{ old('discriminacion_religion', $registro->discriminacion_religion ?? 2) == 1 ? 'checked' : '' }}>
-                                <label class="form-check-label" for="discriminacion_religion">Religión</label>
-                            </div>
-                            <div class="form-check form-switch">
-                                <input class="form-check-input discriminacion-multiple" type="checkbox" name="discriminacion_discapacidad" id="discriminacion_discapacidad" value="1" {{ old('discriminacion_discapacidad', $registro->discriminacion_discapacidad ?? 2) == 1 ? 'checked' : '' }}>
-                                <label class="form-check-label" for="discriminacion_discapacidad">Discapacidad</label>
-                            </div>
-                            <div class="form-check form-switch">
-                                <input class="form-check-input discriminacion-multiple" type="checkbox" name="discriminacion_otros" id="discriminacion_otros" value="1" {{ old('discriminacion_otros', $registro->discriminacion_otros ?? 2) == 1 ? 'checked' : '' }}>
-                                <label class="form-check-label" for="discriminacion_otros">Otros</label>
-                            </div>
-                            <div class="form-check form-switch">
-                                <input class="form-check-input discriminacion-multiple" type="checkbox" name="discriminacion_no_hemos" id="discriminacion_no_hemos" value="1" {{ old('discriminacion_no_hemos', $registro->discriminacion_no_hemos ?? 2) == 1 ? 'checked' : '' }}>
-                                <label class="form-check-label" for="discriminacion_no_hemos">No hemos sido discriminados</label>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card mb-4">
-                        <div class="card-header bg-primary text-white">18. ¿Con qué frecuencia en tu núcleo familiar dedican tiempo a compartir actividades juntos?</div>
-                        <div class="card-body">
-                            <select class="form-select" name="frecuencia_compartir" required>
-                                <option value="">Seleccione...</option>
-                                <option value="103" {{ old('frecuencia_compartir', $registro->frecuencia_compartir ?? '') == 103 ? 'selected' : '' }}>Muy frecuentemente</option>
-                                <option value="104" {{ old('frecuencia_compartir', $registro->frecuencia_compartir ?? '') == 104 ? 'selected' : '' }}>Frecuentemente</option>
-                                <option value="105" {{ old('frecuencia_compartir', $registro->frecuencia_compartir ?? '') == 105 ? 'selected' : '' }}>Con poca frecuencia</option>
-                                <option value="106" {{ old('frecuencia_compartir', $registro->frecuencia_compartir ?? '') == 106 ? 'selected' : '' }}>Nunca</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="card mb-4">
-                        <div class="card-header bg-primary text-white">19. En algún momento en tu familia han acudido a alguna de las siguientes instituciones por razón de violencia intrafamiliar:</div>
+                        <div class="card-header bg-primary text-white">18. En algún momento en tu familia han acudido a alguna de las siguientes instituciones por razón de violencia intrafamiliar:</div>
                         <div class="card-body">
                             @php $institucion_requerida = !isset($registro); @endphp
                             <div class="form-check form-switch">
@@ -169,9 +101,54 @@
                                 <input class="form-check-input institucion-multiple" type="checkbox" name="institucion_centros_integrales" id="institucion_centros_integrales" value="1" {{ old('institucion_centros_integrales', $registro->institucion_centros_integrales ?? 2) == 1 ? 'checked' : '' }}>
                                 <label class="form-check-label" for="institucion_centros_integrales">Centros Integrales para la Familia</label>
                             </div>
+                        </div>
+                    </div>
+                    <div class="card mb-4">
+                        <div class="card-header bg-primary text-white">19. En tu núcleo familiar han sido discriminados en razón de:</div>
+                        <div class="card-body">
                             <div class="form-check form-switch">
-                                <input class="form-check-input institucion-multiple" type="checkbox" name="institucion_no_hemos_asistido" id="institucion_no_hemos_asistido" value="1" {{ old('institucion_no_hemos_asistido', $registro->institucion_no_hemos_asistido ?? 2) == 1 ? 'checked' : '' }}>
-                                <label class="form-check-label" for="institucion_no_hemos_asistido">No hemos asistido</label>
+                                <input class="form-check-input discriminacion-multiple" type="checkbox" name="discriminacion_sexo" id="discriminacion_sexo" value="1" {{ old('discriminacion_sexo', $registro->discriminacion_sexo ?? 2) == 1 ? 'checked' : '' }}>
+                                <label class="form-check-label" for="discriminacion_sexo">Sexo</label>
+                            </div>
+                            <div class="form-check form-switch">
+                                <input class="form-check-input discriminacion-multiple" type="checkbox" name="discriminacion_genero" id="discriminacion_genero" value="1" {{ old('discriminacion_genero', $registro->discriminacion_genero ?? 2) == 1 ? 'checked' : '' }}>
+                                <label class="form-check-label" for="discriminacion_genero">Identidad de género</label>
+                            </div>
+                            <div class="form-check form-switch">
+                                <input class="form-check-input discriminacion-multiple" type="checkbox" name="discriminacion_etnia" id="discriminacion_etnia" value="1" {{ old('discriminacion_etnia', $registro->discriminacion_etnia ?? 2) == 1 ? 'checked' : '' }}>
+                                <label class="form-check-label" for="discriminacion_etnia">Etnia</label>
+                            </div>
+                            <div class="form-check form-switch">
+                                <input class="form-check-input discriminacion-multiple" type="checkbox" name="discriminacion_nacionalidad" id="discriminacion_nacionalidad" value="1" {{ old('discriminacion_nacionalidad', $registro->discriminacion_nacionalidad ?? 2) == 1 ? 'checked' : '' }}>
+                                <label class="form-check-label" for="discriminacion_nacionalidad">Nacionalidad</label>
+                            </div>
+                            <div class="form-check form-switch">
+                                <input class="form-check-input discriminacion-multiple" type="checkbox" name="discriminacion_estrato" id="discriminacion_estrato" value="1" {{ old('discriminacion_estrato', $registro->discriminacion_estrato ?? 2) == 1 ? 'checked' : '' }}>
+                                <label class="form-check-label" for="discriminacion_estrato">Estrato</label>
+                            </div>
+                            <div class="form-check form-switch">
+                                <input class="form-check-input discriminacion-multiple" type="checkbox" name="discriminacion_edad" id="discriminacion_edad" value="1" {{ old('discriminacion_edad', $registro->discriminacion_edad ?? 2) == 1 ? 'checked' : '' }}>
+                                <label class="form-check-label" for="discriminacion_edad">Edad</label>
+                            </div>
+                            <div class="form-check form-switch">
+                                <input class="form-check-input discriminacion-multiple" type="checkbox" name="discriminacion_religion" id="discriminacion_religion" value="1" {{ old('discriminacion_religion', $registro->discriminacion_religion ?? 2) == 1 ? 'checked' : '' }}>
+                                <label class="form-check-label" for="discriminacion_religion">Religión</label>
+                            </div>
+                            <div class="form-check form-switch">
+                                <input class="form-check-input discriminacion-multiple" type="checkbox" name="discriminacion_discapacidad" id="discriminacion_discapacidad" value="1" {{ old('discriminacion_discapacidad', $registro->discriminacion_discapacidad ?? 2) == 1 ? 'checked' : '' }}>
+                                <label class="form-check-label" for="discriminacion_discapacidad">Discapacidad</label>
+                            </div>
+                            <div class="form-check form-switch">
+                                <input class="form-check-input discriminacion-multiple" type="checkbox" name="discriminacion_otros" id="discriminacion_otros" value="1" {{ old('discriminacion_otros', $registro->discriminacion_otros ?? 2) == 1 ? 'checked' : '' }}>
+                                <label class="form-check-label" for="discriminacion_otros">Otros</label>
+                            </div>
+                            <div class="form-check form-switch">
+                                <input class="form-check-input discriminacion-multiple" type="checkbox" name="discriminacion_no_hemos" id="discriminacion_no_hemos" value="1" {{ old('discriminacion_no_hemos', $registro->discriminacion_no_hemos ?? 2) == 1 ? 'checked' : '' }}>
+                                <label class="form-check-label" for="discriminacion_no_hemos">No hemos sido discriminados</label>
+                            </div>
+                            <div class="form-check form-switch">
+                                <input class="form-check-input discriminacion-multiple" type="checkbox" name="discriminacion_no_sabe" id="discriminacion_no_sabe" value="1" {{ old('discriminacion_no_sabe', $registro->discriminacion_no_sabe ?? 2) == 1 ? 'checked' : '' }}>
+                                <label class="form-check-label" for="discriminacion_no_sabe">No sabe</label>
                             </div>
                         </div>
                     </div>
@@ -245,9 +222,9 @@ document.addEventListener('DOMContentLoaded', function() {
         }
         // Validar selección múltiple: al menos uno marcado
         const grupos = [
-            {name: 'violencia', className: 'violencia-multiple', label: '15. ¿Alguien ha sido víctima de violencia?', ninguna: 'violencia_ninguna'},
-            {name: 'discriminacion', className: 'discriminacion-multiple', label: '17. ¿Han sido discriminados?', ninguna: 'discriminacion_no_hemos'},
-            {name: 'institucion', className: 'institucion-multiple', label: '19. ¿Han acudido a instituciones por violencia?', ninguna: 'institucion_no_hemos_asistido'}
+            {name: 'violencia', className: 'violencia-multiple', label: '17. ¿Alguien ha sido víctima de violencia?', ninguna: 'violencia_ninguna'},
+            {name: 'discriminacion', className: 'discriminacion-multiple', label: '19. ¿Han sido discriminados?', ninguna: 'discriminacion_no_hemos'},
+            {name: 'institucion', className: 'institucion-multiple', label: '18. ¿Han acudido a instituciones por violencia?', ninguna: ''}
         ];
         for(let grupo of grupos) {
             let checks = this.querySelectorAll(`input[type=checkbox].${grupo.className}`);
@@ -318,7 +295,6 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     exclusividadCheckboxes('violencia-multiple', 'violencia_ninguna');
     exclusividadCheckboxes('discriminacion-multiple', 'discriminacion_no_hemos');
-    exclusividadCheckboxes('institucion-multiple', 'institucion_no_hemos_asistido');
 });
 </script>
 @endsection
