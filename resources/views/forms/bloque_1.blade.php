@@ -238,7 +238,7 @@
                     <div class="card-body">
                     <div class="mb-3">
                             <label class="form-label">¿Algún miembro del núcleo familiar ha sido víctima del conflicto armado y/o social en Colombia?</label>
-                            <select class="form-select" name="victima_conflicto">
+                            <select class="form-select" name="victima_conflicto" id="victima_conflicto" required>
                                 <option value="">Seleccione...</option>
                                 <option value="1" {{ old('victima_conflicto', isset($registro) ? $registro->victima_conflicto : '') == '1' ? 'selected' : '' }}>Sí</option>
                                 <option value="2" {{ old('victima_conflicto', isset($registro) ? $registro->victima_conflicto : '') == '2' ? 'selected' : '' }}>No</option>
@@ -246,29 +246,29 @@
                             </select>
                             @error('victima_conflicto')<div class="text-danger small">{{ $message }}</div>@enderror
                         </div>
-                        <div class="mb-3">
-                            <label class="form-label">¿Cuáles han sido los hechos victimizantes? (Seleccione todas las que apliquen)</label>
+                        <div class="mb-3" id="hechosVictimizantesSection" style="display:none;">
+                            <label class="form-label">¿Cuáles han sido los hechos victimizantes? (Seleccione todas las que apliquen)<span class="text-danger" id="hechosRequiredMark" style="display:none;"> *</span></label>
                             <div class="row">
-                                <div class="col-md-4"><div class="form-check form-switch"><input class="form-check-input" type="checkbox" name="hecho_homicidio" id="hecho_homicidio" value="1" {{ old('hecho_homicidio', isset($registro) ? $registro->hecho_homicidio : '') == 1 ? 'checked' : '' }}><label class="form-check-label" for="hecho_homicidio">Homicidio</label></div></div>
-                                <div class="col-md-4"><div class="form-check form-switch"><input class="form-check-input" type="checkbox" name="hecho_desaparicion" id="hecho_desaparicion" value="1" {{ old('hecho_desaparicion', isset($registro) ? $registro->hecho_desaparicion : '') == 1 ? 'checked' : '' }}><label class="form-check-label" for="hecho_desaparicion">Desaparición forzada</label></div></div>
-                                <div class="col-md-4"><div class="form-check form-switch"><input class="form-check-input" type="checkbox" name="hecho_confinamiento" id="hecho_confinamiento" value="1" {{ old('hecho_confinamiento', isset($registro) ? $registro->hecho_confinamiento : '') == 1 ? 'checked' : '' }}><label class="form-check-label" for="hecho_confinamiento">Confinamiento</label></div></div>
-                                <div class="col-md-4"><div class="form-check form-switch"><input class="form-check-input" type="checkbox" name="hecho_desplazamiento" id="hecho_desplazamiento" value="1" {{ old('hecho_desplazamiento', isset($registro) ? $registro->hecho_desplazamiento : '') == 1 ? 'checked' : '' }}><label class="form-check-label" for="hecho_desplazamiento">Desplazamiento forzado</label></div></div>
-                                <div class="col-md-4"><div class="form-check form-switch"><input class="form-check-input" type="checkbox" name="hecho_tortura" id="hecho_tortura" value="1" {{ old('hecho_tortura', isset($registro) ? $registro->hecho_tortura : '') == 1 ? 'checked' : '' }}><label class="form-check-label" for="hecho_tortura">Tortura</label></div></div>
-                                <div class="col-md-4"><div class="form-check form-switch"><input class="form-check-input" type="checkbox" name="hecho_amenaza" id="hecho_amenaza" value="1" {{ old('hecho_amenaza', isset($registro) ? $registro->hecho_amenaza : '') == 1 ? 'checked' : '' }}><label class="form-check-label" for="hecho_amenaza">Amenaza</label></div></div>
-                                <div class="col-md-4"><div class="form-check form-switch"><input class="form-check-input" type="checkbox" name="hecho_despojo" id="hecho_despojo" value="1" {{ old('hecho_despojo', isset($registro) ? $registro->hecho_despojo : '') == 1 ? 'checked' : '' }}><label class="form-check-label" for="hecho_despojo">Despojo forzado y/o abandono forzado de tierras</label></div></div>
-                                <div class="col-md-4"><div class="form-check form-switch"><input class="form-check-input" type="checkbox" name="hecho_secuestro" id="hecho_secuestro" value="1" {{ old('hecho_secuestro', isset($registro) ? $registro->hecho_secuestro : '') == 1 ? 'checked' : '' }}><label class="form-check-label" for="hecho_secuestro">Secuestro</label></div></div>
-                                <div class="col-md-4"><div class="form-check form-switch"><input class="form-check-input" type="checkbox" name="hecho_vinculacion" id="hecho_vinculacion" value="1" {{ old('hecho_vinculacion', isset($registro) ? $registro->hecho_vinculacion : '') == 1 ? 'checked' : '' }}><label class="form-check-label" for="hecho_vinculacion">Vinculación de niños, niñas y adolescentes a actividades relacionadas con grupos armados</label></div></div>
-                                <div class="col-md-4"><div class="form-check form-switch"><input class="form-check-input" type="checkbox" name="hecho_perdida_bienes" id="hecho_perdida_bienes" value="1" {{ old('hecho_perdida_bienes', isset($registro) ? $registro->hecho_perdida_bienes : '') == 1 ? 'checked' : '' }}><label class="form-check-label" for="hecho_perdida_bienes">Pérdida de bienes muebles o inmuebles</label></div></div>
-                                <div class="col-md-4"><div class="form-check form-switch"><input class="form-check-input" type="checkbox" name="hecho_minas" id="hecho_minas" value="1" {{ old('hecho_minas', isset($registro) ? $registro->hecho_minas : '') == 1 ? 'checked' : '' }}><label class="form-check-label" for="hecho_minas">Minas antipersonal, munición sin explotar, artefacto explosivo improvisado</label></div></div>
-                                <div class="col-md-4"><div class="form-check form-switch"><input class="form-check-input" type="checkbox" name="hecho_lesiones_psicologicas" id="hecho_lesiones_psicologicas" value="1" {{ old('hecho_lesiones_psicologicas', isset($registro) ? $registro->hecho_lesiones_psicologicas : '') == 1 ? 'checked' : '' }}><label class="form-check-label" for="hecho_lesiones_psicologicas">Lesiones personales psicológicas</label></div></div>
-                                <div class="col-md-4"><div class="form-check form-switch"><input class="form-check-input" type="checkbox" name="hecho_lesiones_fisicas" id="hecho_lesiones_fisicas" value="1" {{ old('hecho_lesiones_fisicas', isset($registro) ? $registro->hecho_lesiones_fisicas : '') == 1 ? 'checked' : '' }}><label class="form-check-label" for="hecho_lesiones_fisicas">Lesiones personales físicas</label></div></div>
-                                <div class="col-md-4"><div class="form-check form-switch"><input class="form-check-input" type="checkbox" name="hecho_terrorismo" id="hecho_terrorismo" value="1" {{ old('hecho_terrorismo', isset($registro) ? $registro->hecho_terrorismo : '') == 1 ? 'checked' : '' }}><label class="form-check-label" for="hecho_terrorismo">Acto terrorista/ atentados/ combates/ enfrentamientos/ hostigamientos</label></div></div>
-                                <div class="col-md-4"><div class="form-check form-switch"><input class="form-check-input" type="checkbox" name="hecho_delitos_sexuales" id="hecho_delitos_sexuales" value="1" {{ old('hecho_delitos_sexuales', isset($registro) ? $registro->hecho_delitos_sexuales : '') == 1 ? 'checked' : '' }}><label class="form-check-label" for="hecho_delitos_sexuales">Delitos contra la libertad e integridad sexual en el marco del conflicto armado</label></div></div>
-                                <div class="col-md-4"><div class="form-check form-switch"><input class="form-check-input" type="checkbox" name="hecho_otro" id="hecho_otro" value="1" {{ old('hecho_otro', isset($registro) ? $registro->hecho_otro : '') == 1 ? 'checked' : '' }}><label class="form-check-label" for="hecho_otro">Otro</label></div></div>
+                                <div class="col-md-4"><div class="form-check form-switch"><input class="form-check-input hechos-v" type="checkbox" name="hecho_homicidio" id="hecho_homicidio" value="1" {{ old('hecho_homicidio', isset($registro) ? $registro->hecho_homicidio : '') == 1 ? 'checked' : '' }}><label class="form-check-label" for="hecho_homicidio">Homicidio</label></div></div>
+                                <div class="col-md-4"><div class="form-check form-switch"><input class="form-check-input hechos-v" type="checkbox" name="hecho_desaparicion" id="hecho_desaparicion" value="1" {{ old('hecho_desaparicion', isset($registro) ? $registro->hecho_desaparicion : '') == 1 ? 'checked' : '' }}><label class="form-check-label" for="hecho_desaparicion">Desaparición forzada</label></div></div>
+                                <div class="col-md-4"><div class="form-check form-switch"><input class="form-check-input hechos-v" type="checkbox" name="hecho_confinamiento" id="hecho_confinamiento" value="1" {{ old('hecho_confinamiento', isset($registro) ? $registro->hecho_confinamiento : '') == 1 ? 'checked' : '' }}><label class="form-check-label" for="hecho_confinamiento">Confinamiento</label></div></div>
+                                <div class="col-md-4"><div class="form-check form-switch"><input class="form-check-input hechos-v" type="checkbox" name="hecho_desplazamiento" id="hecho_desplazamiento" value="1" {{ old('hecho_desplazamiento', isset($registro) ? $registro->hecho_desplazamiento : '') == 1 ? 'checked' : '' }}><label class="form-check-label" for="hecho_desplazamiento">Desplazamiento forzado</label></div></div>
+                                <div class="col-md-4"><div class="form-check form-switch"><input class="form-check-input hechos-v" type="checkbox" name="hecho_tortura" id="hecho_tortura" value="1" {{ old('hecho_tortura', isset($registro) ? $registro->hecho_tortura : '') == 1 ? 'checked' : '' }}><label class="form-check-label" for="hecho_tortura">Tortura</label></div></div>
+                                <div class="col-md-4"><div class="form-check form-switch"><input class="form-check-input hechos-v" type="checkbox" name="hecho_amenaza" id="hecho_amenaza" value="1" {{ old('hecho_amenaza', isset($registro) ? $registro->hecho_amenaza : '') == 1 ? 'checked' : '' }}><label class="form-check-label" for="hecho_amenaza">Amenaza</label></div></div>
+                                <div class="col-md-4"><div class="form-check form-switch"><input class="form-check-input hechos-v" type="checkbox" name="hecho_despojo" id="hecho_despojo" value="1" {{ old('hecho_despojo', isset($registro) ? $registro->hecho_despojo : '') == 1 ? 'checked' : '' }}><label class="form-check-label" for="hecho_despojo">Despojo forzado y/o abandono forzado de tierras</label></div></div>
+                                <div class="col-md-4"><div class="form-check form-switch"><input class="form-check-input hechos-v" type="checkbox" name="hecho_secuestro" id="hecho_secuestro" value="1" {{ old('hecho_secuestro', isset($registro) ? $registro->hecho_secuestro : '') == 1 ? 'checked' : '' }}><label class="form-check-label" for="hecho_secuestro">Secuestro</label></div></div>
+                                <div class="col-md-4"><div class="form-check form-switch"><input class="form-check-input hechos-v" type="checkbox" name="hecho_vinculacion" id="hecho_vinculacion" value="1" {{ old('hecho_vinculacion', isset($registro) ? $registro->hecho_vinculacion : '') == 1 ? 'checked' : '' }}><label class="form-check-label" for="hecho_vinculacion">Vinculación de niños, niñas y adolescentes a actividades relacionadas con grupos armados</label></div></div>
+                                <div class="col-md-4"><div class="form-check form-switch"><input class="form-check-input hechos-v" type="checkbox" name="hecho_perdida_bienes" id="hecho_perdida_bienes" value="1" {{ old('hecho_perdida_bienes', isset($registro) ? $registro->hecho_perdida_bienes : '') == 1 ? 'checked' : '' }}><label class="form-check-label" for="hecho_perdida_bienes">Pérdida de bienes muebles o inmuebles</label></div></div>
+                                <div class="col-md-4"><div class="form-check form-switch"><input class="form-check-input hechos-v" type="checkbox" name="hecho_minas" id="hecho_minas" value="1" {{ old('hecho_minas', isset($registro) ? $registro->hecho_minas : '') == 1 ? 'checked' : '' }}><label class="form-check-label" for="hecho_minas">Minas antipersonal, munición sin explotar, artefacto explosivo improvisado</label></div></div>
+                                <div class="col-md-4"><div class="form-check form-switch"><input class="form-check-input hechos-v" type="checkbox" name="hecho_lesiones_psicologicas" id="hecho_lesiones_psicologicas" value="1" {{ old('hecho_lesiones_psicologicas', isset($registro) ? $registro->hecho_lesiones_psicologicas : '') == 1 ? 'checked' : '' }}><label class="form-check-label" for="hecho_lesiones_psicologicas">Lesiones personales psicológicas</label></div></div>
+                                <div class="col-md-4"><div class="form-check form-switch"><input class="form-check-input hechos-v" type="checkbox" name="hecho_lesiones_fisicas" id="hecho_lesiones_fisicas" value="1" {{ old('hecho_lesiones_fisicas', isset($registro) ? $registro->hecho_lesiones_fisicas : '') == 1 ? 'checked' : '' }}><label class="form-check-label" for="hecho_lesiones_fisicas">Lesiones personales físicas</label></div></div>
+                                <div class="col-md-4"><div class="form-check form-switch"><input class="form-check-input hechos-v" type="checkbox" name="hecho_terrorismo" id="hecho_terrorismo" value="1" {{ old('hecho_terrorismo', isset($registro) ? $registro->hecho_terrorismo : '') == 1 ? 'checked' : '' }}><label class="form-check-label" for="hecho_terrorismo">Acto terrorista/ atentados/ combates/ enfrentamientos/ hostigamientos</label></div></div>
+                                <div class="col-md-4"><div class="form-check form-switch"><input class="form-check-input hechos-v" type="checkbox" name="hecho_delitos_sexuales" id="hecho_delitos_sexuales" value="1" {{ old('hecho_delitos_sexuales', isset($registro) ? $registro->hecho_delitos_sexuales : '') == 1 ? 'checked' : '' }}><label class="form-check-label" for="hecho_delitos_sexuales">Delitos contra la libertad e integridad sexual en el marco del conflicto armado</label></div></div>
+                                <div class="col-md-4"><div class="form-check form-switch"><input class="form-check-input hechos-v" type="checkbox" name="hecho_otro" id="hecho_otro" value="1" {{ old('hecho_otro', isset($registro) ? $registro->hecho_otro : '') == 1 ? 'checked' : '' }}><label class="form-check-label" for="hecho_otro">Otro</label></div></div>
                                 <div class="col-md-4 align-items-center d-flex"><input type="text" class="form-control ms-2" id="hecho_otro_cual" name="hecho_otro_cual" placeholder="¿Cuál?" value="{{ old('hecho_otro_cual', isset($registro) ? $registro->hecho_otro_cual : '') }}" style="display: none; max-width: 180px;"></div>
-                                <div class="col-md-4"><div class="form-check form-switch"><input class="form-check-input" type="checkbox" name="hecho_no_aplica" id="hecho_no_aplica" value="1" {{ old('hecho_no_aplica', isset($registro) ? $registro->hecho_no_aplica : '') == 1 ? 'checked' : '' }}><label class="form-check-label" for="hecho_no_aplica">No aplica</label></div></div>
+                                <div class="col-md-4"><div class="form-check form-switch"><input class="form-check-input hechos-v" type="checkbox" name="hecho_no_aplica" id="hecho_no_aplica" value="1" {{ old('hecho_no_aplica', isset($registro) ? $registro->hecho_no_aplica : '') == 1 ? 'checked' : '' }}><label class="form-check-label" for="hecho_no_aplica">No aplica</label></div></div>
                             </div>
-                            @error('hecho')<div class="text-danger small">{{ $message }}</div>@enderror
+                            <div class="text-danger small" id="hechosVictimizantesError" style="display:none;">Debe seleccionar al menos una opción.</div>
                         </div>
                     </div>
                 </div>
@@ -323,195 +323,227 @@
 <!-- SweetAlert2 -->
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        // Mostrar SweetAlert de éxito si existe mensaje en sesión
-        @if(session('success'))
-            Swal.fire({
-                icon: 'success',
-                title: '¡Guardado exitosamente!',
-                text: '{{ session('success') }}',
-                confirmButtonColor: '#0c6efd'
-            });
-        @endif
-
-        // Lógica para el botón Siguiente
-        const btnSiguiente = document.getElementById('btnSiguiente');
-        @if(isset($registro))
-            btnSiguiente.disabled = false;
-            btnSiguiente.addEventListener('click', function() {
-                // Usar SIEMPRE las llaves del registro guardado para URL limpia
-                const tipo_documento = '{{ $registro->tipo_documento }}';
-                const numero_documento = '{{ $registro->numero_documento }}';
-                window.location.href = "/observatorioapp/public/form/2/" + tipo_documento + "/" + numero_documento;
-            });
-        @endif
-
-        // Mostrar SweetAlert de error si existe error de usuario existente
-        @if($errors->has('usuario_existente'))
-            Swal.fire({
-                icon: 'error',
-                title: 'Usuario ya existe',
-                text: 'Este usuario ya existe, solo puedes ingresar usuarios nuevos.',
-                confirmButtonColor: '#d33'
-            });
-        @endif
-
-        // Mostrar/ocultar campo CUAL en pregunta 4
-        const chkOtraOrientacion = document.getElementById('orientacion_otra');
-        const txtOtraOrientacion = document.getElementById('orientacion_otra_cual');
-        if(chkOtraOrientacion) {
-            function toggleOtraOrientacion() {
-                txtOtraOrientacion.style.display = chkOtraOrientacion.checked ? 'block' : 'none';
-            }
-            chkOtraOrientacion.addEventListener('change', toggleOtraOrientacion);
-            toggleOtraOrientacion();
-        }
-        // Exclusividad No aplica en pregunta 4
-        const chkNoAplicaOrientacion = document.getElementById('orientacion_no_aplica');
-        const orientacionChecks = document.querySelectorAll('input[name^="orientacion_"]:not(#orientacion_no_aplica)');
-        if(chkNoAplicaOrientacion) {
-            chkNoAplicaOrientacion.addEventListener('change', function() {
-                if(this.checked) {
-                    orientacionChecks.forEach(chk => { if(chk.id !== 'orientacion_no_aplica') chk.checked = false; });
-                    if(chkOtraOrientacion) txtOtraOrientacion.style.display = 'none';
-                }
-            });
-        }
-        orientacionChecks.forEach(chk => {
-            chk.addEventListener('change', function() {
-                if(this.checked && chkNoAplicaOrientacion.checked) chkNoAplicaOrientacion.checked = false;
-            });
+document.addEventListener('DOMContentLoaded', function() {
+    // Mostrar SweetAlert de éxito si existe mensaje en sesión
+    @if(session('success'))
+        Swal.fire({
+            icon: 'success',
+            title: '¡Guardado exitosamente!',
+            text: '{{ session('success') }}',
+            confirmButtonColor: '#0c6efd'
         });
+    @endif
 
-        // Mostrar/ocultar campo CUAL en pregunta 6
-        const chkHechoOtro = document.getElementById('hecho_otro');
-        const txtHechoOtro = document.getElementById('hecho_otro_cual');
-        if(chkHechoOtro) {
-            function toggleHechoOtro() {
-                txtHechoOtro.style.display = chkHechoOtro.checked ? 'block' : 'none';
-            }
-            chkHechoOtro.addEventListener('change', toggleHechoOtro);
-            toggleHechoOtro();
-        }
-        // Exclusividad No aplica en pregunta 6
-        const chkNoAplicaHecho = document.getElementById('hecho_no_aplica');
-        const hechoChecks = document.querySelectorAll('input[name^="hecho_"]:not(#hecho_no_aplica)');
-        if(chkNoAplicaHecho) {
-            chkNoAplicaHecho.addEventListener('change', function() {
-                if(this.checked) {
-                    hechoChecks.forEach(chk => { if(chk.id !== 'hecho_no_aplica') chk.checked = false; });
-                    if(chkHechoOtro) txtHechoOtro.style.display = 'none';
-                }
-            });
-        }
-        hechoChecks.forEach(chk => {
-            chk.addEventListener('change', function() {
-                if(this.checked && chkNoAplicaHecho.checked) chkNoAplicaHecho.checked = false;
-            });
+    // Lógica para el botón Siguiente
+    const btnSiguiente = document.getElementById('btnSiguiente');
+    @if(isset($registro))
+        btnSiguiente.disabled = false;
+        btnSiguiente.addEventListener('click', function() {
+            // Usar SIEMPRE las llaves del registro guardado para URL limpia
+            const tipo_documento = '{{ $registro->tipo_documento }}';
+            const numero_documento = '{{ $registro->numero_documento }}';
+            window.location.href = "/observatorioapp/public/form/2/" + tipo_documento + "/" + numero_documento;
         });
+    @endif
 
-        // Spinner al guardar
-        const form = document.getElementById('bloque1Form');
-        form.addEventListener('submit', function(e) {
-            // Validación amigable: solo mostrar SweetAlert para el primer campo vacío
-            const campos = [
-                {selector: '#tipo_documento', label: 'Tipo de documento'},
-                {selector: '#numero_documento', label: 'Número de documento'},
-                {selector: '#profesional_documento', label: 'Número de documento del profesional'},
-                {selector: 'select[name="comuna_nucleo_familiar"]', label: 'Comuna núcleo familiar'},
-                {selector: 'select[name="familia_migrante"]', label: '¿La familia es migrante?'},
-                {selector: 'select[name="grupo_etnico"]', label: 'Grupo étnico'},
-                {selector: 'select[name="victima_conflicto"]', label: '¿Ha sido víctima del conflicto armado?'},
-                {selector: 'select[name="nivel_educativo"]', label: 'Nivel educativo'},
-                {selector: 'select[name="personas_nucleo"]', label: 'Personas en el núcleo familiar'},
-                {selector: 'select[name="config_familiar"]', label: 'Configuración familiar'},
-                {selector: 'select[name="personas_cuidado"]', label: '¿Requieren cuidado permanente?'}
-            ];
-            for(let campo of campos) {
-                let el = document.querySelector(campo.selector);
-                if(el && (el.value === '' || el.value === null)) {
-                    e.preventDefault();
-                    Swal.fire({
-                        icon: 'warning',
-                        title: 'Campo obligatorio',
-                        text: `Debes llenar el campo: ${campo.label}`,
-                        confirmButtonColor: '#0c6efd'
-                    });
-                    el.focus();
-                    return false;
-                }
+    // Mostrar SweetAlert de error si existe error de usuario existente
+    @if($errors->has('usuario_existente'))
+        Swal.fire({
+            icon: 'error',
+            title: 'Usuario ya existe',
+            text: 'Este usuario ya existe, solo puedes ingresar usuarios nuevos.',
+            confirmButtonColor: '#d33'
+        });
+    @endif
+
+    // Mostrar/ocultar campo CUAL en pregunta 4
+    const chkOtraOrientacion = document.getElementById('orientacion_otra');
+    const txtOtraOrientacion = document.getElementById('orientacion_otra_cual');
+    if(chkOtraOrientacion) {
+        function toggleOtraOrientacion() {
+            txtOtraOrientacion.style.display = chkOtraOrientacion.checked ? 'block' : 'none';
+        }
+        chkOtraOrientacion.addEventListener('change', toggleOtraOrientacion);
+        toggleOtraOrientacion();
+    }
+    // Exclusividad No aplica en pregunta 4
+    const chkNoAplicaOrientacion = document.getElementById('orientacion_no_aplica');
+    const orientacionChecks = document.querySelectorAll('input[name^="orientacion_"]:not(#orientacion_no_aplica)');
+    if(chkNoAplicaOrientacion) {
+        chkNoAplicaOrientacion.addEventListener('change', function() {
+            if(this.checked) {
+                orientacionChecks.forEach(chk => { if(chk.id !== 'orientacion_no_aplica') chk.checked = false; });
+                if(chkOtraOrientacion) txtOtraOrientacion.style.display = 'none';
             }
-            // Validar selección múltiple: al menos uno marcado
-            const grupos = [
-                {name: 'orientación sexual', prefix: 'orientacion_', label: '¿Algún miembro del núcleo familiar se identifica con las siguientes orientaciones sexuales?'},
-                {name: 'grupo etario', prefix: 'grupo_', label: '¿De los siguientes grupos etarios, cuáles están presentes en su núcleo familiar?'},
-                {name: 'hechos victimizantes', prefix: 'hecho_', label: '¿Cuáles han sido los hechos victimizantes?'}
-            ];
-            for(let grupo of grupos) {
-                let checks = this.querySelectorAll(`input[type=checkbox][name^='${grupo.prefix}']`);
-                let checked = Array.from(checks).some(chk => chk.checked);
-                if(!checked) {
-                    e.preventDefault();
-                    Swal.fire({
-                        icon: 'warning',
-                        title: 'Campo obligatorio',
-                        text: `Debes seleccionar al menos una opción en: ${grupo.label}`,
-                        confirmButtonColor: '#0c6efd'
-                    });
-                    checks[0].focus();
-                    return false;
-                }
-            }
-            // Validación campo "¿Cuál?" pregunta 4
-            const chkOtraOrientacion = document.getElementById('orientacion_otra');
-            const chkNoAplicaOrientacion = document.getElementById('orientacion_no_aplica');
-            const txtOtraOrientacion = document.getElementById('orientacion_otra_cual');
-            if(chkOtraOrientacion && chkOtraOrientacion.checked && (!chkNoAplicaOrientacion || !chkNoAplicaOrientacion.checked)) {
-                if(txtOtraOrientacion && txtOtraOrientacion.value.trim() === '') {
-                    e.preventDefault();
-                    Swal.fire({
-                        icon: 'warning',
-                        title: 'Campo obligatorio',
-                        text: 'Debes llenar el campo: ¿Cuál? (especifica la orientación sexual)',
-                        confirmButtonColor: '#0c6efd'
-                    });
-                    txtOtraOrientacion.focus();
-                    return false;
-                }
-            }
-            // Validación campo "¿Cuál?" pregunta 6
-            const chkHechoOtro = document.getElementById('hecho_otro');
-            const chkNoAplicaHecho = document.getElementById('hecho_no_aplica');
-            const txtHechoOtro = document.getElementById('hecho_otro_cual');
-            if(chkHechoOtro && chkHechoOtro.checked && (!chkNoAplicaHecho || !chkNoAplicaHecho.checked)) {
-                if(txtHechoOtro && txtHechoOtro.value.trim() === '') {
-                    e.preventDefault();
-                    Swal.fire({
-                        icon: 'warning',
-                        title: 'Campo obligatorio',
-                        text: 'Debes llenar el campo: ¿Cuál? (especifica el hecho victimizante)',
-                        confirmButtonColor: '#0c6efd'
-                    });
-                    txtHechoOtro.focus();
-                    return false;
-                }
-            }
-            // Mostrar spinner sobre el formulario
-            let spinner = document.createElement('div');
-            spinner.id = 'loadingSpinner';
-            spinner.style.position = 'fixed';
-            spinner.style.top = '0';
-            spinner.style.left = '0';
-            spinner.style.width = '100vw';
-            spinner.style.height = '100vh';
-            spinner.style.background = 'rgba(255,255,255,0.7)';
-            spinner.style.display = 'flex';
-            spinner.style.alignItems = 'center';
-            spinner.style.justifyContent = 'center';
-            spinner.style.zIndex = '9999';
-            spinner.innerHTML = `<div class='spinner-border text-primary' style='width: 4rem; height: 4rem;' role='status'><span class='visually-hidden'>Cargando...</span></div>`;
-            document.body.appendChild(spinner);
+        });
+    }
+    orientacionChecks.forEach(chk => {
+        chk.addEventListener('change', function() {
+            if(this.checked && chkNoAplicaOrientacion.checked) chkNoAplicaOrientacion.checked = false;
         });
     });
+
+    // Mostrar/ocultar campo CUAL en pregunta 6
+    const chkHechoOtro = document.getElementById('hecho_otro');
+    const txtHechoOtro = document.getElementById('hecho_otro_cual');
+    if(chkHechoOtro) {
+        function toggleHechoOtro() {
+            txtHechoOtro.style.display = chkHechoOtro.checked ? 'block' : 'none';
+        }
+        chkHechoOtro.addEventListener('change', toggleHechoOtro);
+        toggleHechoOtro();
+    }
+    // Exclusividad No aplica en pregunta 6
+    const chkNoAplicaHecho = document.getElementById('hecho_no_aplica');
+    const hechoChecks = document.querySelectorAll('input[name^="hecho_"]:not(#hecho_no_aplica)');
+    if(chkNoAplicaHecho) {
+        chkNoAplicaHecho.addEventListener('change', function() {
+            if(this.checked) {
+                hechoChecks.forEach(chk => { if(chk.id !== 'hecho_no_aplica') chk.checked = false; });
+                if(chkHechoOtro) txtHechoOtro.style.display = 'none';
+            }
+        });
+    }
+    hechoChecks.forEach(chk => {
+        chk.addEventListener('change', function() {
+            if(this.checked && chkNoAplicaHecho.checked) chkNoAplicaHecho.checked = false;
+        });
+    });
+
+    // Mostrar/Ocultar hechos victimizantes según respuesta
+    const victimaSelect = document.getElementById('victima_conflicto');
+    const hechosSection = document.getElementById('hechosVictimizantesSection');
+    const hechosRequiredMark = document.getElementById('hechosRequiredMark');
+    const hechosCheckboxes = document.querySelectorAll('.hechos-v');
+    const hechosError = document.getElementById('hechosVictimizantesError');
+    function toggleHechosSection() {
+        if (victimaSelect.value === '1') {
+            hechosSection.style.display = '';
+            hechosRequiredMark.style.display = '';
+        } else {
+            hechosSection.style.display = 'none';
+            hechosRequiredMark.style.display = 'none';
+            hechosError.style.display = 'none';
+            hechosCheckboxes.forEach(cb => cb.checked = false);
+        }
+    }
+    victimaSelect.addEventListener('change', toggleHechosSection);
+    toggleHechosSection();
+
+    // Validación al enviar el formulario
+    const form = document.getElementById('bloque1Form');
+    form.addEventListener('submit', function(e) {
+        if (victimaSelect.value === '1') {
+            let checked = false;
+            hechosCheckboxes.forEach(cb => { if (cb.checked) checked = true; });
+            if (!checked) {
+                hechosError.style.display = '';
+                e.preventDefault();
+                return false;
+            } else {
+                hechosError.style.display = 'none';
+            }
+        } else {
+            hechosError.style.display = 'none';
+        }
+        // Validación amigable: solo mostrar SweetAlert para el primer campo vacío
+        const campos = [
+            {selector: '#tipo_documento', label: 'Tipo de documento'},
+            {selector: '#numero_documento', label: 'Número de documento'},
+            {selector: '#profesional_documento', label: 'Número de documento del profesional'},
+            {selector: 'select[name="comuna_nucleo_familiar"]', label: 'Comuna núcleo familiar'},
+            {selector: 'select[name="familia_migrante"]', label: '¿La familia es migrante?'},
+            {selector: 'select[name="grupo_etnico"]', label: 'Grupo étnico'},
+            {selector: 'select[name="victima_conflicto"]', label: '¿Ha sido víctima del conflicto armado?'},
+            {selector: 'select[name="nivel_educativo"]', label: 'Nivel educativo'},
+            {selector: 'select[name="personas_nucleo"]', label: 'Personas en el núcleo familiar'},
+            {selector: 'select[name="config_familiar"]', label: 'Configuración familiar'},
+            {selector: 'select[name="personas_cuidado"]', label: '¿Requieren cuidado permanente?'}
+        ];
+        for(let campo of campos) {
+            let el = document.querySelector(campo.selector);
+            if(el && (el.value === '' || el.value === null)) {
+                e.preventDefault();
+                Swal.fire({
+                    icon: 'warning',
+                    title: 'Campo obligatorio',
+                    text: `Debes llenar el campo: ${campo.label}`,
+                    confirmButtonColor: '#0c6efd'
+                });
+                el.focus();
+                return false;
+            }
+        }
+        // Validar selección múltiple: al menos uno marcado
+        const grupos = [
+            {name: 'orientación sexual', prefix: 'orientacion_', label: '¿Algún miembro del núcleo familiar se identifica con las siguientes orientaciones sexuales?'},
+            {name: 'grupo etario', prefix: 'grupo_', label: '¿De los siguientes grupos etarios, cuáles están presentes en su núcleo familiar?'}
+        ];
+        for(let grupo of grupos) {
+            let checks = this.querySelectorAll(`input[type=checkbox][name^='${grupo.prefix}']`);
+            let checked = Array.from(checks).some(chk => chk.checked);
+            if(!checked) {
+                e.preventDefault();
+                Swal.fire({
+                    icon: 'warning',
+                    title: 'Campo obligatorio',
+                    text: `Debes seleccionar al menos una opción en: ${grupo.label}`,
+                    confirmButtonColor: '#0c6efd'
+                });
+                checks[0].focus();
+                return false;
+            }
+        }
+        // Validación campo "¿Cuál?" pregunta 4
+        const chkOtraOrientacion = document.getElementById('orientacion_otra');
+        const chkNoAplicaOrientacion = document.getElementById('orientacion_no_aplica');
+        const txtOtraOrientacion = document.getElementById('orientacion_otra_cual');
+        if(chkOtraOrientacion && chkOtraOrientacion.checked && (!chkNoAplicaOrientacion || !chkNoAplicaOrientacion.checked)) {
+            if(txtOtraOrientacion && txtOtraOrientacion.value.trim() === '') {
+                e.preventDefault();
+                Swal.fire({
+                    icon: 'warning',
+                    title: 'Campo obligatorio',
+                    text: 'Debes llenar el campo: ¿Cuál? (especifica la orientación sexual)',
+                    confirmButtonColor: '#0c6efd'
+                });
+                txtOtraOrientacion.focus();
+                return false;
+            }
+        }
+        // Validación campo "¿Cuál?" pregunta 6
+        const chkHechoOtro = document.getElementById('hecho_otro');
+        const chkNoAplicaHecho = document.getElementById('hecho_no_aplica');
+        const txtHechoOtro = document.getElementById('hecho_otro_cual');
+        if(chkHechoOtro && chkHechoOtro.checked && (!chkNoAplicaHecho || !chkNoAplicaHecho.checked)) {
+            if(txtHechoOtro && txtHechoOtro.value.trim() === '') {
+                e.preventDefault();
+                Swal.fire({
+                    icon: 'warning',
+                    title: 'Campo obligatorio',
+                    text: 'Debes llenar el campo: ¿Cuál? (especifica el hecho victimizante)',
+                    confirmButtonColor: '#0c6efd'
+                });
+                txtHechoOtro.focus();
+                return false;
+            }
+        }
+        // Mostrar spinner sobre el formulario
+        let spinner = document.createElement('div');
+        spinner.id = 'loadingSpinner';
+        spinner.style.position = 'fixed';
+        spinner.style.top = '0';
+        spinner.style.left = '0';
+        spinner.style.width = '100vw';
+        spinner.style.height = '100vh';
+        spinner.style.background = 'rgba(255,255,255,0.7)';
+        spinner.style.display = 'flex';
+        spinner.style.alignItems = 'center';
+        spinner.style.justifyContent = 'center';
+        spinner.style.zIndex = '9999';
+        spinner.innerHTML = `<div class='spinner-border text-primary' style='width: 4rem; height: 4rem;' role='status'><span class='visually-hidden'>Cargando...</span></div>`;
+        document.body.appendChild(spinner);
+    });
+});
 </script>
 @endsection
