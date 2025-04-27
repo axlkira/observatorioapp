@@ -57,7 +57,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="card mb-4">
+                    <div class="card mb-4" id="pregunta18Card">
                         <div class="card-header bg-primary text-white">18. En algún momento en tu familia han acudido a alguna de las siguientes instituciones por razón de violencia intrafamiliar:</div>
                         <div class="card-body">
                             @php $institucion_requerida = !isset($registro); @endphp
@@ -229,6 +229,12 @@ document.addEventListener('DOMContentLoaded', function() {
         for(let grupo of grupos) {
             let checks = this.querySelectorAll(`input[type=checkbox].${grupo.className}`);
             let checked = Array.from(checks).some(chk => chk.checked);
+            
+            // Si es el grupo "institucion" y "violencia_ninguna" está marcado, no validar
+            if (grupo.name === 'institucion' && document.getElementById('violencia_ninguna').checked) {
+                continue; // Saltamos la validación para este grupo
+            }
+            
             if(!checked) {
                 e.preventDefault();
                 Swal.fire({
@@ -280,21 +286,70 @@ document.addEventListener('DOMContentLoaded', function() {
     @endif
 
     // Exclusividad para "Ninguna" y "No hemos asistido" en preguntas múltiples
-    function exclusividadCheckboxes(grupo, idNinguna) {
+    function exclusividadCheckboxes(grupo, idNinguna, idNoSabe = null) {
         const checks = document.querySelectorAll('.' + grupo);
         const ninguna = document.getElementById(idNinguna);
+        const noSabe = idNoSabe ? document.getElementById(idNoSabe) : null;
+        
         checks.forEach(chk => {
             chk.addEventListener('change', function() {
+                // Si se marca "Ninguna", desmarcar todas las otras
                 if (this === ninguna && this.checked) {
-                    checks.forEach(otro => { if (otro !== ninguna) otro.checked = false; });
-                } else if (this.checked) {
+                    checks.forEach(otro => { 
+                        if (otro !== ninguna) otro.checked = false; 
+                    });
+                } 
+                // Si se marca "No sabe", desmarcar todas las otras
+                else if (noSabe && this === noSabe && this.checked) {
+                    checks.forEach(otro => { 
+                        if (otro !== noSabe) otro.checked = false; 
+                    });
+                }
+                // Si se marca cualquier otra, desmarcar "Ninguna" y "No sabe"
+                else if (this.checked) {
                     ninguna.checked = false;
+                    if (noSabe) noSabe.checked = false;
                 }
             });
         });
     }
     exclusividadCheckboxes('violencia-multiple', 'violencia_ninguna');
-    exclusividadCheckboxes('discriminacion-multiple', 'discriminacion_no_hemos');
+    exclusividadCheckboxes('discriminacion-multiple', 'discriminacion_no_hemos', 'discriminacion_no_sabe');
+
+    // Ocultar/mostrar pregunta 18 según la respuesta a la pregunta 17
+    const pregunta17Checks = document.querySelectorAll('.violencia-multiple');
+    const ninguna = document.getElementById('violencia_ninguna');
+    const pregunta18Card = document.getElementById('pregunta18Card');
+    const pregunta18Checks = document.querySelectorAll('.institucion-multiple');
+    
+    // Función para mostrar u ocultar la pregunta 18
+    function actualizarVisibilidadPregunta18() {
+        if (ninguna.checked) {
+            pregunta18Card.style.display = 'none';
+            // Desmarcar todas las opciones de la pregunta 18 cuando se oculta
+            pregunta18Checks.forEach(check => {
+                check.checked = false;
+            });
+        } else {
+            const algunaViolenciaMarcada = Array.from(pregunta17Checks).some(check => 
+                check !== ninguna && check.checked
+            );
+            
+            if (algunaViolenciaMarcada) {
+                pregunta18Card.style.display = 'block';
+            } else {
+                pregunta18Card.style.display = 'none';
+            }
+        }
+    }
+    
+    // Aplicar al cargar la página
+    actualizarVisibilidadPregunta18();
+    
+    // Aplicar cuando cambia cualquier checkbox de la pregunta 17
+    pregunta17Checks.forEach(check => {
+        check.addEventListener('change', actualizarVisibilidadPregunta18);
+    });
 });
 </script>
 @endsection
