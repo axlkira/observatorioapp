@@ -88,7 +88,7 @@ class FormController extends Controller
                 'institucion_cavif', 'institucion_ips_eps', 'institucion_fiscalia', 'institucion_linea_155', 'institucion_comisaria', 'institucion_inspeccion', 'institucion_icbf', 'institucion_caivas', 'institucion_personeria', 'institucion_centros_integrales', 'institucion_no_hemos_asistido',
             ];
             foreach ($multichecks as $field) {
-                $data[$field] = $request->has($field) ? 1 : 2;
+                $data[$field] = $request->has($field) ? 1 : 0;
             }
             // --- Lógica profesional_documento ---
             if (empty($data['profesional_documento']) || $data['profesional_documento'] === null) {
