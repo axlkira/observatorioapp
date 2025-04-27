@@ -91,16 +91,16 @@
                         <div class="card-body">
                             @php
                                 $p43 = [
-                                    'p43_subsidios_economicos' => old('p43_subsidios_economicos', $registro->p43_subsidios_economicos ?? 2),
-                                    'p43_acceso_centros_cuidado' => old('p43_acceso_centros_cuidado', $registro->p43_acceso_centros_cuidado ?? 2),
-                                    'p43_atencion_medica' => old('p43_atencion_medica', $registro->p43_atencion_medica ?? 2),
-                                    'p43_capacitacion_cuidadores' => old('p43_capacitacion_cuidadores', $registro->p43_capacitacion_cuidadores ?? 2),
-                                    'p43_paquetes_alimentarios' => old('p43_paquetes_alimentarios', $registro->p43_paquetes_alimentarios ?? 2),
-                                    'p43_redes_apoyo_cuidadores' => old('p43_redes_apoyo_cuidadores', $registro->p43_redes_apoyo_cuidadores ?? 2),
-                                    'p43_incentivos_economicos' => old('p43_incentivos_economicos', $registro->p43_incentivos_economicos ?? 2),
-                                    'p43_otros' => old('p43_otros', $registro->p43_otros ?? 2),
-                                    'p43_ninguno' => old('p43_ninguno', $registro->p43_ninguno ?? 2),
-                                    'p43_no_aplica' => old('p43_no_aplica', $registro->p43_no_aplica ?? 2),
+                                    'p43_subsidios_economicos' => old('p43_subsidios_economicos', $registro->p43_subsidios_economicos ?? 0),
+                                    'p43_acceso_centros_cuidado' => old('p43_acceso_centros_cuidado', $registro->p43_acceso_centros_cuidado ?? 0),
+                                    'p43_atencion_medica' => old('p43_atencion_medica', $registro->p43_atencion_medica ?? 0),
+                                    'p43_capacitacion_cuidadores' => old('p43_capacitacion_cuidadores', $registro->p43_capacitacion_cuidadores ?? 0),
+                                    'p43_paquetes_alimentarios' => old('p43_paquetes_alimentarios', $registro->p43_paquetes_alimentarios ?? 0),
+                                    'p43_redes_apoyo_cuidadores' => old('p43_redes_apoyo_cuidadores', $registro->p43_redes_apoyo_cuidadores ?? 0),
+                                    'p43_incentivos_economicos' => old('p43_incentivos_economicos', $registro->p43_incentivos_economicos ?? 0),
+                                    'p43_otros' => old('p43_otros', $registro->p43_otros ?? 0),
+                                    'p43_ninguno' => old('p43_ninguno', $registro->p43_ninguno ?? 0),
+                                    'p43_no_aplica' => old('p43_no_aplica', $registro->p43_no_aplica ?? 0),
                                 ];
                             @endphp
                             <div class="form-check form-switch">

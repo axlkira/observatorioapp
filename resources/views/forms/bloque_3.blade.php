@@ -34,43 +34,43 @@
                         <div class="row">
                             <div class="col-md-4">
                                 <div class="form-check form-switch">
-                                    <input class="form-check-input" type="checkbox" name="fuente_empleo_formal" id="fuente_empleo_formal" value="1" {{ old('fuente_empleo_formal', $registro->fuente_empleo_formal ?? 2) == 1 ? 'checked' : '' }}>
+                                    <input class="form-check-input" type="checkbox" name="fuente_empleo_formal" id="fuente_empleo_formal" value="1" {{ old('fuente_empleo_formal', $registro->fuente_empleo_formal ?? 0) == 1 ? 'checked' : '' }}>
                                     <label class="form-check-label" for="fuente_empleo_formal">Empleo formal</label>
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-check form-switch">
-                                    <input class="form-check-input" type="checkbox" name="fuente_empleo_informal" id="fuente_empleo_informal" value="1" {{ old('fuente_empleo_informal', $registro->fuente_empleo_informal ?? 2) == 1 ? 'checked' : '' }}>
+                                    <input class="form-check-input" type="checkbox" name="fuente_empleo_informal" id="fuente_empleo_informal" value="1" {{ old('fuente_empleo_informal', $registro->fuente_empleo_informal ?? 0) == 1 ? 'checked' : '' }}>
                                     <label class="form-check-label" for="fuente_empleo_informal">Empleo informal</label>
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-check form-switch">
-                                    <input class="form-check-input" type="checkbox" name="fuente_independiente" id="fuente_independiente" value="1" {{ old('fuente_independiente', $registro->fuente_independiente ?? 2) == 1 ? 'checked' : '' }}>
+                                    <input class="form-check-input" type="checkbox" name="fuente_independiente" id="fuente_independiente" value="1" {{ old('fuente_independiente', $registro->fuente_independiente ?? 0) == 1 ? 'checked' : '' }}>
                                     <label class="form-check-label" for="fuente_independiente">Independiente</label>
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-check form-switch">
-                                    <input class="form-check-input" type="checkbox" name="fuente_apoyo_familia_amigos" id="fuente_apoyo_familia_amigos" value="1" {{ old('fuente_apoyo_familia_amigos', $registro->fuente_apoyo_familia_amigos ?? 2) == 1 ? 'checked' : '' }}>
+                                    <input class="form-check-input" type="checkbox" name="fuente_apoyo_familia_amigos" id="fuente_apoyo_familia_amigos" value="1" {{ old('fuente_apoyo_familia_amigos', $registro->fuente_apoyo_familia_amigos ?? 0) == 1 ? 'checked' : '' }}>
                                     <label class="form-check-label" for="fuente_apoyo_familia_amigos">Apoyo de familiares y amigos</label>
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-check form-switch">
-                                    <input class="form-check-input" type="checkbox" name="fuente_pension" id="fuente_pension" value="1" {{ old('fuente_pension', $registro->fuente_pension ?? 2) == 1 ? 'checked' : '' }}>
+                                    <input class="form-check-input" type="checkbox" name="fuente_pension" id="fuente_pension" value="1" {{ old('fuente_pension', $registro->fuente_pension ?? 0) == 1 ? 'checked' : '' }}>
                                     <label class="form-check-label" for="fuente_pension">Pensión</label>
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-check form-switch">
-                                    <input class="form-check-input" type="checkbox" name="fuente_subsidios_gobierno" id="fuente_subsidios_gobierno" value="1" {{ old('fuente_subsidios_gobierno', $registro->fuente_subsidios_gobierno ?? 2) == 1 ? 'checked' : '' }}>
+                                    <input class="form-check-input" type="checkbox" name="fuente_subsidios_gobierno" id="fuente_subsidios_gobierno" value="1" {{ old('fuente_subsidios_gobierno', $registro->fuente_subsidios_gobierno ?? 0) == 1 ? 'checked' : '' }}>
                                     <label class="form-check-label" for="fuente_subsidios_gobierno">Subsidios del gobierno</label>
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-check form-switch">
-                                    <input class="form-check-input" type="checkbox" name="fuente_ninguna" id="fuente_ninguna" value="1" {{ old('fuente_ninguna', $registro->fuente_ninguna ?? 2) == 1 ? 'checked' : '' }}>
+                                    <input class="form-check-input" type="checkbox" name="fuente_ninguna" id="fuente_ninguna" value="1" {{ old('fuente_ninguna', $registro->fuente_ninguna ?? 0) == 1 ? 'checked' : '' }}>
                                     <label class="form-check-label" for="fuente_ninguna">Ninguna</label>
                                 </div>
                             </div>
@@ -134,7 +134,7 @@
                 <div class="card mb-4 shadow-sm">
                     <div class="card-header bg-primary text-white">25. ¿Tu núcleo familiar cuenta con algún patrimonio que les permita solventarse ante una eventualidad o crisis?</div>
                     <div class="card-body">
-                        <select class="form-select" name="patrimonio" required>
+                        <select class="form-select" name="patrimonio" id="patrimonio" required>
                             <option value="">Seleccione...</option>
                             <option value="1" {{ old('patrimonio', $registro->patrimonio ?? '') == 1 ? 'selected' : '' }}>Sí</option>
                             <option value="0" {{ old('patrimonio', $registro->patrimonio ?? '') == 0 ? 'selected' : '' }}>No</option>
@@ -144,10 +144,10 @@
                 </div>
 
                 <!-- Pregunta 26 -->
-                <div class="card mb-4 shadow-sm">
+                <div class="card mb-4 shadow-sm" id="pregunta26Card" style="display: none;">
                     <div class="card-header bg-primary text-white">26. Si la respuesta anterior es afirmativa, ¿Por cuánto tiempo dispondrías de ese patrimonio para solventar una eventualidad o crisis?</div>
                     <div class="card-body">
-                        <select class="form-select" name="tiempo_patrimonio_crisis" required>
+                        <select class="form-select" name="tiempo_patrimonio_crisis" id="tiempo_patrimonio_crisis">
                             <option value="">Seleccione...</option>
                             <option value="172" {{ old('tiempo_patrimonio_crisis', $registro->tiempo_patrimonio_crisis ?? '') == 172 ? 'selected' : '' }}>Tres meses o menos</option>
                             <option value="173" {{ old('tiempo_patrimonio_crisis', $registro->tiempo_patrimonio_crisis ?? '') == 173 ? 'selected' : '' }}>Seis meses</option>
@@ -257,6 +257,30 @@ document.addEventListener('DOMContentLoaded', function() {
             if (this.checked) ninguna.checked = false;
         });
     }
+
+    // Lógica para mostrar/ocultar pregunta 26 según respuesta de pregunta 25
+    const patrimonioSelect = document.getElementById('patrimonio');
+    const pregunta26Card = document.getElementById('pregunta26Card');
+    const tiempoPatrimonioCrisisSelect = document.getElementById('tiempo_patrimonio_crisis');
+    
+    // Función para actualizar la visibilidad y comportamiento de la pregunta 26
+    function actualizarPregunta26() {
+        if (patrimonioSelect.value === '1') {
+            pregunta26Card.style.display = 'block';
+            tiempoPatrimonioCrisisSelect.required = true;
+            // No establecemos valor por defecto, debe ser elegido por el usuario
+        } else {
+            pregunta26Card.style.display = 'none';
+            tiempoPatrimonioCrisisSelect.required = false;
+            tiempoPatrimonioCrisisSelect.value = '3'; // Valor por defecto cuando no se muestra
+        }
+    }
+    
+    // Verificar estado inicial al cargar la página
+    actualizarPregunta26();
+    
+    // Escuchar cambios en la selección
+    patrimonioSelect.addEventListener('change', actualizarPregunta26);
 
     // Lógica para el botón Siguiente
     const btnSiguiente = document.getElementById('btnSiguienteBloque4');

@@ -71,14 +71,14 @@
                         <div class="card-body">
                             @php
                                 $p34 = [
-                                    'p34_ninos_adolescentes_adultos' => old('p34_ninos_adolescentes_adultos', $registro->p34_ninos_adolescentes_adultos ?? 2),
-                                    'p34_ninos_adolescentes_adultos_mayores' => old('p34_ninos_adolescentes_adultos_mayores', $registro->p34_ninos_adolescentes_adultos_mayores ?? 2),
-                                    'p34_jovenes_adultos' => old('p34_jovenes_adultos', $registro->p34_jovenes_adultos ?? 2),
-                                    'p34_jovenes_adultos_mayores' => old('p34_jovenes_adultos_mayores', $registro->p34_jovenes_adultos_mayores ?? 2),
-                                    'p34_adultos_adultos_mayores' => old('p34_adultos_adultos_mayores', $registro->p34_adultos_adultos_mayores ?? 2),
-                                    'p34_nunca' => old('p34_nunca', $registro->p34_nunca ?? 2),
-                                    'p34_no_sabe' => old('p34_no_sabe', $registro->p34_no_sabe ?? 2),
-                                    'p34_no_aplica' => old('p34_no_aplica', $registro->p34_no_aplica ?? 2),
+                                    'p34_ninos_adolescentes_adultos' => old('p34_ninos_adolescentes_adultos', $registro->p34_ninos_adolescentes_adultos ?? 0),
+                                    'p34_ninos_adolescentes_adultos_mayores' => old('p34_ninos_adolescentes_adultos_mayores', $registro->p34_ninos_adolescentes_adultos_mayores ?? 0),
+                                    'p34_jovenes_adultos' => old('p34_jovenes_adultos', $registro->p34_jovenes_adultos ?? 0),
+                                    'p34_jovenes_adultos_mayores' => old('p34_jovenes_adultos_mayores', $registro->p34_jovenes_adultos_mayores ?? 0),
+                                    'p34_adultos_adultos_mayores' => old('p34_adultos_adultos_mayores', $registro->p34_adultos_adultos_mayores ?? 0),
+                                    'p34_nunca' => old('p34_nunca', $registro->p34_nunca ?? 0),
+                                    'p34_no_sabe' => old('p34_no_sabe', $registro->p34_no_sabe ?? 0),
+                                    'p34_no_aplica' => old('p34_no_aplica', $registro->p34_no_aplica ?? 0),
                                 ];
                             @endphp
                             <div class="form-check form-switch">
@@ -113,6 +113,67 @@
                                 <input class="form-check-input p34-switch" type="checkbox" name="p34_no_aplica" id="p34_no_aplica" value="1" {{ $p34['p34_no_aplica'] == 1 ? 'checked' : '' }}>
                                 <label class="form-check-label" for="p34_no_aplica">No aplica</label>
                             </div>
+
+                            <script>
+                                document.addEventListener('DOMContentLoaded', function() {
+                                    // Checkboxes exclusivos (No aplica, No sabe, Nunca se ha presentado)
+                                    const exclusiveCheckboxes = [
+                                        document.getElementById('p34_no_aplica'),
+                                        document.getElementById('p34_no_sabe'),
+                                        document.getElementById('p34_nunca')
+                                    ];
+                                    
+                                    // Checkboxes de opciones regulares
+                                    const regularCheckboxes = [
+                                        document.getElementById('p34_ninos_adolescentes_adultos'),
+                                        document.getElementById('p34_ninos_adolescentes_adultos_mayores'),
+                                        document.getElementById('p34_jovenes_adultos'),
+                                        document.getElementById('p34_jovenes_adultos_mayores'),
+                                        document.getElementById('p34_adultos_adultos_mayores')
+                                    ];
+                                    
+                                    // Función para manejar cuando se marca un checkbox exclusivo
+                                    function handleExclusiveCheckbox(checkedIndex) {
+                                        // Desmarcar todos los checkboxes regulares
+                                        regularCheckboxes.forEach(checkbox => {
+                                            checkbox.checked = false;
+                                        });
+                                        
+                                        // Desmarcar otros checkboxes exclusivos
+                                        exclusiveCheckboxes.forEach((checkbox, index) => {
+                                            if (index !== checkedIndex) {
+                                                checkbox.checked = false;
+                                            }
+                                        });
+                                    }
+                                    
+                                    // Función para manejar cuando se marca un checkbox regular
+                                    function handleRegularCheckbox() {
+                                        // Desmarcar todos los checkboxes exclusivos
+                                        exclusiveCheckboxes.forEach(checkbox => {
+                                            checkbox.checked = false;
+                                        });
+                                    }
+                                    
+                                    // Agregar event listeners a checkboxes exclusivos
+                                    exclusiveCheckboxes.forEach((checkbox, index) => {
+                                        checkbox.addEventListener('change', function() {
+                                            if (this.checked) {
+                                                handleExclusiveCheckbox(index);
+                                            }
+                                        });
+                                    });
+                                    
+                                    // Agregar event listeners a checkboxes regulares
+                                    regularCheckboxes.forEach(checkbox => {
+                                        checkbox.addEventListener('change', function() {
+                                            if (this.checked) {
+                                                handleRegularCheckbox();
+                                            }
+                                        });
+                                    });
+                                });
+                            </script>
                         </div>
                     </div>
                     <!-- Pregunta 35 -->

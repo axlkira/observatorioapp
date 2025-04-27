@@ -118,11 +118,11 @@ class FormController extends Controller
                 'tiempo_patrimonio_crisis'
             ];
             foreach ($fields as $field) {
-                // Para los switches (checkbox): 1=Sí, 2=No
+                // Para los switches (checkbox): 1=Sí, 0=No
                 if (in_array($field, [
                     'fuente_empleo_formal', 'fuente_empleo_informal', 'fuente_independiente',
                     'fuente_apoyo_familia_amigos', 'fuente_pension', 'fuente_subsidios_gobierno', 'fuente_ninguna'])) {
-                    $data[$field] = $request->has($field) ? 1 : 2;
+                    $data[$field] = $request->has($field) ? 1 : 0;
                 } else {
                     $data[$field] = $request->input($field, null);
                 }
@@ -182,15 +182,15 @@ class FormController extends Controller
         } elseif ($block == 6) {
             // Bloque 6: Respeto y Comunicación Familiar
             $data['p33_acceso_metodos_anticonceptivos'] = $request->input('p33_acceso_metodos_anticonceptivos');
-            // Pregunta 34: opción múltiple (cada campo 1/2)
-            $data['p34_ninos_adolescentes_adultos'] = $request->has('p34_ninos_adolescentes_adultos') ? 1 : 2;
-            $data['p34_ninos_adolescentes_adultos_mayores'] = $request->has('p34_ninos_adolescentes_adultos_mayores') ? 1 : 2;
-            $data['p34_jovenes_adultos'] = $request->has('p34_jovenes_adultos') ? 1 : 2;
-            $data['p34_jovenes_adultos_mayores'] = $request->has('p34_jovenes_adultos_mayores') ? 1 : 2;
-            $data['p34_adultos_adultos_mayores'] = $request->has('p34_adultos_adultos_mayores') ? 1 : 2;
-            $data['p34_nunca'] = $request->has('p34_nunca') ? 1 : 2;
-            $data['p34_no_sabe'] = $request->has('p34_no_sabe') ? 1 : 2;
-            $data['p34_no_aplica'] = $request->has('p34_no_aplica') ? 1 : 2;
+            // Pregunta 34: opción múltiple (cada campo 1/0)
+            $data['p34_ninos_adolescentes_adultos'] = $request->has('p34_ninos_adolescentes_adultos') ? 1 : 0;
+            $data['p34_ninos_adolescentes_adultos_mayores'] = $request->has('p34_ninos_adolescentes_adultos_mayores') ? 1 : 0;
+            $data['p34_jovenes_adultos'] = $request->has('p34_jovenes_adultos') ? 1 : 0;
+            $data['p34_jovenes_adultos_mayores'] = $request->has('p34_jovenes_adultos_mayores') ? 1 : 0;
+            $data['p34_adultos_adultos_mayores'] = $request->has('p34_adultos_adultos_mayores') ? 1 : 0;
+            $data['p34_nunca'] = $request->has('p34_nunca') ? 1 : 0;
+            $data['p34_no_sabe'] = $request->has('p34_no_sabe') ? 1 : 0;
+            $data['p34_no_aplica'] = $request->has('p34_no_aplica') ? 1 : 0;
             // Únicas respuesta
             $data['p35_orientacion_asesoria'] = $request->input('p35_orientacion_asesoria');
             $data['p36_calidad_comunicacion'] = $request->input('p36_calidad_comunicacion');
@@ -202,34 +202,35 @@ class FormController extends Controller
             $data['p40_igualdad_oportunidades'] = $request->input('p40_igualdad_oportunidades');
             $data['p41_valoracion_posturas'] = $request->input('p41_valoracion_posturas');
             $data['p42_trabajos_cuidado'] = $request->input('p42_trabajos_cuidado');
-            // Pregunta 43: opción múltiple (cada campo 1/2)
-            $data['p43_subsidios_economicos'] = $request->has('p43_subsidios_economicos') ? 1 : 2;
-            $data['p43_acceso_centros_cuidado'] = $request->has('p43_acceso_centros_cuidado') ? 1 : 2;
-            $data['p43_atencion_medica'] = $request->has('p43_atencion_medica') ? 1 : 2;
-            $data['p43_capacitacion_cuidadores'] = $request->has('p43_capacitacion_cuidadores') ? 1 : 2;
-            $data['p43_paquetes_alimentarios'] = $request->has('p43_paquetes_alimentarios') ? 1 : 2;
-            $data['p43_redes_apoyo_cuidadores'] = $request->has('p43_redes_apoyo_cuidadores') ? 1 : 2;
-            $data['p43_incentivos_economicos'] = $request->has('p43_incentivos_economicos') ? 1 : 2;
-            $data['p43_ninguno'] = $request->has('p43_ninguno') ? 1 : 2;
-            $data['p43_no_aplica'] = $request->has('p43_no_aplica') ? 1 : 2;
-            // Exclusividad lógica: si "Ninguno" o "No aplica" está chequeado, los demás deben ser 2
+            // Pregunta 43: opción múltiple (cada campo 1/0)
+            $data['p43_subsidios_economicos'] = $request->has('p43_subsidios_economicos') ? 1 : 0;
+            $data['p43_acceso_centros_cuidado'] = $request->has('p43_acceso_centros_cuidado') ? 1 : 0;
+            $data['p43_atencion_medica'] = $request->has('p43_atencion_medica') ? 1 : 0;
+            $data['p43_capacitacion_cuidadores'] = $request->has('p43_capacitacion_cuidadores') ? 1 : 0;
+            $data['p43_paquetes_alimentarios'] = $request->has('p43_paquetes_alimentarios') ? 1 : 0;
+            $data['p43_redes_apoyo_cuidadores'] = $request->has('p43_redes_apoyo_cuidadores') ? 1 : 0;
+            $data['p43_incentivos_economicos'] = $request->has('p43_incentivos_economicos') ? 1 : 0;
+            $data['p43_otros'] = $request->has('p43_otros') ? 1 : 0;
+            $data['p43_ninguno'] = $request->has('p43_ninguno') ? 1 : 0;
+            $data['p43_no_aplica'] = $request->has('p43_no_aplica') ? 1 : 0;
+            // Exclusividad lógica: si "Ninguno" o "No aplica" está chequeado, los demás deben ser 0
             if ($data['p43_ninguno'] == 1 || $data['p43_no_aplica'] == 1) {
                 foreach ([
                     'p43_subsidios_economicos', 'p43_acceso_centros_cuidado', 'p43_atencion_medica',
-                    'p43_capacitacion_cuidadores', 'p43_paquetes_alimentarios', 'p43_redes_apoyo_cuidadores', 'p43_incentivos_economicos'
+                    'p43_capacitacion_cuidadores', 'p43_paquetes_alimentarios', 'p43_redes_apoyo_cuidadores', 'p43_incentivos_economicos', 'p43_otros'
                 ] as $campo) {
-                    $data[$campo] = 2;
+                    $data[$campo] = 0;
                 }
             } else {
-                // Si alguno de los otros está chequeado, "Ninguno" y "No aplica" deben ser 2
+                // Si alguno de los otros está chequeado, "Ninguno" y "No aplica" deben ser 0
                 if (
                     $data['p43_subsidios_economicos'] == 1 || $data['p43_acceso_centros_cuidado'] == 1 ||
                     $data['p43_atencion_medica'] == 1 || $data['p43_capacitacion_cuidadores'] == 1 ||
                     $data['p43_paquetes_alimentarios'] == 1 || $data['p43_redes_apoyo_cuidadores'] == 1 ||
-                    $data['p43_incentivos_economicos'] == 1
+                    $data['p43_incentivos_economicos'] == 1 || $data['p43_otros'] == 1
                 ) {
-                    $data['p43_ninguno'] = 2;
-                    $data['p43_no_aplica'] = 2;
+                    $data['p43_ninguno'] = 0;
+                    $data['p43_no_aplica'] = 0;
                 }
             }
         } elseif ($block == 8) {
@@ -263,9 +264,9 @@ class FormController extends Controller
             $seleccionados = 0;
             foreach ($campos as $campo) {
                 if ($campo === 'p46_ninguno_anteriores') {
-                    $data[$campo] = $request->has($campo) ? 1 : 2;
+                    $data[$campo] = $request->has($campo) ? 1 : 0;
                 } else {
-                    $data[$campo] = $request->has($campo) ? 1 : 2;
+                    $data[$campo] = $request->has($campo) ? 1 : 0;
                     if ($request->has($campo)) $seleccionados++;
                 }
             }
@@ -273,7 +274,7 @@ class FormController extends Controller
             if ($data['p46_ninguno_anteriores'] == 1) {
                 foreach ($campos as $campo) {
                     if ($campo !== 'p46_ninguno_anteriores') {
-                        $data[$campo] = 2;
+                        $data[$campo] = 0;
                     }
                 }
             }
