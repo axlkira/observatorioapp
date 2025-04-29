@@ -14,7 +14,7 @@
         <tbody>
             @foreach($usuarios as $usuario)
                 <tr>
-                    <td>{{ $usuario->tipo_documento }}</td>
+                <td>{{ $usuario->tipo_documento_nombre ?? $usuario->tipo_documento }}</td>
                     <td>{{ $usuario->numero_documento }}</td>
                     <td>
                         <a href="{{ url('form/1/' . $usuario->tipo_documento . '/' . $usuario->numero_documento) }}" class="btn btn-primary btn-sm">
