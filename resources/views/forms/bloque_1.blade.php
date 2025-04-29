@@ -36,7 +36,7 @@
                         <div class="row mb-3">
                             <div class="col-md-4">
                                 <label for="tipo_documento" class="form-label">Tipo de documento</label>
-                                <select class="form-select" id="tipo_documento" name="tipo_documento">
+                                <select class="form-select" id="tipo_documento" name="tipo_documento" @if(isset($registro)) disabled @endif>
                                     <option value="">Seleccione...</option>
                                     <option value="4" {{ old('tipo_documento', isset($registro) ? $registro->tipo_documento : '') == '4' ? 'selected' : '' }}>Cédula de ciudadanía</option>
                                     <option value="5" {{ old('tipo_documento', isset($registro) ? $registro->tipo_documento : '') == '5' ? 'selected' : '' }}>Cédula de extranjería</option>
@@ -46,7 +46,7 @@
                             </div>
                             <div class="col-md-4">
                                 <label for="numero_documento" class="form-label">Número de documento</label>
-                                <input type="text" class="form-control" id="numero_documento" name="numero_documento" value="{{ old('numero_documento', isset($registro) ? $registro->numero_documento : '') }}">
+                                <input type="text" class="form-control" id="numero_documento" name="numero_documento" value="{{ old('numero_documento', isset($registro) ? $registro->numero_documento : '') }}" @if(isset($registro)) disabled @endif>
                                 @error('numero_documento')<div class="text-danger small">{{ $message }}</div>@enderror
                             </div>
                             <div class="col-md-4">
