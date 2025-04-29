@@ -361,6 +361,20 @@ class FormController extends Controller
                 return back()->withErrors($validator)->withInput();
             }
         }
+        // Validación de llaves primarias en actualización (bloque 1)
+        if ($block == 1 && $request->input('es_actualizacion')) {
+            $original = DB::table($table)
+                ->where('tipo_documento', $request->input('tipo_documento'))
+                ->where('numero_documento', $request->input('numero_documento'))
+                ->first();
+            if (!$original) {
+                return back()->with('error', 'No se encontró el registro original para validar las llaves primarias.');
+            }
+            // Si los valores enviados no coinciden con los originales, rechazar
+            if ($request->input('tipo_documento') != $original->tipo_documento || $request->input('numero_documento') != $original->numero_documento) {
+                return back()->with('error', 'No está permitido modificar el tipo o número de documento.');
+            }
+        }
         if ($block == 1) {
             $validator = Validator::make($request->all(), [
                 'comuna_nucleo_familiar' => 'required',
